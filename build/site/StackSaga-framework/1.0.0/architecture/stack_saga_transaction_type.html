@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>StackSaga Transaction Types :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:architecture:stack_saga_transaction_type.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="prev" href="replay-transaction.html">
+    <link rel="next" href="../framework/create-aggregator.html">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="what_is_stacksaga.html">What is StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="high_level_architecture.html">StackSaga in High-level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stacksaga_components.html">StackSaga Components</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="SEC.html">Saga execution coordinator (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator.html">Saga Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="executor_architecture.html">Saga Executor</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="command_executor_architecture.html">Command Executor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="query_executor_architecture.html">Query Executor</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="1">
+    <a class="nav-link" href="stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../intro.html" class="home-link" title="Home"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">StackSaga Framework</a></li>
+    <li><a href="stack_saga_transaction_type.html">StackSaga Transaction Types</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">StackSaga Transaction Types</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section, you will get the architecture of this framework.
+Other than that, you will get what are the limitations you have to face when you are going to use microservice architecture and how to overcome those difficulties by using StackSAGA framework.</p>
+</div>
+<div class="paragraph">
+<p>You know that in the saga flow, the transaction can be divided into 3 types according to the behavior of the transaction.
+Let&#8217;s see one by one how the StackSaga&#8217;s execution-coordinator coordinates (SEC) each component with each transaction type.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong><a href="#fully_success_transaction_scenario">Fully success transaction scenario</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#revert_success_transaction_scenario">Revert success transaction scenario</a></strong></p>
+</li>
+<li>
+<p><strong><a href="#revert_failed_transaction_scenario">Rollback/Compensation/Revert failed transaction scenario</a></strong></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fully_success_transaction_scenario"><a class="anchor" href="#fully_success_transaction_scenario"></a><span class="icon green"><i class="fa fa-circle"></i></span> Fully Success</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>here, the SEC has successfully executed all the executors. therefore, there is no compensation/revert execution was invoked. this is the success scenario we wish.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/Architecture-Stacksaga-fully-success-transaction-stacksaga.drawio.svg" alt="StackSaga High-level architecture" height="300">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="rounded-number">1</span> As the first step the user makes the request and the <strong>OrderController</strong> catch the request.</p>
+</li>
+<li>
+<p><span class="rounded-number">2</span> After having the request, initialize the place order aggregator and set the start executor into the StackSaga.
+(In this time you have the transaction uid which is created by framework.
+The transaction uid is the unique id for identifying each transaction.
+You can get it from your created Aggregator object.)</p>
+</li>
+<li>
+<p><span class="rounded-number">3</span> now the execution processes are handled by the SEC.
+Before invoking the executor that you provided as the start-executor SEC saves the initial state of the aggregator in the event-tore.</p>
+</li>
+<li>
+<p><span class="rounded-number">4</span> SEC executes the start-executor<strong> ([Command] CreateOrderExecutor)</strong> that you provided. <span class="rounded-number">4.1</span> due to the executing the process method by the SEC, the <strong>InternalOrderService&#8217;s</strong> <strong>createOrder()</strong> method will be invoked. <span class="rounded-number">4.2</span> after successfully invoking the method, SEC will store the state of the aggregator. <span class="rounded-number">4.3</span> after saving the state in the event-store, SEC will execute the <strong>onEachProcessPerformed</strong> method of the handler class that you provided. <span class="rounded-number">4.4</span> then you can put your execution here to update the status of the place-order transaction. as the diagram, we have executed <strong>updateCustomerOrderStatus()</strong> method of <strong>InternalOrderService</strong> to update the status. <span class="rounded-number">4.5</span> after updating the status of the place-order, you can notify your customer by sending the email or SMS or whatever method about the status of the order.</p>
+</li>
+<li>
+<p><span class="rounded-number">5</span> SEC executes the 2nd executor that you provided from the 1st executor. <span class="rounded-number">5.1</span> due to the executing the <strong>doProcess</strong> method of the <strong>[Query] UserExecutor</strong> by the SEC, the <strong>ExternalUserStatusService&#8217;s</strong> <strong>checkUser()</strong> method will be invoked.
+<span class="rounded-number">5.2</span> the <strong>ExternalUserStatusService</strong> will call the <strong>user-service</strong> and make a request.
+<Span class="rounded-number">5.3</span> after successfully invoking the request, SEC will store the state of the aggregator of 2nd process. <Span class="rounded-number">5.4</span> after saving the state in the event-store, SEC will execute the <strong>onEachProcessPerformed</strong> method of the handler class that you provided.</p>
+<div class="paragraph">
+<p><mark>Due to this executor is a query executor, there is no status update process has been executed here.</mark></p>
+</div>
+</li>
+<li>
+<p><span class="rounded-number">6</span> SEC executes the <strong>[Command] PaymentExecutor</strong> executor that you provided. <span class="rounded-number">6.1</span> due to the executing the process method by the SEC, the <strong>ExternalPaymentService&#8217;s</strong> <strong>makePayment()</strong> method will be invoked. <span class="rounded-number">6.2</span> the <strong>ExternalPaymentService</strong> will call the <strong>payment-service</strong> and make a request to make-payment process. <span class="rounded-number">6.3</span> after successfully making the request, SEC will store the state of the aggregator. <span class="rounded-number">6.4</span> after saving the state in the event-store, SEC will execute the <strong>onEachProcessPerformed</strong> method of the handler class that you provided. <span class="rounded-number">6.5</span> then you can put your execution here to update the status of the place-order transaction. as the diagram, we have executed <strong>updateCustomerOrderStatus()</strong> method of <strong>InternalOrderService</strong> to update the status. <span class="rounded-number">6.6</span> after updating the status of the place-order, you can notify your customer by sending the email or SMS or whatever method about the status of the order.</p>
+</li>
+<li>
+<p><span class="rounded-number">7</span> SEC executes the <strong>[Command] DeliveryExecutor</strong> that you provided. <span class="rounded-number">7.1</span> due to the executing the process method by the SEC, the <strong>ExternalDeliveryService&#8217;s</strong> <strong>addToDelivery()</strong> method will be invoked. <span class="rounded-number">7.2</span> the <strong>ExternalDeliveryService</strong> will call the <strong>delivery-service</strong> and make a request to add-to-delivery process. <span class="rounded-number">7.3</span> after successfully making the request, SEC will store the state of the aggregator. <span class="rounded-number">7.4</span> after saving the state in the event-store, SEC will execute the <strong>onEachProcessPerformed</strong> method of the handler class that you provided. <span class="rounded-number">7.5</span> then you can put your execution here to update the status of the place-order transaction. as the diagram, we have executed <strong>updateCustomerOrderStatus()</strong> method of <strong>InternalOrderService</strong> to update the status. <span class="rounded-number">7.6</span> after updating the status of the place-order, you can notify your customer by sending the email or SMS or whatever method about the status of the order.</p>
+</li>
+<li>
+<p><span class="rounded-number">8</span> as the final step the SEC will invoke the <strong>onTransactionCompleted</strong> method of the handler. <span class="rounded-number">8.1</span> you can update the place-order status as the final state as <strong>success</strong>. <span class="rounded-number">8.2</span> after updating the place-order status, you can notify it to the customer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="revert_success_transaction_scenario"><a class="anchor" href="#revert_success_transaction_scenario"></a><span class="icon yellow"><i class="fa fa-circle"></i></span> Compensation Success</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>here, the SEC hasn&#8217;t successfully executed all the executors. an error occurred while after some processing. therefore, the transaction has a compensation/revert executions.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/Architecture-Stacksaga-revert-success-transaction-scenario.drawio.svg" alt="Compensation/Revert success transaction scenario" height="300">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="rounded-number">1</span> as the first step the users make the request and the <strong>OrderController</strong> catch the request.</p>
+</li>
+<li>
+<p><span class="rounded-number">2</span> after having the request, initialize the place order aggregator and set the start executor into the StackSaga.
+(In this time you have the transaction uid which is created by framework.
+The <strong>transaction uid</strong> is the unique id for identifying each transaction.
+You can get it from your created <strong>Aggregator</strong> object.
+)</p>
+</li>
+<li>
+<p><span class="rounded-number">3</span> now the execution processes are handled by the SEC.
+Before invoking the executor that you provided as the <strong>start-executor</strong> SEC saves the initial state of the aggregator in the <strong>event-tore</strong>.</p>
+</li>
+<li>
+<p><span class="rounded-number">4</span> SEC executes the start-executor<strong> ([Command] CreateOrderExecutor)</strong> that you provided. <span class="rounded-number">4.1</span> due to the executing the process method by the SEC, the <strong>InternalOrderService&#8217;s</strong> <strong>createOrder()</strong> method will be invoked. <span class="rounded-number">4.2</span> after successfully invoking the method, SEC will store the state of the aggregator. <span class="rounded-number">4.3</span> after saving the state in the event-store, SEC will execute the <strong>onEachProcessPerformed</strong> method of the handler class that you provided. <span class="rounded-number">4.4</span> then you can put your execution here to update the status of the place-order transaction. as the diagram, we have executed <strong>updateCustomerOrderStatus()</strong> method of <strong>InternalOrderService</strong> to update the status. <span class="rounded-number">4.5</span> after updating the status of the place-order, you can notify your customer by sending the email or SMS or whatever method about the status of the order.</p>
+</li>
+<li>
+<p><span class="rounded-number">5</span> SEC executes the 2nd executor that you provided from the 1st executor. <span class="rounded-number">5.1</span> due to the executing the <strong>doProcess</strong> method of the <strong>[Query] UserExecutor</strong> by the SEC, the <strong>ExternalUserStatusService&#8217;s</strong> <strong>checkUser()</strong> method will be invoked. <span class="rounded-number">5.2</span> the <strong>ExternalUserStatusService</strong> will call the <strong>user-service</strong> and make a request. <span class="rounded-number">5.3</span> after successfully invoking the request, SEC will store the state of the aggregator of 2nd process. <span class="rounded-number">5.4</span> after saving the state in the event-store, SEC will execute the <strong>onEachProcessPerformed</strong> method of the handler class that you provided.</p>
+<div class="paragraph">
+<p><mark>Due to this executor is a query executor, there is no status update process have been executed here.</mark></p>
+</div>
+</li>
+<li>
+<p><span class="rounded-number">6</span> SEC executes the <strong>[Command] PaymentExecutor</strong> executor that you provided. <span class="rounded-number">6.1</span> due to the executing the process method by the SEC, the <strong>ExternalPaymentService&#8217;s</strong> <strong>makePayment()</strong> method will be invoked. <span class="rounded-number">6.2</span> the <strong>ExternalPaymentService</strong> will call the <strong>payment-service</strong> and make a request to make-payment process. at this time, the request failed due to an exception.</p>
+</li>
+<li>
+<p><span class="rounded-number">7</span> the SEC will invoke <strong>onProcessException</strong> method of the handler class that you provided. there you can get notified about the <strong>process failure.</strong> the transaction can&#8217;t be executed forward anymore, the compensation process will start from this point.</p>
+<div class="paragraph">
+<p>**if you want to update the order status or update the customer, you can invoke your code here. in this example, it hasn&#8217;t been implemented.</p>
+</div>
+</li>
+<li>
+<p><span class="rounded-number">8</span> due to the final successful executed <strong>OrderExecutor</strong> (There is no compensation because the UserExecutor is a query executor.) SEC invokes the <strong>doRevert</strong> method of the <strong>OrderExecutor</strong>. <span class="rounded-number">8.1</span> due to the executing of the <strong>doRevert</strong> method, <strong>createOrderRevert</strong> method will be invoked and do the revert process of the make-payment. <span class="rounded-number">8.2</span> in the compensation process if you want to store some data regarding the revert process, you can store them into the [hint-store] the framework provides. that stored data is saved at this step. <span class="rounded-number">8.4</span> after invoking successfully the revert, the SEC will invoke <strong>onEachRevertPerformed</strong> method regarding the revert process. <span class="rounded-number">8.4</span> the customer will be notified about the revert process. (if you want to update the order status, you can invoke your code here as well. that part hasn&#8217;t been implemented in this example.)</p>
+</li>
+<li>
+<p><span class="rounded-number">9</span> StackSaga state-machine knows that the compensation is done. therefore, SEC invokes the <strong>onTransactionCompleted</strong> method as <strong>REVERT_SUCCESS</strong>. <span class="rounded-number">9.1</span> you can update the status of the place-order regarding the revert was processed. <span class="rounded-number">9.2</span> after that the customer will be notified about the revert success process of their order.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To keep the overall state of the transaction eventually consistent, the revert processes (compensation processes) can be retryable.
+Because all the compensations must be invoked.
+To have knowledge about how retry works of revert-processes in StackSaga, please refer to <a href="https://mafei-dev.github.io/stacksaga-doc/architecture/1.0/topics/retryable-exception-vs-non-retryable-exception.html#how-retry-works-in-the-revert-process">this</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="revert_failed_transaction_scenario"><a class="anchor" href="#revert_failed_transaction_scenario"></a><span class="icon red"><i class="fa fa-circle"></i></span> Compensation Failed</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/Architecture-Stacksaga-evert-failed-transaction-scenario.drawio.svg" alt="Compensation/Revert failed transaction scenario" height="300">
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="replay-transaction.html">Transaction Replay.</a></span>
+  <span class="next"><a href="../framework/create-aggregator.html">Creating Aggregator Class</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

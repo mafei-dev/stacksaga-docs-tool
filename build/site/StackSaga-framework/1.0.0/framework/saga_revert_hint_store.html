@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>RevertHintStore :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:framework:saga_revert_hint_store.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="prev" href="saga_exception_annotation.html">
+    <link rel="next" href="saga_event_handler.html">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/what_is_stacksaga.html">What is StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/high_level_architecture.html">StackSaga in High-level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stacksaga_components.html">StackSaga Components</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/SEC.html">Saga execution coordinator (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator.html">Saga Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../architecture/executor_architecture.html">Saga Executor</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../architecture/command_executor_architecture.html">Command Executor</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../architecture/query_executor_architecture.html">Query Executor</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="1">
+    <a class="nav-link" href="saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../intro.html" class="home-link" title="Home"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">StackSaga Framework</a></li>
+    <li><a href="saga_revert_hint_store.html">RevertHintStore</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">RevertHintStore</h1>
+<div class="paragraph">
+<p><code>RevertHintStore</code> does provide you a map to put the data that the revert processes want.
+After having a <a href="#non_retryable_executor_exception">NonRetryableExecutorException</a>, the engine will start the revert process by stopping to forward anymore.
+You know already, when the transaction going forward, you can update or add the data in the aggregator object.
+But when it is starting to revert, you cannot change the values in the aggregator object anymore.
+Because the aggregator object is frozen.
+Therefore, you should have to have a way to carry out the data to the backwards as well.
+To overcome that problem, the system provides the RevertHintStore object to add your extra hints that are necessary for the revert process through each executor.
+After adding the data in the <code>RevertHintStore</code> object, you can read that data from other next revert-processes.</p>
+</div>
+<div class="paragraph">
+<p>Here you can see an implementation for revert method of one of command executors.
+<code>RevertHintStore</code> can be used in all revert processes like <a href="#revert_before_executor">revert-before</a>,
+<a href="#revert_after_executor">revert-after</a> executors as well.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@SagaExecutor(
+        executeFor = "delivery-service",
+        liveCheck = true,
+        value = "DispatchOrderExecutor"
+)
+public class DispatchOrderExecutor implements CommandExecutor&lt;PlaceOrderAggregator&gt; {
+
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+            ProcessStack processStack,
+            PlaceOrderAggregator aggregator,
+            ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager
+    ) throws RetryableExecutorException, NonRetryableExecutorException {
+        //
+    }
+
+    @Override
+    public void doRevert(ProcessStack processStack,
+                         NonRetryableExecutorException realException,
+                         PlaceOrderAggregator aggregator,
+                         RevertHintStore revertHintStore
+    ) throws RetryableExecutorException {
+
+        revertHintStore
+                .get("MakePaymentExecutor") <i class="conum" data-value="1"></i><b>(1)</b>
+                .ifPresent(makePaymentExecutor -&gt; {
+                    if (makePaymentExecutor.equalsIgnoreCase("success")) {
+                        <i class="conum" data-value="2"></i><b>(2)</b>
+                        revertHintStore.put("last_updated_time", LocalDateTime.now().toString());
+                        <i class="conum" data-value="2"></i><b>(2)</b>
+                        revertHintStore.put("DispatchOrderExecutor", "success");
+                    }
+                });
+        ...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Obtaining the <code>RevertHintStore</code> data (Key: MakePaymentExecutor) that have been added in another revert process before.
+If the value exists in the <code>RevertHintStore</code> you will have an <code>Optional&lt;String&gt;</code> object with the data.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Based on the <code>RevertHintStore</code> 's old data that bes been added by another executor, adding another data into the <code>RevertHintStore</code>.
+This value will be helpful for the next revert process.</td>
+</tr>
+</table>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="saga_exception_annotation.html">saga_exception_annotation.adoc</a></span>
+  <span class="next"><a href="saga_event_handler.html">Saga Execution Event Listener </a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
