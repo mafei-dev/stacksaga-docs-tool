@@ -242,15 +242,39 @@
 <article class="doc">
 <h1 class="page">Saga Execution Event Listener </h1>
 <div class="paragraph">
-<p><code>SagaExecutionEventListener</code> is the place where you&#8217;re notified about each and every action during the process by the SEC.
-As an example, you hand over your transaction to the StackSaga engine by mentioning the starting executor.
-After handing over, the engine will invoke your executors one by one.
+<p><code>ExecutionEventListener&lt;A&gt;</code> is the place where you&#8217;re notified about each and every action during the process by the SEC.
+As an example, After handing over the transaction to the StackSaga engine by mentioning the starting executor, the engine will invoke your executors one by one.
 During the process, the engine does provide some events regarding the execution to notify.
-To get notified, you can create a separate EventListener classes for each and every <a href="#creating_aggregator_class">Aggregator</a>.
-For creating the EventListeners, the EventListeners should be implemented from <code>ExecutionEventListener&lt;A&gt;</code> interface.
-<code>A</code> is the Aggregator class that you want to get notified.
-And also the class should be annotated with <code><strong>@SagaExecutionEventListener</strong></code>  or <code>@<strong>SagaAsyncExecutionEventListener</strong></code>.
-Those annotations provide Spring bean capabilities for your implementation as well.</p>
+To get notified for each action, you can create a separate ExecutionEventListener implementations for <a href="#creating_aggregator_class">Aggregators</a>.
+One aggregator can have many ExecutionEventListener implementations as needed.
+Specially the ExecutionEventListener is provided for cross-cutting concerns.
+therefore the implementations of the <code>ExecutionEventListener&lt;A&gt;</code> can be used in two ways.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Synchronous way</p>
+<div class="ulist">
+<ul>
+<li>
+<p>if the events also should be run in sequence order with the same thread, the Synchronous way can be implemented.
+to overcome the Synchronous feature the implementation should be annotated by <code><strong>@SagaExecutionEventListener</strong></code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Asynchronous way</p>
+<div class="ulist">
+<ul>
+<li>
+<p>if the events should not be bothered to the man executions and if not required sequence order between real executions and events, the Asynchronous way can be implemented. and also the events are triggered in separate threads.
+to overcome the Asynchronous feature the implementation should be annotated by <code>@<strong>SagaAsyncExecutionEventListener</strong></code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -259,8 +283,7 @@ Those annotations provide Spring bean capabilities for your implementation as we
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you want to call the event methods in <strong>Async-mode</strong>  inside the handler, the handler class can be annotated with <code>@SagaAsyncExecutionEventListener</code> instead of <code>@SagaExecutionEventListener</code>.
-Then it will run the event methods in separate threads asynchronously.
+<code>ExecutionEventListener</code> comes with a generic parameter. the <code>&lt;A&gt;</code> is represented the target Aggregator. when the ExecutionEventListener implementation is created, the target aggregator should be mentioned.
 </td>
 </tr>
 </table>
@@ -382,31 +405,47 @@ And also you can create multiple listeners for the target Aggregator.
 <pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@SagaExecutionEventListener
 public class PlaceOrderEventListener implements ExecutionEventListener&lt;PlaceOrderAggregator&gt; {
     @Override
-    public void onEachProcessPerformed(Class&lt;? extends SagaExecutor&lt;? extends Aggregator&gt;&gt; processedExecutor, PlaceOrderAggregator currentAggregator) {
-        //do whatever you want
+    public void onEachProcessExecutionPerformed(String executedExecutor, PlaceOrderAggregator currentAggregator) {
+        // TODO: implement
     }
 
     @Override
-    public void onEachRevertPerformed(Class&lt;? extends SagaExecutor&lt;? extends Aggregator&gt;&gt; revertedExecutor, PlaceOrderAggregator finalAggregatorState, NonRetryableExecutorException nonRetryableExecutorException, RevertHintStore revertHintStore) {
-        //do whatever you want
+    public void onEachRevertPerformed(String revertedExecutor, PlaceOrderAggregator finalAggregatorState, NonRetryableExecutorException nonRetryableExecutorException,
+                                      RevertHintStore revertHintStore) {
+        // TODO: implement
     }
 
     @Override
-    public void onTransactionCompleted(TransactionCompletedDetail&lt;PlaceOrderAggregator&gt; transactionCompletedDetail, CompleteStatus completeStatus) {
-        //do whatever you want
+    public void onTransactionCompleted(TransactionCompletedDetail&lt;PlaceOrderAggregator&gt; transactionCompletedDetail,
+                                       CompleteStatus completeStatus) {
+        // TODO: implement
     }
 
     @Override
     public void onTransactionTerminated(TransactionTerminationDetail&lt;PlaceOrderAggregator&gt; transactionTerminationDetail) {
-        //do whatever you want
+        // TODO: implement
     }
 
     @Override
-    public void onProcessException(PlaceOrderAggregator finalAggregatorState, NonRetryableExecutorException exception, Class&lt;? extends SagaExecutor&lt;? extends Aggregator&gt;&gt; executorClass) {
-        //do whatever you want
+    public void onProcessException(PlaceOrderAggregator finalAggregatorState,
+                                   NonRetryableExecutorException exception,
+                                   String executedExecutor) {
+        // TODO: implement
     }
 }</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All the methods are in the <strong>default</strong> form. it helps to ignore the un necessary methods.
+</td>
+</tr>
+</table>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="saga_revert_hint_store.html">RevertHintStore</a></span>
