@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Untitled :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:quick-examples:creating-PreAuthExecutor.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/saga-architecture.html">Introduction to the Saga Design Pattern</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/introduction-to-stacksaga.html">Introduction to StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/SEC.html">Saga execution coordinator. (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator.html">Saga Aggregator.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/executor_architecture.html">Saga Executors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect2">
+<h3 id="_creating_preauthexecutor_command_executor"><a class="anchor" href="#_creating_preauthexecutor_command_executor"></a>Creating PreAuthExecutor (Command-Executor)</h3>
+<div class="paragraph">
+<p>After initiating the order details, next we will be creating an executor called <code>PreAuthExecutor</code>.
+It is responsible for making <code>PreAuth</code> by calling to the utility <code>payment-service</code>.
+Due to the execution should be reverted if the entire process is not successful as wished, the <code>PreAuthExecutor</code> is implemented from the <code>CommandExecutor</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>TO make the PreAuth request, we should provide the <code>userId</code>, <code>amount</code> and <code>orderId</code>.
+And to revert the process we have to provide the <code>PreAuthRef</code> back.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "payment-service", liveCheck = false, value = "PreAuthExecutor")
+@RequiredArgsConstructor
+public class PreAuthExecutor implements CommandExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+    private final PaymentService paymentService;
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+            PlaceOrderAggregator currentAggregator, <i class="conum" data-value="3"></i><b>(3)</b>
+            ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager
+    ) throws RetryableExecutorException, NonRetryableExecutorException {
+        currentAggregator.getExecutions().add(this.getClass().getSimpleName()+":"+ LocalDateTime.now());
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        final String preAuthRef = this.paymentService.makePreAuth(
+                PreAuthDto
+                        .RequestBody
+                        .builder()
+                        .userId(currentAggregator.getUserId())
+                        .amount(currentAggregator.getAmount())
+                        .orderId(currentAggregator.getAggregatorTransactionId())
+                        .build()
+        );
+        <i class="conum" data-value="5"></i><b>(5)</b>
+        currentAggregator.setPreAuthRef(preAuthRef);
+        <i class="conum" data-value="6"></i><b>(6)</b>
+        return stepManager.next(StockUpdateExecutor.class, OrderStatus.MADE_PRE_AUTH);
+    }
+
+    @Override
+    public SagaExecutionEventName doRevert(
+            NonRetryableExecutorException processException,
+            PlaceOrderAggregator finalAggregatorState,
+            RevertHintStore revertHintStore
+    )
+    throws RetryableExecutorException { <i class="conum" data-value="7"></i><b>(7)</b>
+
+        this.paymentService.releasePreAuth(
+                PreAuthReleaseDto.RequestBody.builder()
+                        <i class="conum" data-value="8"></i><b>(8)</b>
+                        .pareAuthRef(finalAggregatorState.getPreAuthRef())
+                        <i class="conum" data-value="9"></i><b>(9)</b>
+                        .reason(processException.get("reason").orElse(""))
+                        .build()
+        );
+        revertHintStore.put(
+                String.valueOf(System.currentTimeMillis()),
+                this.getClass().getSimpleName() + ":doRevert"
+        );<i class="conum" data-value="10"></i><b>(10)</b>
+
+        return return OrderStatus.RELEASED_PRE_AUTH; <i class="conum" data-value="11"></i><b>(11)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>PreAuthExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Implement the <code>PreAuthExecutor</code> from the <code>CommandExecutor</code> by passing the target Aggregator.
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#command_executor" class="xref page"><code>CommandExecutor&lt;A&gt;</code></a> interface.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>you will have the <code>currentAggregator</code> object through the method parameter. due to this executor is the 3rd executor, the <code>currentAggregator</code> object has been updated by the <code>OrderController</code>(initialization), <code>UserDetailExecutor</code>,and <code>OrderInitializeExecutor</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>make the pre-auth process by invoking the PaymentService&#8217;s <code>makePreAuth()</code> method.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Update the <code>currentAggregator</code> with <code>preAuthRef</code> data that received as the response.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Navigates the execution by using <code>stepManager</code> to the next executor called <code>StockUpdateExecutor</code>.
+And also passed the status as <code>MADE_PRE_AUTH</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><code>RetryableExecutorException</code> As per the StackSaga design pattern the revert process cannot have any <code>NonRetryableExecutorException</code> error.
+It only can have <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>For Calling the PaymentService&#8217;s <code>releasePreAuth()</code> we have to provide the <code>pareAuthRef</code> data.
+So we have the last aggregator data that was updated until the end of the process to forward.
+Therefore, that contains the <code>pareAuthRef</code> and we can access it from the <code>finalAggregatorState</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>And As well as a reason should be given for the releasing <code>PreAuth</code>.
+All the time the process can be failed (With  <code>NonRetryableExecutorException</code>)we have added a data called <code>reason</code> with the <code>NonRetryableExecutorException</code>.
+This is the time that can be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Update the hint-store object by adding current millisecond and the revert method name with the executor name while the revert process. <br>
+In your real application, <a href="#//">the hint-store</a> can be used for adding some data regarding the revert process.
+It can be accessed from the next revert process.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>Return the status as <code>RELEASED_PRE_AUTH</code>  finally.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_paymentservice"><a class="anchor" href="#_creating_paymentservice"></a>Creating PaymentService</h3>
+<div class="paragraph">
+<p><code>PaymentService</code> is a regular spring service that creates for calling utility <code>payment-service</code>.
+Due to the <code>payment-service</code> is another utility service we have to call it through http or any other protocol that target service supports (Most probably API endpoints are exposed by http protocol).
+This example&#8217;s <code>payment-service</code> also support http endpoint to access the API.
+Therefore, we will be using rest template as http client.
+But you can use any Http client like Feign-client, Okhttp, Spring-webclient and so on.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The relationship between the executor and service should not be <strong>one-to-one</strong>.
+A service can be used for many executors.
+In this example, the <code>PaymentService</code> class is used for <code>PreAuthExecutor</code> both executors.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Service
+@RequiredArgsConstructor
+public class PaymentService {
+
+    private final RestTemplate restTemplate;
+
+    public String makePreAuth(PreAuthDto.RequestBody requestBody)
+        throws RetryableExecutorException, NonRetryableExecutorException { <i class="conum" data-value="1"></i><b>(1)</b>
+
+        try {
+            <i class="conum" data-value="2"></i><b>(2)</b>
+            PreAuthDto.ResponseBody responseBody = this.restTemplate.postForObject(
+                    "http://payment-service/pre-auth",
+                    requestBody,
+                    PreAuthDto.ResponseBody.class
+            );
+            assert responseBody != null;
+            <i class="conum" data-value="3"></i><b>(3)</b>
+            return responseBody.getPreAuthRef();
+        } catch (HttpClientErrorException ex) { <i class="conum" data-value="4"></i><b>(4)</b>
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.FORBIDDEN)) {
+                <i class="conum" data-value="5"></i><b>(5)</b>
+                throw NonRetryableExecutorException
+                        .buildWith(
+                                new InsufficientBalanceException("Balance not sufficient"),
+                                ""
+                        )
+                        .build();
+            } else {
+                <i class="conum" data-value="6"></i><b>(6)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            }
+        } catch (HttpServerErrorException ex) {  <i class="conum" data-value="7"></i><b>(7)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                <i class="conum" data-value="8"></i><b>(8)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            } else {
+                //502 , 503, 504, 509 etc.
+                <i class="conum" data-value="9"></i><b>(9)</b>
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) {  <i class="conum" data-value="10"></i><b>(10)</b>
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            <i class="conum" data-value="11"></i><b>(11)</b>
+            throw ex;
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        }
+
+    }
+
+    public void releasePreAuth(PreAuthReleaseDto.RequestBody requestBody) throws RetryableExecutorException {
+        try {
+            <i class="conum" data-value="12"></i><b>(12)</b>
+            this.restTemplate.put(
+                    "http://payment-service/pre-auth/release",
+                    requestBody
+            );
+        } catch (HttpServerErrorException ex) {<i class="conum" data-value="13"></i><b>(13)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                <i class="conum" data-value="14"></i><b>(14)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            } else {
+                //502 , 503, 504, 509 etc.
+                <i class="conum" data-value="15"></i><b>(15)</b>
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) { <i class="conum" data-value="16"></i><b>(16)</b>
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            <i class="conum" data-value="17"></i><b>(17)</b>
+            throw ex;
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        } catch (RuntimeException restOfExceptions) { <i class="conum" data-value="18"></i><b>(18)</b>
+            log.error("Unhanded exception : {}", restOfExceptions.getMessage());
+            log.warn("Unhanded exception was occurred and ignored while releasing pre-auth: {}", restOfExceptions.getMessage());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We have thrown both <code>NonRetryableExecutorException</code>,and <code>RetryableExecutorException</code> that PreAuthExecutor&#8217;s <code>doPrcess()</code> method expects.
+The handling exception part is done in the service layer.
+<div class="paragraph">
+<p>[ Read the <a href="creating-UserDetailExecutor.html#exception_tip" class="xref page">TIP</a> ]</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the http request to the utility payment-service.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Returns the <code>authRef</code> that received as the response to the <code>PreAuthExecutor</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>4xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>An error can be thrown by the payment-service when we try to make a pre-auth if the user has no enough balance for making the pre-auth.
+Therefore, the <code>FORBIDDEN</code> error code is filtered and throws it as <code>NonRetryableExecutorException</code> wrapping with a new exception called <code>InsufficientBalanceException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Other 4xx errors are thrown as <code>NonRetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Check the 5xx error is equal to <code>INTERNAL_SERVER_ERROR</code>.
+Because if there is an internal server in this case, we know that we cannot go ahead and the process should be stopped going forward.
+Therefore, <code>NonRetryableExecutorException</code> is thrown by wrapping the real letter.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Cathe the other exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>In this example, other error codes are not considered because we assume that errors cannot be happened.
+Therefore, that error just throws without wrapping with <code>NonRetryableExecutorException</code>.
+IF you want to wrap, you can do as usual but is not required if you don&#8217;t consider those errors.
+Because internally the framework wraps the all <code>RuntimeExceptions</code> with <code>NonRetryableExecutorException</code> by default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>Making the request to the utility payment-service to release the PreAuth that we made.
+This method is the Compensating of the <code>makePreAuth</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="14"></i><b>14</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="15"></i><b>15</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="16"></i><b>16</b></td>
+<td>Cathe the other exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="17"></i><b>17</b></td>
+<td>In this example, other error codes are not considered because we assume that errors cannot be happened.
+Therefore, that error just throws without wrapping with <code>NonRetryableExecutorException</code>.
+IF you want to wrap, you can do as usual but is not required if you don&#8217;t consider those errors.
+Because internally the framework wraps the all <code>RuntimeExceptions</code> with <code>NonRetryableExecutorException</code> by default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="18"></i><b>18</b></td>
+<td>Ignore other all unknown (Unhandled) exceptions to avoid the transaction termination.</td>
+</tr>
+</table>
+</div>
+<div id="tip_for_avoid_transaction_termination" class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you think that, even if the revert execution is failed for some reason (due to an unhandled exception,) the rest of revert executions should be run without terminating the transaction, you can flow this.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

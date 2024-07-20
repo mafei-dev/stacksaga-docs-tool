@@ -3,14 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Saga execution coordinator (SEC) :: StackSAGA Docs</title>
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Saga execution coordinator. (SEC) :: StackSAGA Docs</title>
     <meta name="page-spec" content="StackSaga-framework:architecture:SEC.adoc">
     <meta name="generator" content="Antora 3.1.7">
-    <link rel="prev" href="stacksaga_components.html">
+    <link rel="prev" href="key_steps_of_ecosystem.html">
     <link rel="next" href="event_store.html">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/icon.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
@@ -18,7 +27,7 @@
 <header class="header">
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
                     src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
             <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
             <button class="navbar-burger" data-target="topbar-nav">
@@ -49,50 +58,35 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="what_is_stacksaga.html">What is StackSaga</a>
+    <a class="nav-link" href="saga-architecture.html">Introduction to the Saga Design Pattern</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="high_level_architecture.html">StackSaga in High-level</a>
+    <a class="nav-link" href="introduction-to-stacksaga.html">Introduction to StackSaga</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stacksaga_components.html">StackSaga Components</a>
+    <a class="nav-link" href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
   </li>
   <li class="nav-item is-current-url" data-depth="1">
-    <a class="nav-link" href="SEC.html">Saga execution coordinator (SEC)</a>
+    <a class="nav-link" href="SEC.html">Saga execution coordinator. (SEC)</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="event_store.html">Event Store</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="aggregator.html">Saga Aggregator</a>
+    <a class="nav-link" href="aggregator.html">Saga Aggregator.</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="executor_architecture.html">Saga Executor</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="command_executor_architecture.html">Command Executor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query_executor_architecture.html">Query Executor</a>
-  </li>
-</ul>
+    <a class="nav-link" href="executor_architecture.html">Saga Executors</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
@@ -117,13 +111,16 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
@@ -150,7 +147,7 @@
     <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../framework/saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
@@ -159,10 +156,63 @@
     <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
   </li>
 </ul>
   </li>
@@ -203,7 +253,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">StackSaga Framework</span>
-    <span class="version">1.0.0 1.0.0</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -218,7 +268,7 @@
       <a class="title" href="../index.html">StackSaga Framework</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">1.0.0 1.0.0</a>
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
         </li>
       </ul>
     </li>
@@ -230,41 +280,75 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../intro.html" class="home-link" title="Home"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">StackSaga Framework</a></li>
-    <li><a href="SEC.html">Saga execution coordinator (SEC)</a></li>
+    <li><a href="SEC.html">Saga execution coordinator. (SEC)</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Saga execution coordinator (SEC)</h1>
+<h1 class="page">Saga execution coordinator. (SEC)</h1>
 <div class="paragraph">
-<p>The Saga Execution Coordinator (SEC) is the core component for implementing a successful Saga flow.
-It maintains a Saga log that contains the sequence of events of a particular flow.
-If a failure occurs within any of the components, the SEC queries the logs and helps identify which components are impacted and in which sequence the compensating transactions must be executed.
-Essentially, the SEC helps maintain an eventually consistent state of the overall process.</p>
+<p>Due to the reason of Stacksaga is one of Saga orchestration framework, a central orchestration engine is required to handle the workflow based on the programatical navigation. Other than that Saga Execution Coordinator perform the following duties.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate the transaction work flow.</p>
+</li>
+<li>
+<p>Retrying the transactions</p>
+</li>
+<li>
+<p>Scheduling the executions</p>
+</li>
+<li>
+<p>Managing dual consistency problem</p>
+</li>
+<li>
+<p>State management</p>
+</li>
+<li>
+<p>Event publishing</p>
+</li>
+<li>
+<p>Aggregator states serialization and Deserialization</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>If the SEC component itself fails, it can read the SEC logs when coming back up to identify which of the components are successfully rolled back, identify which ones were pending, and start calling them in reverse chronological order.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Stores &amp; interpret a Saga’s state machine</p>
-</li>
-<li>
-<p>Executes the Requests of a Saga by talking to other services</p>
-</li>
-<li>
-<p>Handle failure recovery by executing Compensating Requests</p>
-</li>
-</ul>
+<p>Let&#8217;s see the fundamental involvement of SEC in the framework with an example.
+Let&#8217;s get the same example that E-Commerce application.
+Then you know we have to create an aggregator for storing necessary data.
+And also we have to create the executors for each atomic transaction.
+Creating aggregator and executors is not enough to start the execution.
+To run the execution, we have to notify SEC with the starting executor and the starting aggregator.
+Then the SEC will execute each executor one by one based on the navigation that each executor does.
+As an example, if we provide the starting executor as order-init executor, it&#8217;s started from that executor, and when it&#8217;s executed, that particular executor will navigate to the next executor based on the logic.
+(Providing the execution flow is fully dynamic in Stacksaga.
+It shouldn&#8217;t be a pre-defined one)</p>
 </div>
 <div class="paragraph">
 <p><span class="image"><object type="image/svg+xml" data="_images/stack-saga-e-store-example-SEC.drawio.svg" width="100%"><span class="alt">StackSaga  Saga Execution Coordinator (SEC)</span></object></span></p>
+</div>
+<div class="paragraph">
+<p>Here you can see how the SEC does work for managing work flow and publishing events in high-level.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>You can access the orchestration engine and start the process by providing the initial aggregator data and initial executor.</p>
+</li>
+<li>
+<p>Then coordinator coordinates and manages the work flow based on the navigation that you command in the executors.
+Each executor will be invoked by SEC, and then your methods will be called for communicating with target services.</p>
+</li>
+<li>
+<p>If there&#8217;s a primary execution error, Handle the failure recovery by executing Compensating Requests.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -273,14 +357,14 @@ Essentially, the SEC helps maintain an eventually consistent state of the overal
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you want to see how SEC works for each transaction mode in detail, please refer <a href="#stack_saga_transaction_type">StackSaga Transaction Types</a>.
+If you want to see how SEC works for each transaction mode in detail, please refer <a href="stack_saga_transaction_type.html" class="xref page">StackSaga Transaction Types</a>.
 It will give you a better understanding of StackSaga framework as well.
 </td>
 </tr>
 </table>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="stacksaga_components.html">StackSaga Components</a></span>
+  <span class="prev"><a href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a></span>
   <span class="next"><a href="event_store.html">Event Store</a></span>
 </nav>
 </article>

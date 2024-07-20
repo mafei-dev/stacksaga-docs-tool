@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
     <title>Aggregator Versioning :: StackSAGA Docs</title>
     <meta name="page-spec" content="StackSaga-framework:architecture:aggregator_versioning.adoc">
     <meta name="generator" content="Antora 3.1.7">
@@ -10,7 +12,14 @@
     <link rel="next" href="version_casting_architecture.html">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/icon.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
@@ -18,7 +27,7 @@
 <header class="header">
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
                     src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
             <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
             <button class="navbar-burger" data-target="topbar-nav">
@@ -49,50 +58,35 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="what_is_stacksaga.html">What is StackSaga</a>
+    <a class="nav-link" href="saga-architecture.html">Introduction to the Saga Design Pattern</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="high_level_architecture.html">StackSaga in High-level</a>
+    <a class="nav-link" href="introduction-to-stacksaga.html">Introduction to StackSaga</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
+    <a class="nav-link" href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stacksaga_components.html">StackSaga Components</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="SEC.html">Saga execution coordinator (SEC)</a>
+    <a class="nav-link" href="SEC.html">Saga execution coordinator. (SEC)</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="event_store.html">Event Store</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="aggregator.html">Saga Aggregator</a>
+    <a class="nav-link" href="aggregator.html">Saga Aggregator.</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="executor_architecture.html">Saga Executor</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="command_executor_architecture.html">Command Executor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query_executor_architecture.html">Query Executor</a>
-  </li>
-</ul>
+    <a class="nav-link" href="executor_architecture.html">Saga Executors</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
@@ -117,13 +111,16 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
@@ -150,7 +147,7 @@
     <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../framework/saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
@@ -159,10 +156,63 @@
     <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
   </li>
 </ul>
   </li>
@@ -203,7 +253,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">StackSaga Framework</span>
-    <span class="version">1.0.0 1.0.0</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -218,7 +268,7 @@
       <a class="title" href="../index.html">StackSaga Framework</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">1.0.0 1.0.0</a>
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
         </li>
       </ul>
     </li>
@@ -230,7 +280,6 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../intro.html" class="home-link" title="Home"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">StackSaga Framework</a></li>
@@ -239,75 +288,228 @@
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
 <article class="doc">
 <h1 class="page">Aggregator Versioning</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>In StackSaga, versioning is the most important thing for you as the developer.
-All the applications are being updated with new versions ever.
-In StackSaga, you have to manage your versioning for each aggregator.
-Because any kind of changes that you make regarding the aggregator, it caused for a version update.
-Not only the aggregators, even if you make some changes in one of the executors, It also causes a version update.
+<p>Aggregator versioning is the most important thing in StackSaga.
+All the applications are being updated with new features time to time.
+Any kind of changes that you make regarding the entire transaction, it caused for a version update of the particular aggregator.</p>
+</div>
+<div class="paragraph">
+<p><strong>Why it&#8217;s necessary to update the aggregator version?</strong></p>
+</div>
+<div class="paragraph">
+<p>You already know that Stacksaga does support event sourcing and <a href="replay-transaction.html" class="xref page">event retrying</a> to overcome the eventual consistency.
+To identify the <a href="#what_is_the_events_version">event&#8217;s version</a> is most important when the event is retried.
+Because all the time the aggregator state that comes to the executor is not equal to the current version of the aggregator.
+Therefore, You should know sometimes what is the aggregator version that transaction has been initialized.</p>
+</div>
+<div class="paragraph">
+<p>For instance, just imagine that a transaction is initiated with aggregator version 1.0.0 and the transaction is failed while executing due to a network issue.
+Then the transaction is temporally stopped for a while until the scheduler is triggered.
+just think a new version will be</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div id="what_is_the_events_version" class="paragraph">
+<p><strong>What is the event&#8217;s version?</strong></p>
+</div>
+<div class="paragraph">
+<p>The first event of the aggregator is saved with the version of the aggregator when the transaction is initialized.
+It is called as event&#8217;s version.
+That means what was the aggregator version that was when the transaction is initialized.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>For instance, let&#8217;s have a look at the placing order example.</p>
+</div>
+<div class="paragraph">
+<p>The aggregator version can be updated due to two main reasons.
+Changing the aggregator structure, Changing the executor structure</p>
+</div>
+<div class="paragraph">
+<p>Not only the aggregators, even if you make some changes in one of the executors, It also causes a version update.
 Because every change you make related to the aggregator, it will change the aggregator state.
 If the aggregator-state is changed, the version must be updated.</p>
 </div>
 <div class="paragraph">
 <p>As an example, if you have PlaceOrderAggregator, the following changes can be caused to a version update.</p>
 </div>
-<div class="paragraph">
-<p><strong>Old Aggregator version Structure.</strong></p>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/stacksaga-old-aggregator.drawio.svg" alt="Stacksaga Old Aggregator Version" width="300"></span></p>
 </div>
-<div class="paragraph">
-<p><strong>New Changes For Existing Aggregator Structure.</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Making changes in aggregator&#8217;s class.</strong></p>
-<div class="paragraph">
-<p><span class="image"><img src="_images/stacksaga-aggregator-change.drawio.svg" alt="Stacksaga Making Aggregator Changes" width="300"></span></p>
-</div>
+<div class="sect1">
+<h2 id="_when_the_aggregator_version_should_be_updated"><a class="anchor" href="#_when_the_aggregator_version_should_be_updated"></a>When the aggregator version should be updated</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Compared to the old version, some changes have been made for the aggregator without doing any changes on the executors.
-This will cause a version update.
-<a href="#aggregator_oriented_casting_architecture">See more</a></p>
+<p><a href="#aggregator_structure_changing">Aggregator Structure Changing</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#adding_new_data">Adding new data</a></p>
+</li>
+<li>
+<p><a href="#removing_existing_data">Removing existing data</a></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Adding new or removing existing executors</strong> (<a href="#query_executor_architecture">Query-Executor</a>, <a href="#command_executor">Command-Executor</a>, or <a href="#revert_after_executor">Revert-Executor</a>)</p>
-<div class="paragraph">
-<p><span class="image"><img src="_images/stacksaga-executor-change.drawio.svg" alt="Stacksaga Updating Executors" width="300"></span></p>
-</div>
+<p><a href="#executor_changing">Executor Changing</a></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Compared to the old version, One Revert-Executor has been removed, and one Query-Executor and another Revert-Executor has been added as new executors.
-This will cause a version update. <a href="#executor_oriented_casting_architecture">See more</a></p>
+<p><a href="#changing_something_inside_the_existing_executor">Changing something inside the existing executor</a></p>
+</li>
+<li>
+<p><a href="#changing_executors_count">Changing Executors count</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#adding_new_executor">Adding new executor(s)</a></p>
+</li>
+<li>
+<p><a href="#removing_existing_executor">Removing existing executor(s)</a></p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p><strong>Making changes in the existing executors' classes.</strong></p>
-<div class="paragraph">
-<p><span class="image"><img src="_images/stacksaga-executor-class-change.drawio.svg" alt="Stacksaga Making Executors Changes" width="300"></span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Compared to the old version, Some changes have been made for some existing executors without changing any executors.
-This will cause a version update.</p>
-</li>
 </ul>
 </div>
 </li>
-</ol>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="aggregator_structure_changing"><a class="anchor" href="#aggregator_structure_changing"></a>Aggregator Structure Changing</h3>
+<div class="paragraph">
+<p>If the aggregator&#8217;s data set is changed, the aggregator version should be updated.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Changing the Structure is the reason for the <a href="version_casting_architecture.html" class="xref page">event-casting</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="adding_new_data"><a class="anchor" href="#adding_new_data"></a>Adding new data to the aggregator</h4>
+<div class="paragraph">
+<p>If some new data is added to the aggregator object, the aggregator version should be updated.
+Changing the structure of the aggregator by adding new data is the reason for <a href="version_casting_architecture.html#aggregator_oriented_up_casting" class="xref page">event-upcasting</a></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-aggregator-change-add-new-data.drawio.svg" alt="stacksaga diagram aggregator change add new data"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing_existing_data"><a class="anchor" href="#removing_existing_data"></a>Removing existing data from the aggregator</h4>
+<div class="paragraph">
+<p>If some existing data is removed from the aggregator object, the aggregator version should be updated.
+Changing the structure of the aggregator by removing the existing data is the reason for <a href="version_casting_architecture.html#aggregator_oriented_down_casting" class="xref page">event-down-casting</a></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-aggregator-change-remove-data.drawio.svg" alt="stacksaga diagram aggregator change remove data"></span></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="executor_changing"><a class="anchor" href="#executor_changing"></a>Executor Changing</h3>
+<div class="paragraph">
+<p>Without changing the aggregator structure, if it makes some changes related to the executors, at this time also the aggregator version should be updated.
+It can be happened both changing the count of executors or changing something in existing executor(s).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It is possible to update an existing <strong>query-executor</strong> to <strong>command-executor</strong>.
+But it is not possible to update <strong>command-executor</strong> to <strong>query-executor</strong>.<br>
+Even it is possible to update <strong>query-executor</strong> to <strong>command-executor</strong>, The StackSaga team does not recommend changing the existing executor type.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing_something_inside_the_existing_executor"><a class="anchor" href="#changing_something_inside_the_existing_executor"></a>Changing something inside the existing executor</h3>
+<div class="paragraph">
+<p>If you make some changes inside the existing executor, It also can be a cause for a version update.
+It depends based on your requirement.
+If the new update should not be impacted on the old events that are remains to be executed, you have to change the aggregator version.
+Then you can filter the old event from the new events.
+If the changes that you made are for all events, there is a possibility to ignore the updating.</p>
+</div>
+<div class="paragraph">
+<p>The following diagram shows some change has been done inside the command-executor 3 than the old one.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-executor-change.drawio.svg" alt="stacksaga diagram executor change"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="changing_executors_count"><a class="anchor" href="#changing_executors_count"></a>Changing Executors count</h3>
+<div class="paragraph">
+<p>If the executor count is changed for an aggregator, it should be a cause for an aggregator version update.</p>
+</div>
+<div class="sect3">
+<h4 id="adding_new_executor"><a class="anchor" href="#adding_new_executor"></a>Adding new executor(s)</h4>
+<div class="paragraph">
+<p>If some new executor(s) are added to the entire transaction, it should be a cause for an aggregator version update.
+It can be any executor either <strong>command-executor</strong> or <strong>query-executor</strong> or any <strong>sub-executor</strong>.</p>
+</div>
+<div class="paragraph">
+<p>The following diagram shows that a new <strong>command-executor</strong> has been added called <strong>command-executor-4</strong>.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-executor-adding.drawio.svg" alt="stacksaga diagram executor adding"></span></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="removing_existing_executor"><a class="anchor" href="#removing_existing_executor"></a>Removing existing executor(s)</h4>
+<div class="paragraph">
+<p>If some executor is removed from the entire transaction flow, it should be a cause for an aggregator version update.
+Even though it can be done theoretically, there is something important that you should know when removing existing executor(s).</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Removing existing executor is one of the most important.
+Because it should be done carefully.
+The reason is that all the executors are exposed to event-retrying.
+If there are some old events related to the executor that you are going to remove, the old events can not be run without that executor.
+Therefore, it is recommended to keep the executor as it is even though if it&#8217;s not used for the new version.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following diagram shows that the executor called <strong>revert-before-executor-2.1</strong> has been removed which was in the old version.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-executor-removing.drawio.svg" alt="stacksaga diagram executor removing"></span></p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a></span>

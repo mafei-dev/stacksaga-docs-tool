@@ -1,0 +1,3314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>StackSaga Demo (Core concept practice) :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:quick-examples:stacksaga-demo.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="prev" href="quick-start.html">
+    <link rel="next" href="stackSaga-demo-with-docker-and-docker-compose.html">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/saga-architecture.html">Introduction to the Saga Design Pattern</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/introduction-to-stacksaga.html">Introduction to StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/SEC.html">Saga execution coordinator. (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator.html">Saga Aggregator.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/executor_architecture.html">Saga Executors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="1">
+    <a class="nav-link" href="stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">StackSaga Framework</a></li>
+    <li><a href="stacksaga-demo.html">StackSaga Demo (Core concept practice)</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">StackSaga Demo (Core concept practice)</h1>
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this demo, we are focusing on how to implement the StackSaga things in the spring boot in microservice architecture.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>IF you are new to StackSaga, it is recommended to read the <a href="../architecture/aggregator.html" class="xref page">architecture</a> and <a href="../framework/create-aggregator.html" class="xref page">reference documentation</a>
+for reading individual components.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>In this example, we have 4 utility microservices called <code>order-service</code>, <code>user-service</code>, <code>payment-service</code>, and <code>stock-service.</code> in addition to that,
+<a href="https://spring.io/projects/spring-cloud-gateway">Spring Cloud Api Gateway</a> is used as the proxy server and as well as the Application Load Balancer (ALB).
+and also Eureka Discovery is used for service registry.</p>
+</div>
+<div class="paragraph">
+<p>The use-case is that the clients can place an order, and then the order request should be completed go through these 4 services.</p>
+</div>
+<div class="paragraph">
+<p>Each services' responsibilities as follows.</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<code><strong>order-service</strong></code>
+</td>
+<td class="hdlist2">
+<p>Order service is responsible for accepting the place order request and managing the entire transaction as the <a href="#//">orchestrator</a>.
+and also as a utility service, the service is responsible for storing the order related specific data in the order-service database.
+According to this use-case, This is the service that stacksaga is added.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code><strong>user-service</strong></code>
+</td>
+<td class="hdlist2">
+<p>To make the process we want to have the user details like delivery address.
+<code>user-service</code> managing the user-related data, and it provides endpoints to fetch the user&#8217;s data.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code><strong>payment-service</strong></code>
+</td>
+<td class="hdlist2">
+<p>In the placing order process, the utility <code>payment-service</code> involves to two main tasks.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>To make the <strong>Pre-Auth</strong> before doing the real transaction and to check that the payment can be done or not.</p>
+</li>
+<li>
+<p>To make the payment (Real transaction).
+All the steps are done smoothly finally, the reserved transaction should be made.
+These endpoints are provided by the <code>payment-service</code>.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<code><strong>stock-service</strong></code>
+</td>
+<td class="hdlist2">
+<p>After making the pre-auth process, we should update the real stock.
+<code>stock-service</code> is responsible for providing endpoints to update the real stock and restore the update.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>All the services that we are going to build.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>API-cloud-gateway</p>
+</li>
+<li>
+<p>eureka-service</p>
+</li>
+<li>
+<p>utility services</p>
+<div class="ulist">
+<ul>
+<li>
+<p>order-service</p>
+</li>
+<li>
+<p>user-service</p>
+</li>
+<li>
+<p>stock-service</p>
+</li>
+<li>
+<p>payment-service</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally <code>stacksaga-admin-dashboard</code> is run for monitoring the transactions.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>source code is available on //[Github].</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>This guide is divided into 3 sections for your convenience.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">[1] <a href="#implementation">Implementation</a></dt>
+<dd>
+<p>Guides for implementing all java classes. (focus the StackSaga concepts)</p>
+</dd>
+<dt class="hdlist1">[2] <a href="#deployment">Deployment</a></dt>
+<dd>
+<p>Guides for creating and connecting The API-gateway and eureka service with utility services with all the configurations.</p>
+</dd>
+<dt class="hdlist1">[3] <a href="#testing">Testing</a></dt>
+<dd>
+<p>Testing the application by running all the applications together.</p>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="_high_level_implementation_diagram"><a class="anchor" href="#_high_level_implementation_diagram"></a>High-level Implementation Diagram.</h3>
+<div class="paragraph">
+<p>Here you can see what we are going to build in High-level.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/stacksaga-example-stacksaga-eureka-spring-cloud-api-gateway-demo-hight-level.drawio.svg" alt="stacksaga example stacksaga eureka spring cloud api gateway microservice demo hight level.">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In the diagram, StackSaga icons <span class="image"><img src="_images/stack-saga-icon.svg" alt="stack saga icon" width="20"></span> are shown which parts StackSaga interact.</p>
+</li>
+<li>
+<p>Red lines are shown how the StackSaga Admin interacts with the process and the request-flow.</p>
+</li>
+<li>
+<p>Black lines are shown how the regular http requests are done.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implementation"><a class="anchor" href="#implementation"></a>Implementation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As the first step, we are going to create the Orchestrator Service called <code>order-service</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Even if there are 4 utility services in the diagram, we mainly focus the order service only.
+Other services are traditional spring boot services, and there is nothing to discuss.<br>
+You can download the full source code from //here.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_create_order_service_orchestrator_service"><a class="anchor" href="#_create_order_service_orchestrator_service"></a>Create Order-Service (Orchestrator Service)</h3>
+<div class="paragraph">
+<p>The <code>order-service</code> is little bit special than the other utility services, because the <code>order-service</code> is the responsible for managing the entire transaction here.
+That&#8217;s why it called as <a href="#//">Orchestrator Service</a>.
+And the next reason is that StackSaga involves that kind of service in your entire system.
+Selecting a service as an Orchestrator service or not depends on your requirement.</p>
+</div>
+<div class="sect3">
+<h4 id="_create_order_the_project_with_spring_initializer"><a class="anchor" href="#_create_order_the_project_with_spring_initializer"></a>Create order the project with spring initializer</h4>
+<div class="paragraph">
+<p>Go to the <a href="https://start.spring.io/">spring initializer</a> and create your project with the following Dependencies.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>spring-boot-starter-web</code></p>
+</li>
+<li>
+<p><code>spring-cloud-starter-netflix-eureka-client</code></p>
+</li>
+<li>
+<p><code>spring-boot-starter-data-jpa</code></p>
+</li>
+<li>
+<p><code>mysql-connector-java</code></p>
+</li>
+<li>
+<p><code>spring-cloud-starter-loadbalancer</code></p>
+</li>
+<li>
+<p><code>lombok</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to that we are using eureka for service registry, we can use <code>spring-cloud-starter-loadbalancer</code> for internal client side load balancing.
+Due to we use just <code>RestTemplate</code> as the httpclient we have to annotate by <code>@LoadBalanced</code> annotation.<br>
+[ <a href="#//">RestTemplateConfig</a> ]
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After creating your project, add the StackSaga dependencies in the dependencies section.
+There are 3 dependencies to be added based on your implementation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can add the <code>stacksaga-spring-boot-starter</code> dependency based on the spring version that you wish to use.
+<mark>In this example, we will be using spring2.X.</mark></p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Spring 2.X</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+  &lt;artifactId&gt;stacksaga-spring-boot-2-starter&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Spring 3.X</dt>
+<dd>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+  &lt;artifactId&gt;stacksaga-spring-boot-3-starter&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<p>Due to the database has been selected as Mysql, you have to add <code>stacksaga-mysql-support</code> dependency.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+    &lt;artifactId&gt;stacksaga-mysql-support&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Due to we are going to Eureka as the discovery service, you have to add <code>stacksaga-connect-k8s-support</code> dependency.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+    &lt;artifactId&gt;stacksaga-connect-eureka-support&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Finally, the <code>pom.xml</code> file will be like below.</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/pom.xml"><span class="icon black"><i class="fa fa-github fa-2x"></i></span></a> pom.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.7.0&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;groupId&gt;org.example&lt;/groupId&gt;
+    &lt;artifactId&gt;order-service&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;8&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;spring-cloud.version&gt;2021.0.3&lt;/spring-cloud.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+
+        ...
+        ...
+        &lt;!--othe dependencies--&gt;
+
+        &lt;!--StackSaga related dependacies --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-spring-boot-2-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-mysql-support&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-connect-eureka-support&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Updating the configuration files related stuff will be discussed at the <a href="#deployment">Deployment</a> section.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_order_service_overview"><a class="anchor" href="#_order_service_overview"></a>Order-Service Overview.</h4>
+<div class="paragraph">
+<p>You know that we have to access more services besides this <code>order-service</code> to fully complete the entire place-order request.
+To access those services in general, you would use <strong>service-layer</strong> and call those services manually by using any httpclient like RestTemplate, Feign client, Okhttp, and so on.
+Instead of that manual unorganized way, StackSaga offers better wrapper blocks for each execution.
+It is called as <code>executors</code>.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read the <a href="#//">reference documentation</a>
+to have a better understanding and best practices regarding the <code>SagaExecutors</code>.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>According to the <a href="#//">Saga design pattern</a>, you know that we should have a Compensating process for all the execution (All the executions that make some changes in a database).
+Due to the fact that the StackSaga framework is one of Saga implementations, it should be provided the primary execution and also a Compensating execution to make a Compensating when the entire process is failed at any point.</p>
+</div>
+<div class="paragraph">
+<p>Based on having a Compensating or not, the executors are two types called <code>command-executor</code> and <code>query-executor</code>.
+<code>command-executor</code> have both primary execution and the Compensating execution.
+If it is <code>query-executor</code>, it has only primary execution.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_how_stacksaga_combines_with_controller_service_and_repository_architecture"><a class="anchor" href="#_how_stacksaga_combines_with_controller_service_and_repository_architecture"></a>How StackSaga combines with Controller Service and Repository architecture?</h4>
+<div class="paragraph">
+<p>In spring applications we follow <code>controller</code>, <code>service</code> and <code>repository</code> layered architecture.
+StackSaga suggest another middle layer between the <code>controller</code> layer and the <code>service</code> layer called <mark><code>executor-layer</code></mark>.
+The <code>executor-layer</code> is the place the executors are created.
+Let&#8217;s see step by step how StackSaga involves the process.</p>
+</div>
+<div class="paragraph">
+<p>Here you can see the entire process in a diagram from based on the order-service (orchestrator-service).</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-example-executors-architecture-in-order-service.drawio.svg" alt="stacksaga microservice example executors architecture in order service"></span></p>
+</div>
+<div class="paragraph">
+<p>In brief, The client makes an order place request and the request comes to the order-service via the api-cloud-gateway.
+And then we initialize a special object called <code>Aggregator</code>
+and it is handed over to the SEC (Saga Execution coordinator), and the SEC will handle the entire execution by executing each every atomic execution.
+The atomic executions have been provided inside the executors.</p>
+</div>
+<div class="paragraph">
+<p>Here you can see the summarized table for your convenience.</p>
+</div>
+<div class="openblock scrollable">
+<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Executor Class Name</th>
+<th class="tableblock halign-left valign-top">Execution_Requirement</th>
+<th class="tableblock halign-left valign-top">Target_Service</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Process-Execution</th>
+<th class="tableblock halign-left valign-top">Revert-Execution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#//"><code>UserDetailExecutor</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fetch the user&#8217;s details</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user-service</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong class="badge-green">QUERY_EXECUTOR</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>getUserDetails</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#//"><code>OrderInitializeExecutor</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initialize the order at the first.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>order-service</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong class="badge-yellow">COMMAND_EXECUTOR</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>initializeOrder()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cancelOrder()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#//"><code>PreAuthExecutor</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Make the Pre-Auth process.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payment-service</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong class="badge-yellow">COMMAND_EXECUTOR</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>makePreAuth()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>releasePreAuth()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#//"><code>StockUpdateExecutor</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update the stock from the store.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stock-service</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong class="badge-yellow">COMMAND_EXECUTOR</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>updateStock()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>restoreStock()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#//"><code>MakePaymentExecutor</code></a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Finalize the order by making the real payment.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>payment-service</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong class="badge-yellow">COMMAND_EXECUTOR</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>makePayment()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_creating_the_aggregator"><a class="anchor" href="#_creating_the_aggregator"></a>Creating the aggregator</h4>
+<div class="paragraph">
+<p>You know that the request comes to the order-service at the first (for downstream services), and it tries to handle the entire request by calling to other utility services.
+To start the execute the request, the <code>order-service</code> should have an Aggregator class that extend from the <code>SagaAggregator</code> class.
+And as well as to verify the aggregator object is serializable well or not, we should provide a <a href="../framework/aggregator_serialization.html" class="xref page">sagaSerializable</a>'s implementation.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read the <a href="#//">reference documentation</a>
+to have a better understanding and best practices regarding the <code>SagaAggregator</code>.</p>
+</div>
+</blockquote>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package org.example.aggregator;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.aggregator.dto.OrderItem;
+import org.stacksaga.Aggregator;
+import org.stacksaga.SagaSerializable;
+import org.stacksaga.core.annotation.SagaAggregator;
+import org.stacksaga.core.annotation.SagaAggregatorVersion;
+
+import java.util.List;
+
+@SagaAggregator(
+        version = @SagaAggregatorVersion(major = 1, minor = 0, patch = 0),
+        name = "PlaceOrderAggregator",
+        sagaSerializable = PlaceOrderAggregatorSerializer.class
+)
+@Getter
+@Setter
+@ToString
+public class PlaceOrderAggregator extends Aggregator {
+
+
+    /**
+     * The relevant user to the order.
+     */
+    @JsonProperty("user_id")
+    private String userId;
+    /**
+     * The item list that user order.
+     */
+    @JsonProperty("items")
+    private List&lt;OrderItem&gt; items;
+
+    /**
+     * The amount to be paid.
+     */
+    @JsonProperty("amount")
+    private Double amount;
+
+    /**
+     * Pre-Auth Reference for release or make the payment.
+     */
+    @JsonProperty("pre_auth_ref")
+    private String preAuthRef;
+
+    /**
+     * Payment ID after the payment.
+     */
+    @JsonProperty("payment_id")
+    private String paymentId;
+
+    @JsonProperty("executions")
+    private List&lt;String&gt; executions = new ArrayList&lt;&gt;();
+
+    @JsonIgnore
+    private Boolean hasRevertError = false;
+
+    public PlaceOrderAggregator() {
+        super(PlaceOrderAggregator.class);
+    }
+}
+
+
+class PlaceOrderAggregatorSerializer extends SagaSerializable&lt;PlaceOrderAggregator&gt; {
+
+    public PlaceOrderAggregatorSerializer() {
+        PlaceOrderAggregator placeOrderAggregator = new PlaceOrderAggregator();
+        placeOrderAggregator.setUserId("user-1");
+        placeOrderAggregator.setAmount(100.00);
+        placeOrderAggregator.setItems(new ArrayList&lt;&gt;());
+        placeOrderAggregator.getItems()
+                .add(OrderItem.builder()
+                        .itemId("item-1")
+                        .itemPrice(100.00)
+                        .build()
+                );
+        this.put("sample-1", placeOrderAggregator);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To make the code more readable and clear, I have used <a href="https://projectlombok.org/:"><code>lombok</code></a>
+and builder pattern for creating the objects through the demo.
+It is not required, and you are free to use the traditional way by creating getters and setters manual.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the <code>PlaceOrderAggregator</code> has the data that we want to access while the entire transaction process.
+Those data will be updated time to time from each execution.</p>
+</div>
+<div class="paragraph">
+<p>Now the aggregator is ready to store and carry out the data throughout the entire process.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_ordercontroller_api_endpoint"><a class="anchor" href="#_creating_ordercontroller_api_endpoint"></a>Creating OrderController (API Endpoint).</h3>
+<div class="paragraph">
+<p>As per the diagram, you know that the request comes to the <code>/order/place</code> endpoint and also the handing over the execution to the stacksaga is happened in this controller class.</p>
+</div>
+<div id="orderController_source" class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@RestController
+@RequestMapping("/order")
+@RequiredArgsConstructor
+public class OrderController {
+
+    <i class="conum" data-value="1"></i><b>(1)</b>
+    private final SagaTemplate&lt;PlaceOrderAggregator&gt; placeOrderAggregatorSagaTemplate;
+
+    @PostMapping("/place")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public PlaceOrderDto.ResponseBody createOrder(@RequestBody PlaceOrderDto.RequestBody requestBody) {
+        <i class="conum" data-value="2"></i><b>(2)</b>
+        final PlaceOrderAggregator placeOrderAggregator = new PlaceOrderAggregator();
+        placeOrderAggregator.setUserId(requestBody.getUserId());
+        placeOrderAggregator.setItems(requestBody.getItems());
+        placeOrderAggregator.setAmount(
+                requestBody.getItems()
+                        .stream()
+                        .map(orderItem -&gt; orderItem.getItemPrice() * orderItem.getQty())
+                        .mapToDouble(Double::doubleValue)
+                        .sum()
+        );
+
+        placeOrderAggregator.setHasRevertError(requestBody.getHasRevertError());
+        placeOrderAggregator.getExecutions().add("INIT:" + LocalDateTime.now());
+        log.debug("placeOrderAggregator:{}", placeOrderAggregator);
+
+        <i class="conum" data-value="3"></i><b>(3)</b>
+        placeOrderAggregatorSagaTemplate.process(
+                placeOrderAggregator,
+                UserDetailExecutor.class
+        );
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        return PlaceOrderDto.ResponseBody.builder()
+                .orderId(placeOrderAggregator.getAggregatorTransactionId())
+                .message("order has been submitted successfully")
+                .build();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Autowire the <a href="../framework/saga_template.html" class="xref page">SagaTemplate</a> for handing over the execution to the framework.
+Your target aggregator class should be provided to the <code>SagaTemplate</code> as a type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Initialize the <a href="creating-aggregator.html" class="xref page">PlaceOrderAggregator</a>  [<a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/aggregator/PlaceOrderAggregator.java"><span class="icon black"><i class="fa fa-github"></i></span></a>] and set the data that should be added initially.
+In our case, the necessary data that are given from the endpoint are added to the aggregator object.
+You can see the initialized data at the dashboard <a href="#//">like this</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Handing over the execution to the framework by passing the initialized aggregator object, and the executor class that the execution should be started.
+From here the execution will be handled by the StackSaga execution coordinator <a href="#//">(SEC)</a> asynchronously.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Build the response object to the client by using the <code>aggregatorTransactionId</code>.
+<code>aggregatorTransactionId</code> can access through your aggregator object due to that id comes from the <code>Aggregator</code> super.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Related Classes' links</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>[ <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/aggregator/PlaceOrderAggregator.java"><span class="icon black"><i class="fa fa-github"></i></span></a> ] <a href="creating-aggregator.html" class="xref page">PlaceOrderAggregator</a></p>
+</li>
+<li>
+<p>[ <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/executor/UserDetailExecutor.java"><span class="icon black"><i class="fa fa-github"></i></span></a> ] <a href="creating-UserDetailExecutor.html#creating_user_detail_executor " class="xref page">UserDetailExecutor</a></p>
+</li>
+<li>
+<p>[ <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/dto/PlaceOrderDto.java"><span class="icon black"><i class="fa fa-github"></i></span></a> ] <code>PlaceOrderDto.RequestBody</code></p>
+</li>
+<li>
+<p>[ <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/dto/PlaceOrderDto.java"><span class="icon black"><i class="fa fa-github"></i></span></a> ] <code>PlaceOrderDto.ResponseBody</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating_sagaexecutioneventname_implementation"><a class="anchor" href="#creating_sagaexecutioneventname_implementation"></a>Creating SagaExecutionEventName Implementation (OrderStatus Enum)</h3>
+<div class="paragraph">
+<p>All the executions can have an event-name based on the action like topic in kafka.
+It is used for identifying the actions in the dashboard.
+As an example after making the payment, you can indicate to the SEC the event as <code>MADE_PAYMENT</code>.
+In StackSaga framework you can create an enum class by implementing from the <code>SagaExecutionEventName</code> interface.
+For our upcoming executors, the following event names will be used.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">import org.stacksaga.core.SagaExecutionEventName;
+
+public enum OrderStatus implements SagaExecutionEventName {
+    INITIALIZED_ORDER,
+    USER_DETAILS_FETCHED,
+    CANCELED_ORDER,
+    MADE_PRE_AUTH,
+    RELEASED_PRE_AUTH,
+    UPDATED_STOCK,
+    RESTORED_STOCK,
+    MADE_PAYMENT,
+    REFUNDED_PAYMENT
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating_user_detail_executor"><a class="anchor" href="#creating_user_detail_executor"></a>Creating UserDetailExecutor</h3>
+<div class="paragraph">
+<p>In the <code>OrderController</code> class The <code>UserDetailExecutor</code> has been mentioned as the initial executor.
+As per the diagram, you know that executor should be a <code>Query-Executor</code>.
+Because the requirement is only fetching the user details.
+Fetching user details doesn&#8217;t change any data.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "user-service", liveCheck = false, value = "UserDetailExecutor")
+@RequiredArgsConstructor
+public class UserDetailExecutor implements QueryExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+
+    <i class="conum" data-value="3"></i><b>(3)</b>
+    private final UserService userService;
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+            PlaceOrderAggregator currentAggregator, <i class="conum" data-value="4"></i><b>(4)</b>
+            ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager <i class="conum" data-value="5"></i><b>(5)</b>
+    ) throws
+    RetryableExecutorException, NonRetryableExecutorException <i class="conum" data-value="6"></i><b>(6)</b>
+    {
+        currentAggregator.getExecutions().add(this.getClass().getSimpleName()+":"+ LocalDateTime.now());
+        <i class="conum" data-value="7"></i><b>(7)</b>
+        UserDetailDto.ResponseBody userDetails = this.userService.getUserDetails(currentAggregator.getUserId());
+        <i class="conum" data-value="8"></i><b>(8)</b>
+        currentAggregator.setDeliveryDetails(userDetails.getDeliveryDetails());
+        return stepManager.next(OrderInitializeExecutor.class, OrderStatus.USER_DETAILS_FETCHED); <i class="conum" data-value="9"></i><b>(9)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>UserDetailExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Implement the <code>UserDetailExecutor</code> from the <code>QueryExecutor</code> by passing the target Aggregator.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#query_executor" class="xref page"><code>QueryExecutor&lt;A&gt;</code></a> interface.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Autowire the <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/service/external/UserService.java"><code>UserService</code></a>
+to make the execution by calling the <code>user-service</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>you will have the <code>currentAggregator</code> object through the method parameter. due to this executor is the 1st executor, the <code>currentAggregator</code> object contains the initialized values from the <a href="creating-controller.html#orderController_source" class="xref page">OrderController</a> class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>stepManager</code> helps you to navigate the execution to the next executor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>If you throw an exception, that is how the framework knows that the executor has an exception at this moment.
+Based on the exception type that you have thrown, The framework decides that the process should be started the revert process or either process should be stopped temporally.
+<div class="paragraph">
+<p>IF the exception is a <code>RetryableExecutorException</code> the framework stops the process temporally.
+Or if the exception is a <code>NonRetryableExecutorException</code> the framework knows that the execution cannot be processed to forward anymore and the revert process should be started.
+Throwing an exception can be implemented in the method as well.
+But in this example, we categorize the exceptions whether the exception is a <code>RetryableExecutorException</code> or otherwise a <code>NonRetryableExecutorException</code> in the <a href="#creating_user_service">UserService</a> (service layer).</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/retryable_executor_exception.html" class="xref page">RetryableExecutorException</a> and <a href="../framework/non_retryable_executor_exception.html" class="xref page">NonRetryableExecutorException</a>.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>By using the UserService&#8217;s <code>getUserDetails()</code> method, fetches the user&#8217;s data from user <code>user-service</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>After receiving the user&#8217;s detail the <code>currentAggregator</code> is updated with user&#8217;s details.
+Therefore, you can access the user&#8217;s detail within the next executor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>By using the <code>stepManager</code>, navigates the execution to the next executor called and the event name marked as <code>USER_DETAILS_FETCHED</code> <a href="creating-OrderInitializeExecutor.html#creating_order_initialize_executor" class="xref page">OrderInitializeExecutor</a>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating_user_service"><a class="anchor" href="#creating_user_service"></a>Creating UserService.</h3>
+<div class="paragraph">
+<p><code>Userservice</code> is a regular spring service that creates for calling <code>user-service</code>.
+Due to the <code>user-service</code> is another utility service we have to call it through http or any other protocol that target service supports (Most probably API endpoints are exposed by http protocol).
+This example&#8217;s <code>user-service</code> also support http endpoint to access the API.
+Therefore, we will be using rest template as http client.
+But you can use any Http client like Feign-client, Okhttp, Spring-webclient and so on.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Service
+@RequiredArgsConstructor
+public class UserService {
+
+    private final RestTemplate restTemplate;
+
+    public UserDetailDto.ResponseBody getUserDetails(String userId)
+            throws
+            NonRetryableExecutorException,  RetryableExecutorException <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+
+        try {
+            <i class="conum" data-value="2"></i><b>(2)</b>
+            UserDetailDto.ResponseBody responseBody = this.restTemplate.getForObject(
+                    "http://user-service/users/{userId}",
+                    UserDetailDto.ResponseBody.class,
+                    userId
+            );
+            assert responseBody != null;
+            return responseBody;
+        } catch (HttpClientErrorException ex) { <i class="conum" data-value="3"></i><b>(3)</b>
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                <i class="conum" data-value="4"></i><b>(4)</b>
+                throw NonRetryableExecutorException
+                        .buildWith(
+                                new RuntimeException("User not found"),
+                                ""
+                        )
+                        .put("reason", "User not found")
+                        .build();
+            } else {
+                <i class="conum" data-value="5"></i><b>(5)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            }
+        } catch (HttpServerErrorException ex) { <i class="conum" data-value="6"></i><b>(6)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                <i class="conum" data-value="7"></i><b>(7)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            } else {
+                <i class="conum" data-value="8"></i><b>(8)</b>
+                //502 , 503, 504, 509 etc.
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) { <i class="conum" data-value="9"></i><b>(9)</b>
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            throw ex; <i class="conum" data-value="10"></i><b>(10)</b>
+        } catch (IllegalArgumentException illegalArgumentException) { <i class="conum" data-value="11"></i><b>(11)</b>
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        } catch (RunT) { <i class="conum" data-value="11"></i><b>(11)</b>
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Handling the exceptions is the most important task in StackSaga framework.
+You have to handle the exception, and decide what should be the <code>NonRetryableExecutorException</code> and what should be the <code>RetryableExecutorException</code> carefully.
+For example, in this demo you saw that we handled <code>NOT_FOUND</code> status.
+the <code>NOT_FOUND</code> can be thrown if the <mark>endpoint not found</mark> that you are looking for.
+Or otherwise it can be passed if the <mark>user does not exist</mark>.
+Then, if you have not any awareness about what the target service returns, you will not be able to catch the real error.
+In this example, we know exactly there is an endpoint <code>/users/{userId}</code> in the user-service therefore no worries.
+But be careful if you access third party APIs.
+Read the API documentation in detail.
+</td>
+</tr>
+</table>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We have thrown both <code>NonRetryableExecutorException</code>,and <code>RetryableExecutorException</code> that UserDetailExecutor&#8217;s <code>doPrcess()</code> method expects.
+That&#8217;s why it was mentioned in above.
+The handling exception part is done in the service layer.
+<div class="paragraph">
+<p>[ Read the <a href="creating-UserDetailExecutor.html#exception_tip" class="xref page">TIP</a> ]</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the http request to the user-service.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>4xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Due to the http error code is equal to NOT_FOUND (404), the process cannot be done anymore.
+Therefore, a <code>NonRetryableExecutorException</code> is thrown by wrapping with the real exception.
+If you want to put some data based on the exception, you can use the <code>put("key","value")</code> method for that.
+The data can be accessed from any revert-exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Other 4xx errors are thrown as the <code>NonRetryableExecutorException</code> by wrapping the real error.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Check the 5xx error is equal to <code>INTERNAL_SERVER_ERROR</code>.
+Because if there is an internal server in this case, we know that we cannot go ahead and the process should be stopped going forward.
+Therefore, <code>NonRetryableExecutorException</code> is thrown by wrapping the real letter.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Cathe the other exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>In this example, that other error codes are not considered because we assume that errors cannot be happened.
+Therefore, that error just throws without wrapping with <code>NonRetryableExecutorException</code>.
+IF you want to wrap, you can do as usual but is not required if you don&#8217;t consider those errors.
+Because internally the framework wraps the all <code>RuntimeExceptions</code> with <code>NonRetryableExecutorException</code> by default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>Due to we are using <code>spring-cloud-load-balancer</code>, when we make a request via the <code>RestTemplate</code> internally load balancer check is there any registered services in the local cache.
+Then, if there is no instance in the cache, it throws and exception with <code>IllegalArgumentException</code>.
+But in our case, actuality it is also a retryable exception.
+Because when an instance is registered, that execution can be invoked.
+Therefore, that error is thrown as <code>RetryableExecutorException</code>.</td>
+</tr>
+</table>
+</div>
+<div id="exception_tip" class="exampleblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The reason for handling the exception is that this is where the http client does the invocation and the special this is most probably the exceptions are different to each other even though the http status code is the same.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Case-1</dt>
+<dd>
+<p>IF you change the Rest-Client (For instance, you move to RestTemplate to Feign-client), all the exceptions are changed.
+Then you have to change all the codes in the executor if you have handled the exceptions inside the executor.
+But in this way nothing to do anything.</p>
+</dd>
+<dt class="hdlist1">Case-2</dt>
+<dd>
+<p>If you have to change the protocol like HttpRest to GRPC, you have nothing to do in the executor layer.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating_order_initialize_executor"><a class="anchor" href="#creating_order_initialize_executor"></a>Creating OrderInitializeExecutor</h3>
+<div class="paragraph">
+<p>You know that the request comes to the <code>OrderController</code>
+and the request is transferred to the <code>UserDetailExecutor</code> as the first step to collect the user details.
+And next, we are going to initiate the order in the own service (order-service).
+To initiate the order will be creating an executor called <code>OrderInitializeExecutor</code>.</p>
+</div>
+<div class="paragraph">
+<p>The OrderInitializeExecutor should be a command-executor because the primary execution (updating order database) makes some changes in the database, and then if a failure occurred at some point after executing the order initialization process, it should be recovered again.</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/executor/OrderInitializeExecutor.java"><span class="icon black"><i class="fa fa-github fa-2x"></i></span> OrderInitializeExecutor.class</a></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "order-service", liveCheck = false, value = "OrderInitializeExecutor")
+@RequiredArgsConstructor
+public class OrderInitializeExecutor implements CommandExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+
+    <i class="conum" data-value="3"></i><b>(3)</b>
+    private final OrderService orderService;
+    private final ObjectMapper objectMapper;
+
+    @Override <i class="conum" data-value="4"></i><b>(4)</b>
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(PlaceOrderAggregator currentAggregator, ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager) throws RetryableExecutorException, NonRetryableExecutorException {
+        try {
+            currentAggregator.getExecutions().add(this.getClass().getSimpleName() + ":" + LocalDateTime.now());
+            <i class="conum" data-value="5"></i><b>(5)</b>
+            this.orderService.initialize(
+                    OrderEntity
+                            .builder()
+                            .orderId(currentAggregator.getAggregatorTransactionId())
+                            .userId(currentAggregator.getUserId())
+                            .createAt(LocalDateTime.now())
+                            .isCancelled(false)
+                            .items(objectMapper.writeValueAsString(currentAggregator.getItems()))
+                            .build()
+            );
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        <i class="conum" data-value="6"></i><b>(6)</b>
+        return stepManager.next(PreAuthExecutor.class, OrderStatus.INITIALIZED_ORDER);
+    }
+
+    @Override
+    public SagaExecutionEventName doRevert(NonRetryableExecutorException processException, PlaceOrderAggregator finalAggregatorState, RevertHintStore revertHintStore) throws RetryableExecutorException {
+        <i class="conum" data-value="7"></i><b>(7)</b>
+        this.orderService.cancelOrder(finalAggregatorState.getAggregatorTransactionId());
+        <i class="conum" data-value="8"></i><b>(8)</b>
+        revertHintStore.put(
+                String.valueOf(System.currentTimeMillis()),
+                this.getClass().getSimpleName() + ":doRevert"
+        );
+        <i class="conum" data-value="9"></i><b>(9)</b>
+        if (finalAggregatorState.getHasRevertError()) {
+            throw new RuntimeException("dummy error for revert-failed.");
+        }
+        <i class="conum" data-value="10"></i><b>(10)</b>
+        return OrderStatus.CANCELED_ORDER;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>OrderInitializeExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The class has been extended from the <code>CommandExecutor</code>.
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#command_executor" class="xref page"><code>CommandExecutor</code></a> annotation.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Autowire the <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/service/internal/OrderService.java"><code>OrderService</code></a> service to make the execution.
+(<code>ObjectMapper</code> has been Autowired just for getting the JSON string)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Overridden the <code>doProcess</code> and <code>doRevert</code> methods.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Initialize the order-details by calling the orderService.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>After Initializing the order successfully, SEC is navigated to the next executor by using <code>stepManager.next</code>.
+The next executor is <code>PreAuthExecutor</code> and also the current executed is marked as <code>INITIALIZED_ORDER</code> in the event-store.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>The order is marked as <code>canceled</code> one if the primary execution should be reverted.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Update the hint-store object by adding current millisecond and the revert method name with the executor name while the revert process. <br>
+In your real application, <a href="#//">the hint-store</a> can be used for adding some data regarding the revert process.
+It can be accessed from the next revert process.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>We used a variable called <code>hasRevertError</code> in the aggregator to <a href="#revert_failed_transaction">test</a> a <code>revert-failed</code> transaction.
+If we have passed the <code>hasRevertError</code> value as <code>true</code>, throw an exception to terminate the transaction.
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is totally testing purpose only.
+In your real application make sure to do not throw an exception from the doRevert method unless <code>RetryableExecutorException</code>.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>If the canceling process is successfully executed, return the event name as CANCELED_ORDER.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_preauthexecutor_command_executor"><a class="anchor" href="#_creating_preauthexecutor_command_executor"></a>Creating PreAuthExecutor (Command-Executor)</h3>
+<div class="paragraph">
+<p>After initiating the order details, next we will be creating an executor called <code>PreAuthExecutor</code>.
+It is responsible for making <code>PreAuth</code> by calling to the utility <code>payment-service</code>.
+Due to the execution should be reverted if the entire process is not successful as wished, the <code>PreAuthExecutor</code> is implemented from the <code>CommandExecutor</code> interface.</p>
+</div>
+<div class="paragraph">
+<p>TO make the PreAuth request, we should provide the <code>userId</code>, <code>amount</code> and <code>orderId</code>.
+And to revert the process we have to provide the <code>PreAuthRef</code> back.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "payment-service", liveCheck = false, value = "PreAuthExecutor")
+@RequiredArgsConstructor
+public class PreAuthExecutor implements CommandExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+    private final PaymentService paymentService;
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+            PlaceOrderAggregator currentAggregator, <i class="conum" data-value="3"></i><b>(3)</b>
+            ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager
+    ) throws RetryableExecutorException, NonRetryableExecutorException {
+        currentAggregator.getExecutions().add(this.getClass().getSimpleName()+":"+ LocalDateTime.now());
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        final String preAuthRef = this.paymentService.makePreAuth(
+                PreAuthDto
+                        .RequestBody
+                        .builder()
+                        .userId(currentAggregator.getUserId())
+                        .amount(currentAggregator.getAmount())
+                        .orderId(currentAggregator.getAggregatorTransactionId())
+                        .build()
+        );
+        <i class="conum" data-value="5"></i><b>(5)</b>
+        currentAggregator.setPreAuthRef(preAuthRef);
+        <i class="conum" data-value="6"></i><b>(6)</b>
+        return stepManager.next(StockUpdateExecutor.class, OrderStatus.MADE_PRE_AUTH);
+    }
+
+    @Override
+    public SagaExecutionEventName doRevert(
+            NonRetryableExecutorException processException,
+            PlaceOrderAggregator finalAggregatorState,
+            RevertHintStore revertHintStore
+    )
+    throws RetryableExecutorException { <i class="conum" data-value="7"></i><b>(7)</b>
+
+        this.paymentService.releasePreAuth(
+                PreAuthReleaseDto.RequestBody.builder()
+                        <i class="conum" data-value="8"></i><b>(8)</b>
+                        .pareAuthRef(finalAggregatorState.getPreAuthRef())
+                        <i class="conum" data-value="9"></i><b>(9)</b>
+                        .reason(processException.get("reason").orElse(""))
+                        .build()
+        );
+        revertHintStore.put(
+                String.valueOf(System.currentTimeMillis()),
+                this.getClass().getSimpleName() + ":doRevert"
+        );<i class="conum" data-value="10"></i><b>(10)</b>
+
+        return return OrderStatus.RELEASED_PRE_AUTH; <i class="conum" data-value="11"></i><b>(11)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>PreAuthExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Implement the <code>PreAuthExecutor</code> from the <code>CommandExecutor</code> by passing the target Aggregator.
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#command_executor" class="xref page"><code>CommandExecutor&lt;A&gt;</code></a> interface.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>you will have the <code>currentAggregator</code> object through the method parameter. due to this executor is the 3rd executor, the <code>currentAggregator</code> object has been updated by the <code>OrderController</code>(initialization), <code>UserDetailExecutor</code>,and <code>OrderInitializeExecutor</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>make the pre-auth process by invoking the PaymentService&#8217;s <code>makePreAuth()</code> method.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Update the <code>currentAggregator</code> with <code>preAuthRef</code> data that received as the response.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Navigates the execution by using <code>stepManager</code> to the next executor called <code>StockUpdateExecutor</code>.
+And also passed the status as <code>MADE_PRE_AUTH</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><code>RetryableExecutorException</code> As per the StackSaga design pattern the revert process cannot have any <code>NonRetryableExecutorException</code> error.
+It only can have <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>For Calling the PaymentService&#8217;s <code>releasePreAuth()</code> we have to provide the <code>pareAuthRef</code> data.
+So we have the last aggregator data that was updated until the end of the process to forward.
+Therefore, that contains the <code>pareAuthRef</code> and we can access it from the <code>finalAggregatorState</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>And As well as a reason should be given for the releasing <code>PreAuth</code>.
+All the time the process can be failed (With  <code>NonRetryableExecutorException</code>)we have added a data called <code>reason</code> with the <code>NonRetryableExecutorException</code>.
+This is the time that can be used.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Update the hint-store object by adding current millisecond and the revert method name with the executor name while the revert process. <br>
+In your real application, <a href="#//">the hint-store</a> can be used for adding some data regarding the revert process.
+It can be accessed from the next revert process.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>Return the status as <code>RELEASED_PRE_AUTH</code>  finally.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_paymentservice"><a class="anchor" href="#_creating_paymentservice"></a>Creating PaymentService</h3>
+<div class="paragraph">
+<p><code>PaymentService</code> is a regular spring service that creates for calling utility <code>payment-service</code>.
+Due to the <code>payment-service</code> is another utility service we have to call it through http or any other protocol that target service supports (Most probably API endpoints are exposed by http protocol).
+This example&#8217;s <code>payment-service</code> also support http endpoint to access the API.
+Therefore, we will be using rest template as http client.
+But you can use any Http client like Feign-client, Okhttp, Spring-webclient and so on.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The relationship between the executor and service should not be <strong>one-to-one</strong>.
+A service can be used for many executors.
+In this example, the <code>PaymentService</code> class is used for <code>PreAuthExecutor</code> both executors.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Service
+@RequiredArgsConstructor
+public class PaymentService {
+
+    private final RestTemplate restTemplate;
+
+    public String makePreAuth(PreAuthDto.RequestBody requestBody)
+        throws RetryableExecutorException, NonRetryableExecutorException { <i class="conum" data-value="1"></i><b>(1)</b>
+
+        try {
+            <i class="conum" data-value="2"></i><b>(2)</b>
+            PreAuthDto.ResponseBody responseBody = this.restTemplate.postForObject(
+                    "http://payment-service/pre-auth",
+                    requestBody,
+                    PreAuthDto.ResponseBody.class
+            );
+            assert responseBody != null;
+            <i class="conum" data-value="3"></i><b>(3)</b>
+            return responseBody.getPreAuthRef();
+        } catch (HttpClientErrorException ex) { <i class="conum" data-value="4"></i><b>(4)</b>
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.FORBIDDEN)) {
+                <i class="conum" data-value="5"></i><b>(5)</b>
+                throw NonRetryableExecutorException
+                        .buildWith(
+                                new InsufficientBalanceException("Balance not sufficient"),
+                                ""
+                        )
+                        .build();
+            } else {
+                <i class="conum" data-value="6"></i><b>(6)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            }
+        } catch (HttpServerErrorException ex) {  <i class="conum" data-value="7"></i><b>(7)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                <i class="conum" data-value="8"></i><b>(8)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            } else {
+                //502 , 503, 504, 509 etc.
+                <i class="conum" data-value="9"></i><b>(9)</b>
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) {  <i class="conum" data-value="10"></i><b>(10)</b>
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            <i class="conum" data-value="11"></i><b>(11)</b>
+            throw ex;
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        }
+
+    }
+
+    public void releasePreAuth(PreAuthReleaseDto.RequestBody requestBody) throws RetryableExecutorException {
+        try {
+            <i class="conum" data-value="12"></i><b>(12)</b>
+            this.restTemplate.put(
+                    "http://payment-service/pre-auth/release",
+                    requestBody
+            );
+        } catch (HttpServerErrorException ex) {<i class="conum" data-value="13"></i><b>(13)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                <i class="conum" data-value="14"></i><b>(14)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            } else {
+                //502 , 503, 504, 509 etc.
+                <i class="conum" data-value="15"></i><b>(15)</b>
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) { <i class="conum" data-value="16"></i><b>(16)</b>
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            <i class="conum" data-value="17"></i><b>(17)</b>
+            throw ex;
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        } catch (RuntimeException restOfExceptions) { <i class="conum" data-value="18"></i><b>(18)</b>
+            log.error("Unhanded exception : {}", restOfExceptions.getMessage());
+            log.warn("Unhanded exception was occurred and ignored while releasing pre-auth: {}", restOfExceptions.getMessage());
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We have thrown both <code>NonRetryableExecutorException</code>,and <code>RetryableExecutorException</code> that PreAuthExecutor&#8217;s <code>doPrcess()</code> method expects.
+The handling exception part is done in the service layer.
+<div class="paragraph">
+<p>[ Read the <a href="creating-UserDetailExecutor.html#exception_tip" class="xref page">TIP</a> ]</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the http request to the utility payment-service.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Returns the <code>authRef</code> that received as the response to the <code>PreAuthExecutor</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>4xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>An error can be thrown by the payment-service when we try to make a pre-auth if the user has no enough balance for making the pre-auth.
+Therefore, the <code>FORBIDDEN</code> error code is filtered and throws it as <code>NonRetryableExecutorException</code> wrapping with a new exception called <code>InsufficientBalanceException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Other 4xx errors are thrown as <code>NonRetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Check the 5xx error is equal to <code>INTERNAL_SERVER_ERROR</code>.
+Because if there is an internal server in this case, we know that we cannot go ahead and the process should be stopped going forward.
+Therefore, <code>NonRetryableExecutorException</code> is thrown by wrapping the real letter.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>Cathe the other exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>In this example, other error codes are not considered because we assume that errors cannot be happened.
+Therefore, that error just throws without wrapping with <code>NonRetryableExecutorException</code>.
+IF you want to wrap, you can do as usual but is not required if you don&#8217;t consider those errors.
+Because internally the framework wraps the all <code>RuntimeExceptions</code> with <code>NonRetryableExecutorException</code> by default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>Making the request to the utility payment-service to release the PreAuth that we made.
+This method is the Compensating of the <code>makePreAuth</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="14"></i><b>14</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="15"></i><b>15</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="16"></i><b>16</b></td>
+<td>Cathe the other exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="17"></i><b>17</b></td>
+<td>In this example, other error codes are not considered because we assume that errors cannot be happened.
+Therefore, that error just throws without wrapping with <code>NonRetryableExecutorException</code>.
+IF you want to wrap, you can do as usual but is not required if you don&#8217;t consider those errors.
+Because internally the framework wraps the all <code>RuntimeExceptions</code> with <code>NonRetryableExecutorException</code> by default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="18"></i><b>18</b></td>
+<td>Ignore other all unknown (Unhandled) exceptions to avoid the transaction termination.</td>
+</tr>
+</table>
+</div>
+<div id="tip_for_avoid_transaction_termination" class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you think that, even if the revert execution is failed for some reason (due to an unhandled exception,) the rest of revert executions should be run without terminating the transaction, you can flow this.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_stockupdateexecutor_command_executor"><a class="anchor" href="#_creating_stockupdateexecutor_command_executor"></a>Creating StockUpdateExecutor (Command-Executor)</h3>
+<div class="paragraph">
+<p><code>StockUpdateExecutor</code> is responsible for updating (reduce) the stock by connecting with the utility stock-service.
+After reducing the stock to place the order, an error occurred that reduced stock should be restored because the order will be canceled.
+That means that the execution has Compensating.
+Therefore, the executor should be a <code>Command-Executor</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "stock-service", liveCheck = false, value = "StockUpdateExecutor")
+@RequiredArgsConstructor
+public class StockUpdateExecutor implements CommandExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+
+    private final StockService stockService;
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+            PlaceOrderAggregator currentAggregator, <i class="conum" data-value="3"></i><b>(3)</b>
+            ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager
+    )
+    throws RetryableExecutorException, NonRetryableExecutorException {
+        currentAggregator.getExecutions().add(this.getClass().getSimpleName()+":"+ LocalDateTime.now());
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        this.stockService.updateStock(
+                UpdateStockDto.RequestBody
+                        .builder()
+                        .orderId(currentAggregator.getAggregatorTransactionId())
+                        .items(currentAggregator
+                                .getItems()
+                                .stream()
+                                .collect(
+                                        Collectors.toMap(
+                                                OrderItem::getItemId,
+                                                OrderItem::getQty
+                                        )
+                                )
+                        )
+                        .build()
+        );
+        <i class="conum" data-value="5"></i><b>(5)</b>
+        return stepManager.next(MakePaymentExecutor.class, OrderStatus.UPDATED_STOCK);
+    }
+
+    @Override
+    public String doRevert(
+            NonRetryableExecutorException processException,
+            PlaceOrderAggregator finalAggregatorState,
+            RevertHintStore revertHintStore
+    ) throws RetryableExecutorException { <i class="conum" data-value="6"></i><b>(6)</b>
+        <i class="conum" data-value="7"></i><b>(7)</b>
+        this.stockService.restoreStock(
+                RestoreStockDto.RequestBody
+                        .builder()
+                        .reason(processException
+                                .get("reason")
+                                .orElse("")
+                        )
+                        .build()
+        );
+        <i class="conum" data-value="8"></i><b>(8)</b>
+        revertHintStore.put(
+                String.valueOf(System.currentTimeMillis()),
+                this.getClass().getSimpleName() + ":doRevert"
+        );
+        <i class="conum" data-value="9"></i><b>(9)</b>
+        return OrderStatus.RESTORED_STOCK;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>StockUpdateExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Implement the <code>StockUpdateExecutor</code> from the <code>CommandExecutor</code> by passing the target Aggregator.
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#command_executor" class="xref page"><code>CommandExecutor&lt;A&gt;</code></a> interface.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>you will have the <code>currentAggregator</code> object through the method parameter. due to this executor is the 4th executor, the <code>currentAggregator</code> object has been updated by the <code>OrderController</code>(initialization), <code>UserDetailExecutor</code>, <code>OrderInitializeExecutor</code>,and <code>PreAuthExecutor</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>updating the stock by invoking the StockService&#8217;s <code>updateStock()</code> method. the <code>orderId</code> and <code>items</code> are passed accessing from the <code>currentAggregator</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Navigates the execution by using <code>stepManager</code> to the next executor called <code>MakePaymentExecutor</code>.
+And also passed the status as <code>UPDATED_STOCK</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><code>RetryableExecutorException</code> As per the StackSaga design pattern the revert process cannot have any <code>NonRetryableExecutorException</code> error.
+It only can have <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Calling the StockService&#8217;s <code>restoreStock()</code> method to restoring the items that has been reduced in the <code>doProcess()</code> method.
+To restore the Stock, we have to pass a reason.
+Due to we have put a reason all the possible times when an <code>NonRetryableExecutorException</code> is occurred in <code>doProcess</code> executions.
+If the value doesn&#8217;t exist in the exception object we have passed just empty <code>String</code> there.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Update the hint-store object by adding current millisecond and the revert method name with the executor name while the revert process. <br>
+In your real application, <a href="#//">the hint-store</a> can be used for adding some data regarding the revert process. It can be accessed from the next revert process.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Returns the status as <code>RESTORED_STOCK</code> finally.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Related classes</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_stockservice"><a class="anchor" href="#_creating_stockservice"></a>Creating StockService</h3>
+<div class="paragraph">
+<p>We called the <code>StockService</code> in the <code>StockUpdateExecutor</code>.
+The service <code>StockService</code> class is responsible for updating the stock or if there is an error, restore the stock by connecting with the utility <code>stock-service</code>.
+So let&#8217;s create the service now.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Service
+@RequiredArgsConstructor
+public class StockService {
+
+    private final RestTemplate restTemplate;
+
+    public void updateStock(UpdateStockDto.RequestBody requestBody)
+            throws
+            RetryableExecutorException, NonRetryableExecutorException {
+        try {
+            <i class="conum" data-value="1"></i><b>(1)</b>
+            this.restTemplate.put(
+                    "http://stock-service/stock",
+                    requestBody
+            );
+        } catch (HttpServerErrorException ex) { <i class="conum" data-value="2"></i><b>(2)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                throw ex;
+            } else {
+                //502 , 503, 504, 509 etc.
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) { <i class="conum" data-value="3"></i><b>(3)</b>
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            throw ex;
+        }
+
+    }
+
+    public void restoreStock(RestoreStockDto.RequestBody requestBody) throws RetryableExecutorException {
+        try {
+            <i class="conum" data-value="4"></i><b>(4)</b>
+            this.restTemplate.put(
+                    "http://stock-service/stock/restore",
+                    requestBody
+            );
+        } catch (HttpServerErrorException ex) { <i class="conum" data-value="5"></i><b>(5)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                throw ex;
+            } else {
+                //502 , 503, 504, 509 etc.
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) { <i class="conum" data-value="6"></i><b>(6)</b>
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            throw ex;
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This service is also pretty much the same as the service that has been created so far.</p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Call the endpoint to update the stock.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Cathe the other exceptions (with 4xx errors as well).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Call the endpoint to restore the updated stock.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Cathe the other exceptions (with 4xx errors as well).</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_makepaymentexecutor_command_executor"><a class="anchor" href="#_creating_makepaymentexecutor_command_executor"></a>Creating MakePaymentExecutor (Command-Executor)</h3>
+<div class="paragraph">
+<p><code>MakePaymentExecutor</code> is the final executor as per the diagram. this executor interacts with the utility <code>payment-service</code>.
+in the <code>PreAuthExecutor</code> also we accessed the utility <code>payment-service</code> for making the pre-auth.
+his executor is responsible for making the real payment for that <code>pre-auth</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "stock-service", liveCheck = false, value = "StockUpdateExecutor")
+@RequiredArgsConstructor
+public class MakePaymentExecutor implements CommandExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+
+    private final PaymentService paymentService; <i class="conum" data-value="3"></i><b>(3)</b>
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+                PlaceOrderAggregator currentAggregator,
+                ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager
+    ) throws RetryableExecutorException, NonRetryableExecutorException {
+        currentAggregator.getExecutions().add(this.getClass().getSimpleName()+":"+ LocalDateTime.now());
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        String paymentId = this.paymentService.makePayment(
+                MakePaymentDto
+                        .RequestBody
+                        .builder()
+                        .amount(currentAggregator.getAmount())
+                        .pareAuthRef(currentAggregator.getPreAuthRef())
+                        .userId(currentAggregator.getUserId())
+                        .build()
+        );
+        <i class="conum" data-value="5"></i><b>(5)</b>
+        currentAggregator.setPaymentId(paymentId);
+        <i class="conum" data-value="6"></i><b>(6)</b>
+        return stepManager.complete(OrderStatus.MADE_PAYMENT);
+    }
+
+    @Override
+    public String doRevert(NonRetryableExecutorException processException, PlaceOrderAggregator finalAggregatorState, RevertHintStore revertHintStore) throws RetryableExecutorException {
+        throw new UnsupportedOperationException(); <i class="conum" data-value="7"></i><b>(7)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>MakePaymentExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Implement the <code>MakePaymentExecutor</code> from the <code>CommandExecutor</code> by passing the target Aggregator.
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#command_executor" class="xref page"><code>CommandExecutor&lt;A&gt;</code></a> interface.</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Autowire the <code>PaymentService</code>.
+The old payment service is used this as well.
+(The new methods will be updated below.)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Calling the PaymentService&#8217;s <code>makePayment()</code> method for making the payment.
+To make the payment, we have to pass the following data.
+<div class="dlist">
+<dl>
+<dt class="hdlist1">-<code>amount</code></dt>
+<dd>
+<p>initialized at <code>OrderController</code></p>
+</dd>
+<dt class="hdlist1">-<code>pareAuthRef</code></dt>
+<dd>
+<p>initialized at <code>PreAuthExecutor</code></p>
+</dd>
+<dt class="hdlist1">-<code>userId</code></dt>
+<dd>
+<p>initialized at <code>OrderController</code></p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Updates the payment in the <code>currentAggregator</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Due to this step is the finale execution, mentions the <strong>compiled</strong> signal to the SEC by using <code>stepManager.complete</code> method with the status as <code>MADE_PAYMENT</code>.
+By mentioning <strong>compiled</strong> signal, the SEC stop the execution and mark the transaction has been successfully completed.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>All other command-executors had a Compensating but in this executor have no any execution for Compensating.
+The reason is that this is the final execution of this entire process and there is no any next executor can be failed.
+You know that all the revert executions are called as the descending order from where the <code>NonRetryableExecutorException</code> is thrown.
+Even this execution is failed for some reason, no need to do a Compensating because that execution already failed.
+If this execution failed for some reason, all other executed (successfully executed so far), executor&#8217;s Compensatings should be invoked.
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you add another execution after making the Payment, you must implement the <code>doRevert()</code> method.
+Because that new execution is failed for some reason, the payment should be refunded.
+Because the payment is already done.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Refer the <a href="#//">reference documentation</a> to see how the executions are invoked.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>Related Classes</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_updating_the_paymentservice"><a class="anchor" href="#_updating_the_paymentservice"></a>Updating the PaymentService.</h3>
+<div class="paragraph">
+<p>To make the payment, we have to create a new method in the existing <code>PaymentService</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">    public String makePayment(MakePaymentDto.RequestBody requestBody) throws RetryableExecutorException, NonRetryableExecutorException {
+        try {
+            MakePaymentDto.ResponseBody responseBody = this.restTemplate.postForObject(
+                    "http://payment-service/pay",
+                    requestBody,
+                    MakePaymentDto.ResponseBody.class
+            );
+            assert responseBody != null;
+            log.debug(responseBody.getMessage());
+            return responseBody.getPaymentRef();
+        } catch (HttpClientErrorException ex) {
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            throw ex;
+        } catch (HttpServerErrorException ex) {
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                throw ex;
+            } else {
+                //502 , 503, 504, 509 etc.
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) {
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            throw ex;
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That method is also pretty much the same as the service methods we have been implementing so far.
+Just call the target utility service and handle the exception.</p>
+</div>
+<div class="paragraph">
+<p><strong>Related Classes' links</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_updating_configuration_properties"><a class="anchor" href="#_updating_configuration_properties"></a>Updating Configuration Properties</h3>
+<div class="paragraph">
+<p>We have all 4 utility services and also other 2 services called api-gateway and eureka service to configure.
+But except the order-service and api-gateway, other services are regular spring-cloud services.
+Therefore, we are not going to deep diving to them.
+You can see get the Configuration Properties through these links.</p>
+</div>
+<div class="ulist">
+<div class="title">Configuration Properties for regular services.</div>
+<ul>
+<li>
+<p><a href="#//">user-service</a></p>
+</li>
+<li>
+<p><a href="#//">stock-service</a></p>
+</li>
+<li>
+<p><a href="#//">payment-service</a></p>
+</li>
+<li>
+<p><a href="#//">eureka-service</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The above links are related to the default deployment approach.
+If you want
+to see
+how the applications are deployed
+by using <a href="#//">docker-compose</a> or <a href="migrating-to-k8s.html" class="xref page">kubernetes</a>,
+reach these links.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s see how to configure The most important service called order-service.</p>
+</div>
+<div class="listingblock">
+<div class="title">application.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">services:
+  <i class="conum" data-value="1"></i><b>(1)</b>
+  payment-service: http://payment-service
+  stock-service: http://stock-service
+  user-service: http://user-service
+server:
+  port: 8081
+eureka:
+  client:
+    serviceUrl:
+      <i class="conum" data-value="2"></i><b>(2)</b>
+      defaultZone: http://localhost:8085/eureka/
+  instance:
+    hostname: localhost
+    <i class="conum" data-value="3"></i><b>(3)</b>
+    instance-id: ${spring.application.name}:${random.uuid}
+spring:
+  application:
+    <i class="conum" data-value="4"></i><b>(4)</b>
+    name: order-service
+  datasource:
+    username: root
+    password: mafei
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stacksaga_place_order_demo_order_service?createDatabaseIfNotExist=true
+  liquibase:
+    <i class="conum" data-value="5"></i><b>(5)</b>
+    enabled: false
+<i class="conum" data-value="6"></i><b>(6)</b>
+stacksaga:
+  enable: true <i class="conum" data-value="7"></i><b>(7)</b>
+  component-scan: org.example.aggregator <i class="conum" data-value="8"></i><b>(8)</b>
+  app-release-version: 1.0.0 <i class="conum" data-value="9"></i><b>(9)</b>
+  connect:
+    admin-urls:
+      - http://localhost:4444 <i class="conum" data-value="10"></i><b>(10)</b>
+    admin-username: order-service-application-user <i class="conum" data-value="11"></i><b>(11)</b>
+    admin-password: ykLO89Irx2Q6Cf2j <i class="conum" data-value="11"></i><b>(11)</b>
+  datasource:
+    <i class="conum" data-value="12"></i><b>(12)</b>
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/order-service?createDatabaseIfNotExist=true
+      username: root
+      password: mafei
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: ${stacksaga.app-release-version}
+logging:
+  pattern:
+    <i class="conum" data-value="13"></i><b>(13)</b>
+    level: "%5p [${spring.application.name:},%X{aggregatorId:-}]"
+  level:
+    org:
+      stacksaga: debug</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to this approach is the default environment, you use the default profile.
+When we move to other environments (<a href="stackSaga-demo-with-docker-and-docker-compose.html" class="xref page">docker-compose</a> and <a href="migrating-to-k8s.html" class="xref page">kubernetes</a>), different profiles will be created.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We decided to obtain the service&#8217;s hosts that we use inside the order service from the configuration file.
+Because the host nam will be different with other environments, (spring profiles) like <a href="stackSaga-demo-with-docker-and-docker-compose.html" class="xref page">docker-compose</a> and <a href="migrating-to-k8s.html" class="xref page">kubernetes</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Due to we use <a href="#//">Eureka service discovery</a>, we have provided the URL of the eureka server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>To identify the eureka client (the instance,) you have to provide a unique id for each instance.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>it is most important because the service-user account should be equal the <code>spring.application.name</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>spring.liquibase.enabled</code> Even if you haven&#8217;t added <code>liquibase</code> in your application, StackSaga uses  <code>liquibase</code> internally.
+Due to the <code>liquibase</code> dependency exists in the application spring tries to access the autoconfiguration.
+Then you will get an error.
+To avoid that exception, you have to disable it.
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you want to use <code>liquibase</code> in your application you are free to use it as usual, and then you don&#8217;t want to disable <code>liquibase</code> like above.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The section that StackSaga configurations started.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>It is not enough to add the StackSaga dependencies.
+To enable StackSaga, you have to enable StackSaga.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>We have to provide the packages to StackSaga where the <code>Aggregator</code> class are stored.
+In our example the package is <code>org.example.aggregator</code>.
+If you have multiple locations, you can provide a list of packages.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>This will be helpful to identify the metadata from the admin dashboard.
+Because all the aggregator and executors metadata is saved under the <code>app-release-version</code>.
+As an example, if you want to see what are the aggregators and executors that have been configured, you select the version and see them.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>The admin URL that the admin-server is running on.
+If multiple <a href="#//">admin-server</a> instances are running, you can provide all the list of URLs.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>The username and the password of the <a href="../admin/create_service_user.html" class="xref page">service-user</a> that you created for this <code>order-service</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>You have to provide the datasource for the event-store that you use.
+In this example we have used <code>stacksaga-mysql-support</code> dependency we have to provide the Mysql datasource configurations.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>due to stacksaga adding the aggregator id in to Mapped Diagnostic Context (MDC) for monitoring the transaction log, you can update your logging pattern like this.
+then you can identify easily all the logs regarding the specific transaction.
+the output will be like this.
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-transaction-id-log-with-pattern.png" alt="stacksaga transaction id log with pattern"></span></p>
+</div>
+<div class="paragraph">
+<p><code>SA-1717265615759-382463295016275</code> is the transaction id of that particular transaction.</p>
+</div></td>
+</tr>
+</table>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are using spring tracing implementation, you can keep the log pattern like this
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-},%X{aggregatorId:-}]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating_api_cloud_gateway"><a class="anchor" href="#creating_api_cloud_gateway"></a>Creating API-Cloud-Gateway</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now we are going to create the api-cloud-gateway.</p>
+</div>
+<div class="paragraph">
+<p><strong>Road Map</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../admin/_images/stacksaga-example-stacksaga-spring-cloud-api-gateway-demo-hight-level-2.drawio.svg" alt="stacksaga example stacksaga spring cloud api gateway demo hight level 2.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>Same as before, visit to the <a href="https://start.spring.io/">spring initializr</a> and create a new project with the following dependencies.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>spring-boot-starter-webflux</p>
+</li>
+<li>
+<p>spring-cloud-starter-gateway</p>
+</li>
+<li>
+<p>spring-cloud-starter-netflix-eureka-client</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+You don&#8217;t want to worry about StackSaga things because StackSaga doesn&#8217;t involve with the API-Gateway.
+But to avoid the cross-origin restrictions, you have to <a href="#//">allow the cross-requests</a> for the Admin-Dashboard URL(s).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The pom.xml file will be like below.</p>
+</div>
+<div class="listingblock">
+<div class="title">pom.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.7.0&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;api-gateway&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;api-gateway&lt;/name&gt;
+    &lt;description&gt;api-gateway&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;8&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;spring-cloud.version&gt;2021.0.3&lt;/spring-cloud.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.projectreactor&lt;/groupId&gt;
+            &lt;artifactId&gt;reactor-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable the Discovery client, annotate the main class by <code>@EnableDiscoveryClient</code> like below.</p>
+</div>
+<div class="listingblock">
+<div class="title">ApiGatewayApplication.class</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.example.apigateway;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@SpringBootApplication
+@EnableDiscoveryClient
+public class ApiGatewayApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ApiGatewayApplication.class, args);
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s update the configuration file.</p>
+</div>
+<div class="listingblock">
+<div class="title">application.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8085/eureka/ <i class="conum" data-value="1"></i><b>(1)</b>
+  instance:
+    hostname: localhost
+    <i class="conum" data-value="2"></i><b>(2)</b>
+    instance-id: ${spring.application.name}:${random.uuid}
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        <i class="conum" data-value="3"></i><b>(3)</b>
+        cors-configurations:
+          '[/*/stacksaga/**]':
+            allowedOrigins:
+              - "http://localhost:4444"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      default-filters:
+        <i class="conum" data-value="4"></i><b>(4)</b>
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      discovery:
+        locator:
+          <i class="conum" data-value="5"></i><b>(5)</b>
+          enabled: true
+          <i class="conum" data-value="6"></i><b>(6)</b>
+          lower-case-service-id: true
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Provide the eureka service registry URL.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Due to the api gateway also a one eureka clients, you have to mention how it would be the instance id when the api gateway is registered with eureka service.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>To avoid the cross-origin restrictions, you can permit the Admin-Dashboard URL.
+If you have a list of Admin-Dashboard URLs, you provide all.
+It permits all the requests for this pattern.
+/<strong>/stacksaga/</strong>*</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>To avoid duplicate response headers exceptions, you can add these filters. (<a href="https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway-server-mvc/filters/deduperesponseheader.html">Read spring doc</a>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Flag that enables DiscoveryClient gateway integration. (<a href="https://docs.spring.io/spring-cloud-gateway/reference/spring-cloud-gateway/the-discoveryclient-route-definition-locator.html">Read spring doc</a>)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Option to lower case serviceId in predicates and filters, defaults to false.
+Useful with eureka when it automatically uppercases serviceId.
+So MYSERIVCE, would match /myservice/** (<a href="https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/appendix.html">Read spring doc</a>)</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating_eureka_service"><a class="anchor" href="#creating_eureka_service"></a>Creating Eureka-service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now we are going to create the eureka service.</p>
+</div>
+<div class="paragraph">
+<p><strong>Road Map</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../admin/_images/stacksaga-example-stacksaga-spring-cloud-api-gateway-demo-hight-level-3.drawio.svg" alt="stacksaga example stacksaga spring cloud api gateway demo hight level 3.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>Same as before, visit to the <a href="https://start.spring.io/">spring initializr</a> and create a new project with the following dependencies.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>spring-boot-starter-actuator (optional)</p>
+</li>
+<li>
+<p>spring-boot-starter-web</p>
+</li>
+<li>
+<p>spring-cloud-starter-netflix-eureka-server</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The pom.xml file will be like below.</p>
+</div>
+<div class="listingblock">
+<div class="title">pom.xml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.7.0&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;eureka-service&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;8&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;spring-cloud.version&gt;2021.0.3&lt;/spring-cloud.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To enable the Discovery Service, annotate the main class by <code>@EnableEurekaServer</code> like below.</p>
+</div>
+<div class="listingblock">
+<div class="title">EurekaServiceApplication.class</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">package com.example.sampleeurekaservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServiceApplication.class, args);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">application.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">eureka:
+  client:
+    <i class="conum" data-value="1"></i><b>(1)</b>
+    registerWithEureka: false
+    fetchRegistry: false
+server:
+  port: 8085</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Due to that fact that the <code>eureka-server</code> dependency contains <code>eureka-client</code> dependency as well, the client tries to register and fetch the data as a client.
+But due to this service acts as the eureka-service, it is not appropriate server acts as a client too.
+Therefore, the client is disabled here.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating_user_service"><a class="anchor" href="#creating_user_service"></a>Creating User Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To reduce the length of the tutorial and due to the user-service is a regular spring-boot project, we skip taking step by step creating the user-service and, please find the <a href="#//">project here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating_payment_service"><a class="anchor" href="#creating_payment_service"></a>Creating Payment Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To reduce the length of the tutorial and due to the <code>payment-service</code> is a regular spring-boot project, we skip taking step by step creating the user-service and, please find the <a href="#//">project here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="creating_stock_service"><a class="anchor" href="#creating_stock_service"></a>Creating Stock Service</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To reduce the length of the tutorial and due to the <code>stock-service</code> is a regular spring-boot project, we skip taking step by step creating the user-service and, please find the <a href="#//">project here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deployment"><a class="anchor" href="#deployment"></a>Deployment</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_application_running_order"><a class="anchor" href="#_application_running_order"></a>Application Running order.</h3>
+<div class="paragraph">
+<p>Make sure to run the services following order.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="run-and-initialize-stacksaga-admin-server.html#set_up_stacksaga_admin_server_and_dashboard" class="xref page">Run StackSaga Admin server</a>.</p>
+</li>
+<li>
+<p>Run Eureka Server.</p>
+</li>
+<li>
+<p>Run API Gateway Service.</p>
+</li>
+<li>
+<p>Run Order-Service</p>
+</li>
+<li>
+<p>Run User-Service</p>
+</li>
+<li>
+<p>Run Stock-Service</p>
+</li>
+<li>
+<p>Run Payment-Service</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="set_up_stacksaga_admin_server_and_dashboard"><a class="anchor" href="#set_up_stacksaga_admin_server_and_dashboard"></a>Set up StackSaga Admin Server And Dashboard</h3>
+<div class="paragraph">
+<p><strong>Road Map</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="../admin/_images/stacksaga-example-stacksaga-spring-cloud-api-gateway-demo-hight-level-admin-server-current.drawio.svg" alt="stacksaga example stacksaga spring cloud api gateway demo hight level admin server current.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p>The first step of the deployment part is initializing the Admin Server And Dashboard and creating a service-user account for the order-service.</p>
+</div>
+<div class="paragraph">
+<p>We are not going to show each step here because there is a clear guide at the reference document.
+Please fallow these links.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../admin/stacksaga_admin.html#admin_server_run" class="xref page">Initializing the Admin Server And Dashboard</a></p>
+</li>
+<li>
+<p><a href="../admin/stacksaga_admin.html#create_service_user" class="xref page">Creating a service-user account</a> for order-service.
+Make sure to create the order-service user as <code>order-service-application-user</code>.
+Because we have added the username in <a href="order-service-configuration-file.html#mentioning_service_user_credential" class="xref page">application.yaml</a> file at the <code>order-service</code>.)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_utility_services"><a class="anchor" href="#_run_the_utility_services"></a>Run the utility services</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ mvn spring-boot:run</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_verifying_the_running_services"><a class="anchor" href="#_verifying_the_running_services"></a>Verifying the running services</h3>
+<div class="paragraph">
+<p><span class="image"><img src="_images/eureka-dashboard-stacksaga.png" alt="eureka dashboard stacksaga"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/service-connected-succesfull-stacksaga.png" alt="service connected succesfull stacksaga"></span></p>
+</div>
+<div class="paragraph">
+<p>You know that the application data is submitted to the admin dashboard by using the credential that you configured.
+You can see those data in the <strong>Services</strong> and <strong>Instances</strong> sections in the dashboard like below.</p>
+</div>
+<div class="paragraph">
+<div class="title">The services</div>
+<p><span class="image"><img src="_images/stacksaga-demo-admin-dashboard-service-view.png" alt="stacksaga demo admin dashboard service view"></span></p>
+</div>
+<div class="paragraph">
+<p>And also if you want to see all the instances, one by one, go to the page called <strong>instances</strong> and enter the service name, and then you will be able to see all the instances that you have run so far like below.</p>
+</div>
+<div class="paragraph">
+<div class="title">Instances</div>
+<p><span class="image"><img src="_images/stacksaga-demo-admin-dashboard-service-instances-view.png" alt="stacksaga demo admin dashboard service instances view"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are using eureka as the service registry, the instance id will be the eureka instance ID, and if you are in kubernetes cluster, the instance ID will be the Pod ID.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing"><a class="anchor" href="#testing"></a>Testing</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+After running all the services, if you want to test all the endpoints, go and test your endpoints <a href="https://documenter.getpostman.com/view/10011188/2sA3JNc1NB">here</a> with your Postman.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s make a request for placing an order.</p>
+</div>
+<div class="paragraph">
+<p>The place order process testing is done in three ways.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="application-testing.html#fully_successful_transaction_testing" class="xref page">Fully successful transaction</a></p>
+</li>
+<li>
+<p><a href="application-testing.html#revert_success_transaction" class="xref page">Revert successful transaction</a></p>
+</li>
+<li>
+<p><a href="application-testing.html#revert_failed_transaction" class="xref page">Revert failed transaction</a></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Even though we are simulating <a href="../architecture/stack_saga_transaction_type.html#revert_failed_transaction_scenario" class="xref page">Revert failed transaction</a> in this demo, Make sure not to happen a Compensating failure.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="fully_successful_transaction_testing"><a class="anchor" href="#fully_successful_transaction_testing"></a>Fully successful transaction Testing</h3>
+<div class="paragraph">
+<p>Let&#8217;s see by making a request that can be fulfilled the entire process successfully.</p>
+</div>
+<div class="paragraph">
+<p>The user1 has enough money in his wallet.
+And also the stocks are available, and all the utility services are working well.
+So our request&#8217;s all primary executions should be successful as we expect.</p>
+</div>
+<div class="paragraph">
+<p>You can see here as we expected, the transaction has been invoked through all the executors successfully.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/place-order-api-test.png" alt="place order api test"></span></p>
+</div>
+<div class="paragraph">
+<p>After making the request, you will have a response like below.
+You can see the <code>order_id</code> has been created successfully.
+Now let&#8217;s move to the admin dashboard and see the trace of the transaction.
+Go to the tracing menu and find your transaction tracing data by providing the <code>transaction id</code> that stacksaga generated.
+)</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you didn&#8217;t test your order-service connectivity through the <code>Service Connector</code> window, make sure to go and <a href="../admin/stacksaga_admin.html#validate_your_connectivity" class="xref page">validate your connectivity</a> by providing target <strong>root URL</strong> and <strong>service-name</strong> (Or Aliased name).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title"><strong>Summary Of the transaction</strong></div>
+<p><span class="image"><img src="_images/stacksaga-place-order-api-test-tracing-summary.png" alt="stacksaga place order api test tracing summary"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In this section, you can see all the things regarding the transaction like transaction data,current status, whether it has some exception or not., what is the instance that transaction was executed, region and zone etc.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title"><strong>Execution Summary of the transaction</strong></div>
+<p><span class="image"><img src="_images/stacksaga-place-order-api-test-executor-summary.png" alt="stacksaga place order api test executor summary"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In this section, you can see all the executors that were executed one by one.
+Ant the time they were executed, and how long each executor has spent to execute.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>By clicking each executor, you will be able to see each executor in detail like how the aggregator updated and how many times the executor was executed, etc.</p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>INIExecutorDefault</strong></div>
+<p><span class="image"><img src="_images/stacksaga-demo-executor-1.png" alt="stacksaga demo executor 1"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Any transaction in StackSaga has initial executor details, and it shows the initial state of the aggregator.
+(If the executor is INIExecutorDefault one all the time, the entered aggregator snapshot and modified aggregator snapshot are the same).</p>
+</li>
+<li>
+<p>We can see the initial data that we updated from the <a href="#//">OrderController</a> class.
+And the rest of the data will be updated on the next executors.
+In addition to that, there are two properties called <code>aggregatorTransactionId</code> and <code>initializedVersion</code>.
+You know the <code>aggregatorTransactionId</code> is updated after handing over the execution to the <a href="#//">SEC</a>.
+The <code>initializedVersion</code> is provided what was the version of the aggregator (The version that you mention at <code>@SagaAggregator</code> in your Custom Aggregator) when the transaction is started.
+This will help to make the decisions when update your aggregator in the feature.
+See  <a href="../architecture/version_casting_architecture.html" class="xref page">Aggregator Casting</a> ]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>As we navigated in the controller, the next executor should be <code>UserDetailExecutor</code>.</em></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>UserDetailExecutor Aggregator State</strong></div>
+<p><span class="image"><img src="_images/stacksaga-demo-executor-2.png" alt="stacksaga demo executor 2"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The entered aggregator state is the one that came to the executor after the last execution.
+Therefore, the <code>delivery_details</code> is <code>null</code> and <code>executions</code> list has only one data.
+And on the right side, you can see the modified aggregator state after executing the <code>UserDetailExecutor</code>.
+There you can see the <code>delivery_details</code> was updated, and the name of the executor was added to the <code>executions</code> list (The 2nd one) due to the UserDetailExecutor has been executed successfully.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>As we navigated in the <code>UserDetailExecutor</code>, the next executor should be <code>OrderInitializeExecutor</code>.</em></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>OrderInitializeExecutor Aggregator State</strong></div>
+<p><span class="image"><img src="_images/stacksaga-demo-executor-3.png" alt="stacksaga demo executor 3"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The entered state of the aggregator is equal to the modified aggregator state of the last executor called <code>UserDetailExecutor</code>.
+And after executing the <code>OrderInitializeExecutor</code>, the name of the executor was added to the <code>executions</code> list (The 3rd one).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>As we navigated in the <code>OrderInitializeExecutor</code>, the next executor should be <code>PreAuthExecutor</code>.</em></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>PreAuthExecutor Aggregator State</strong></div>
+<p><span class="image"><img src="_images/stacksaga-demo-executor-4.png" alt="stacksaga demo executor 4"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The entered state of the aggregator is equal to the modified aggregator state of the last executor called <code>OrderInitializeExecutor</code>.
+And after successfully executing the <code>PreAuthExecutor</code> you can see that the <code>pre_auth_ref</code> was updated at the modified aggregator state.
+And the name of the executor was added to the <code>executions</code> list (The 4th one)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>As we navigated in the <code>PreAuthExecutor</code>, the next executor should be <code>StockUpdateExecutor</code>.</em></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>StockUpdateExecutor Aggregator State</strong></div>
+<p><span class="image"><img src="_images/stacksaga-demo-executor-5.png" alt="stacksaga demo executor 5"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The entered state of the aggregator is equal to the modified aggregator state of the last executor called <code>PreAuthExecutor</code>.
+And after successfully executing the <code>StockUpdateExecutor</code> you can see that the name of the executor was added to the <code>executions</code> list (The 5th one).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>As we navigated in the <code>StockUpdateExecutor</code>, the next executor should be <code>MakePaymentExecutor</code>.</em></p>
+</div>
+<div class="paragraph">
+<div class="title"><strong>MakePaymentExecutor Aggregator State</strong></div>
+<p><span class="image"><img src="_images/stacksaga-demo-executor-6.png" alt="stacksaga demo executor 6"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The entered state of the aggregator is equal to the modified aggregator state of the last executor called <code>StockUpdateExecutor</code>.
+And after successfully executing the <code>MakePaymentExecutor</code> you can see that the <code>payment_id</code> was updated.
+And name of the executor was added to the <code>executions</code> list (The 6th one).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="revert_success_transaction"><a class="anchor" href="#revert_success_transaction"></a>Revert Success Transaction</h3>
+<div class="paragraph">
+<p>Let&#8217;s look at such a scenario one of primary executions is fielded with non-retryable exception.
+You can remember that in the <code>PreAuthExecutor</code> we caught the <code>FORBIDDEN</code> exception that sends by the <code>payment-service</code>
+if the user&#8217;s wallet has no balance to make the pre-auth.
+In this testing, let&#8217;s place an order with a higher amount than the wallet has.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/place-order-api-test-revert-success.png" alt="place order api test revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-place-order-api-test-tracing-summary-revert-success.png" alt="stacksaga place order api test tracing summary revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-1-revert-success-error-log.png" alt="stacksaga demo executor 1 revert success error log"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-place-order-api-test-execution-summary-revert-success.png" alt="stacksaga place order api test execution summary revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-1-revert-success.png" alt="stacksaga demo executor 1 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-2-revert-success.png" alt="stacksaga demo executor 2 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-3-revert-success.png" alt="stacksaga demo executor 3 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-4-revert-success.png" alt="stacksaga demo executor 4 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-4-1-revert-success.png" alt="stacksaga demo executor 4 1 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-4-2-revert-success.png" alt="stacksaga demo executor 4 2 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-4-3-revert-success.png" alt="stacksaga demo executor 4 3 revert success"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-executor-4-4-revert-success.png" alt="stacksaga demo executor 4 4 revert success"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="revert_failed_transaction"><a class="anchor" href="#revert_failed_transaction"></a>Revert Failed Transaction.</h3>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-revert-failed-request-postman.png" alt="stacksaga demo revert failed request postman"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-revert-failed-summary.png" alt="stacksaga demo revert failed summary"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-revert-failed-execution-summary.png" alt="stacksaga demo revert failed execution summary"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-revert-failed-primary-error-log.png" alt="stacksaga demo revert failed primary error log"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-revert-failed-revert-error-log.png" alt="stacksaga demo revert failed revert error log"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-demo-revert-failed-revert-error-hint-store.png" alt="stacksaga demo revert failed revert error hint store"></span></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="quick-start.html">Quick Start</a></span>
+  <span class="next"><a href="stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

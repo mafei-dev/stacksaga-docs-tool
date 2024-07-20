@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Migrate To Docker Environment. :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:quick-examples:stackSaga-demo-with-docker-and-docker-compose.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="prev" href="stacksaga-demo.html">
+    <link rel="next" href="k8s_with_k8s/migration-to-kubernetes.html">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/saga-architecture.html">Introduction to the Saga Design Pattern</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/introduction-to-stacksaga.html">Introduction to StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/SEC.html">Saga execution coordinator. (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator.html">Saga Aggregator.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/executor_architecture.html">Saga Executors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="1">
+    <a class="nav-link" href="stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">StackSaga Framework</a></li>
+    <li><a href="stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Migrate To Docker Environment.</h1>
+<div class="sect1">
+<h2 id="Overview"><a class="anchor" href="#Overview"></a>Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This will guide you to deploy your <a href="stacksaga-demo.html" class="xref page">entire demo system</a> in docker environment by creating docker images step by step.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We only focus on the configuration files and manifest files for docker deployment and how the communication is happened in the docker environment.
+Please find the <a href="#//">full source code here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/docker/stacksaga-demo-docker-summary.png" alt="stacksaga demo docker summary"></span></p>
+</div>
+<div class="paragraph">
+<p>The steps are as follows.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>[Set up StackSaga-Admin server].</p>
+</li>
+<li>
+<p>Updating <code>api-gateway</code> service.</p>
+</li>
+<li>
+<p>Updating <code>eureka-service</code> service.</p>
+</li>
+<li>
+<p>Updating <code>order-service</code> service.</p>
+</li>
+<li>
+<p>Updating <code>user-service</code> service.</p>
+</li>
+<li>
+<p>Updating <code>stock-service</code> service.</p>
+</li>
+<li>
+<p>Updating <code>payment-service</code> service.</p>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="_set_up_stacksaga_admin_server_in_docker"><a class="anchor" href="#_set_up_stacksaga_admin_server_in_docker"></a>Set up StackSaga-Admin server in Docker.</h3>
+<div class="paragraph">
+<p>Instead of running the executable jar fil in the local, you can use the <code>StackSaga-Admin-Server</code> image called <a href="https://hub.docker.com/r/stacksaga/stacksaga_admin_mysql">stacksaga/stacksaga_admin_mysql</a> from the docker-hub.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s create the docker-compose file for running the <code>StackSaga-Admin-Server</code> and configure the database for the <code>StackSaga-Admin-Server</code>.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+we create 3 different network groups in this example for grouping the services based on the communication.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>stacksaga-admin-communicate</code> group</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>admin_db</code> service. (from docker-compose.admin.yaml)</p>
+</li>
+<li>
+<p><code>stacksaga-admin</code> service. (from docker-compose.admin.yaml)</p>
+</li>
+<li>
+<p><code>order-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><code>api-gateway-communicate</code> group</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>api-gateway</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>payment-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>user-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>order-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><code>utility-server-communicate</code> group</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>db</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>eureka-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>api-gateway</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>order-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>user-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+<li>
+<p><code>payment-service</code> service. (from docker-compose.services.yaml)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">docker-compose.admin.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">version: '3.8'
+services:
+  admin_db: <i class="conum" data-value="1"></i><b>(1)</b>
+    container_name: admin_db
+    image: mysql:8.0 <i class="conum" data-value="2"></i><b>(2)</b>
+    restart: always
+    environment: <i class="conum" data-value="3"></i><b>(3)</b>
+      MYSQL_ROOT_PASSWORD: mafei
+      MYSQL_USER: mafei
+      MYSQL_PASSWORD: mafei
+    ports:
+      - "3506:3306" <i class="conum" data-value="4"></i><b>(4)</b>
+    volumes:
+      - admin_mysql_data:/var/lib/mysql <i class="conum" data-value="5"></i><b>(5)</b>
+    healthcheck: <i class="conum" data-value="6"></i><b>(6)</b>
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    networks:
+      - stacksaga_admin <i class="conum" data-value="7"></i><b>(7)</b>
+  stacksaga-admin: <i class="conum" data-value="8"></i><b>(8)</b>
+    container_name: stacksaga-admin
+    image: stacksaga/stacksaga_admin_mysql:1.0.0 <i class="conum" data-value="9"></i><b>(9)</b>
+    restart: always
+    ports:
+      - "4444:4444" <i class="conum" data-value="10"></i><b>(10)</b>
+    environment: <i class="conum" data-value="11"></i><b>(11)</b>
+      - SPRING_DATASOURCE_URL=jdbc:mysql://admin_db:3306/stacksaga_admin?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=mafei
+    depends_on:
+      admin_db:
+        condition: service_healthy <i class="conum" data-value="12"></i><b>(12)</b>
+    networks:
+      - stacksaga_admin <i class="conum" data-value="13"></i><b>(13)</b>
+volumes:
+  admin_mysql_data: <i class="conum" data-value="14"></i><b>(14)</b>
+    driver: local
+
+networks:
+  stacksaga_admin: <i class="conum" data-value="15"></i><b>(15)</b>
+    driver: bridge</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Create a service for the database called <code>admin_db</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Mysql version 8 is used as the image.
+This is the minimum version that supports StackSaga framework)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Pass the initial username and password for creating the database server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Due to you many have run the local mysql the internal port exports in port <code>3506</code> for out of the docker environment.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Use the volume <code>admin_mysql_data</code> that we created for saving the mysql-image&#8217;s data in the allocated disk.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The <code>StackSaga-Admin-Server</code> should use the database that we are creating.
+Therefore, we have to confirm that the <code>stacksaga-admin</code> server run after successfully starting the <code>admin_db</code>.
+The command tha we have mentioned in the <code>test</code> will be called until it returns a success response.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><code>admin_db</code> server has been added to the <code>stacksaga_admin</code> group. because the database and the <code>stacksaga-admin</code> should communicate via the host.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>creating the <code>stacksaga-admin</code> service for deploying the <code>stacksaga_admin_mysql</code> image.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>The <code>stacksaga/stacksaga_admin_mysql:1.0.0</code> is used for running the admin-server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>The port of the admin-server container is exposed to the outside with port <code>4444</code>.
+Then you can access the admin-dashboard via <code>localhost:4444</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>Passing the required configurations as environment variables.
+The database host and username and password of the database that we created above for the admin-server is added here.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="12"></i><b>12</b></td>
+<td>Avoid running the admin-server before starting the mysql server successfully.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="13"></i><b>13</b></td>
+<td>Add the <code>stacksaga-admin</code> server into the <code>stacksaga_admin</code> network group.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="14"></i><b>14</b></td>
+<td>Creating the volume for storing the mysql database data in the allocated disk named <code>admin_mysql_data</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="15"></i><b>15</b></td>
+<td>Creating the network group that we used above named <code>stacksaga_admin</code>.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">application-docker.yml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-service:8085/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+server:
+  port: 8080
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/*/stacksaga/**]':
+            allowedOrigins:
+              - "http://localhost:4444"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">application-docker.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+server:
+  port: 8085
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">application-docker.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">services:
+  payment-service: http://payment-service
+  stock-service: http://stock-service
+  user-service: http://user-service
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-service:8085/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+spring:
+  application:
+    name: order-service
+  datasource:
+    username: root
+    password: mafei
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db:3306/stacksaga_place_order_demo_order_service?createDatabaseIfNotExist=true
+  liquibase:
+    enabled: false
+stacksaga:
+  component-scan: org.example.aggregator
+  app-release-version: 1.0.0
+  connect:
+    admin-urls:
+      - http://stacksaga-admin:4444
+    admin-username: order-service-application-user
+    admin-password: ykLO89Irx2Q6Cf2j
+  datasource:
+    mysql:
+      jdbc-url: jdbc:mysql://db:3306/order-service?createDatabaseIfNotExist=true
+      username: root
+      password: mafei
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  enable: true
+  cloud:
+    validate-internal-communication-on-start-up: false
+
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: ${stacksaga.app-release-version}
+logging:
+  level:
+    org:
+      stacksaga: debug</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">application-docker.yaml</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">server:
+  port: 8080
+spring:
+  application:
+    name: payment-service
+  datasource:
+    username: root
+    password: mafei
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db:3306/stacksaga_place_order_demo_payment_service?createDatabaseIfNotExist=true
+  jpa:
+    hibernate:
+      ddl-auto: update
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8085/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0
+logging:
+  level:
+    org:
+      stacksaga: debug
+      springframework: debug
+    root: info</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">server:
+  port: 8080
+spring:
+  application:
+    name: stock-service
+  datasource:
+    username: root
+    password: mafei
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db:3306/stacksaga_place_order_demo_stock_service?createDatabaseIfNotExist=true
+  jpa:
+    hibernate:
+      ddl-auto: update
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8085/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0
+logging:
+  level:
+    org:
+      stacksaga: debug
+      springframework: debug
+    root: info</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">server:
+  port: 8080
+spring:
+  application:
+    name: user-service
+  datasource:
+    username: root
+    password: mafei
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://db:3306/stacksaga_place_order_demo_user_service?createDatabaseIfNotExist=true
+  jpa:
+    hibernate:
+      ddl-auto: update
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8085/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+    prefer-ip-address: true
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0
+logging:
+  level:
+    org:
+      stacksaga: debug
+      springframework: debug
+    root: info</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="stacksaga-demo.html">StackSaga Demo (Core concept practice)</a></span>
+  <span class="next"><a href="k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

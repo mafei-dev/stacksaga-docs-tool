@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
     <title>Aggregator Version Casting :: StackSAGA Docs</title>
     <meta name="page-spec" content="StackSaga-framework:architecture:version_casting_architecture.adoc">
     <meta name="generator" content="Antora 3.1.7">
@@ -10,7 +12,14 @@
     <link rel="next" href="dual_consistency_problem_of_sec_in_microservice.html">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/icon.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
@@ -18,7 +27,7 @@
 <header class="header">
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
                     src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
             <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
             <button class="navbar-burger" data-target="topbar-nav">
@@ -49,50 +58,35 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="what_is_stacksaga.html">What is StackSaga</a>
+    <a class="nav-link" href="saga-architecture.html">Introduction to the Saga Design Pattern</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="high_level_architecture.html">StackSaga in High-level</a>
+    <a class="nav-link" href="introduction-to-stacksaga.html">Introduction to StackSaga</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
+    <a class="nav-link" href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stacksaga_components.html">StackSaga Components</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="SEC.html">Saga execution coordinator (SEC)</a>
+    <a class="nav-link" href="SEC.html">Saga execution coordinator. (SEC)</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="event_store.html">Event Store</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="aggregator.html">Saga Aggregator</a>
+    <a class="nav-link" href="aggregator.html">Saga Aggregator.</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="executor_architecture.html">Saga Executor</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="command_executor_architecture.html">Command Executor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query_executor_architecture.html">Query Executor</a>
-  </li>
-</ul>
+    <a class="nav-link" href="executor_architecture.html">Saga Executors</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
@@ -117,13 +111,16 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
@@ -150,7 +147,7 @@
     <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../framework/saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
@@ -159,10 +156,63 @@
     <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
   </li>
 </ul>
   </li>
@@ -203,7 +253,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">StackSaga Framework</span>
-    <span class="version">1.0.0 1.0.0</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -218,7 +268,7 @@
       <a class="title" href="../index.html">StackSaga Framework</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">1.0.0 1.0.0</a>
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
         </li>
       </ul>
     </li>
@@ -230,7 +280,6 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../intro.html" class="home-link" title="Home"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">StackSaga Framework</a></li>
@@ -244,46 +293,25 @@
 </aside>
 <article class="doc">
 <h1 class="page">Aggregator Version Casting</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>All the applications will be updated by changing their versions from time to time.
 When a new version is deployed, the old version will be replaced by the new version (if you are not going to use service-mesh).
-But in the event-based architecture, some events can have been waiting to be executed when the new version is being deployed or after deployed as well.
-Then the old event should be mapped with the previous version.
-And if you don&#8217;t consider the old version’s execution, when developing the new version, the events will be conflicted or crashed.
-Because, the old version&#8217;s event is going to be executed by using the new version of the same service.
-But the new version doesn&#8217;t allow the old events, and then the event will face for an exception due to that the event&#8217;s data is not mapped with different versions to be executed smoothly.</p>
+But in the event-based architecture, some events can have been waiting to be executed when the new version is being deployed or after deployed as well.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="#aggregator_oriented_casting_architecture">Aggregator-Oriented casting</a></p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Aggregator upcast</p>
-</li>
-<li>
-<p>Aggregator downcast</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Then the old event should be mapped with the new version.
+That means by using the old serialized aggregator objects that are in the event-store should be able to create a new aggregator object.</p>
 </div>
-</li>
-<li>
-<p><a href="#executor_oriented_casting_architecture">Executor-Oriented casting</a></p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Executor upcast</p>
-</li>
-<li>
-<p>Executor downcast</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>So, if you don&#8217;t consider the old version’s events that might be in the event-store, when developing the new version, the events will be conflicted or crashed while mapping the old event to the new aggregator version.
+Because the old version&#8217;s events are going to be executed by using the new aggregator.</p>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<div class="title">Event rebuilding by the engine for transaction retrying.</div>
+<p><span class="image"><img src="_images/stacksaga-diagram-event-rebuiding.drawio.svg" alt="stacksaga diagram event rebuilding"></span></p>
 </div>
 </div>
 </div>
@@ -385,43 +413,18 @@ This is the time the casting is been worked on.
 You have to modify and annotate the aggregator so as not to conflict while building the object by the framework.
 Here you can see the best practices related to the casting of aggregators.</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_executor_oriented_casting"><a class="anchor" href="#_executor_oriented_casting"></a>Executor-Oriented Casting</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>According to the framework, one aggregator can have multiple executors based on your use case.
-When you update the version of the service, you might want to remove existing executors or add new executors based on the update that should be done.
-If you are going to add more additional executors to the existing aggregator that is called as <strong>executor-oriented upcasting</strong>.
-And the opposite of that, if you remove some existing executors from the aggregator, that form is called as <strong>executor-oriented-down-casting</strong>.
-Adding more is not a problem when the old event executors at all.
-Just think, for instance, the old aggregator had 3 executors and the new aggregator has 4 executors due to the additional one, which has been added.
-And after deploying the new version, the old events are executed through the new version.
-That execution is not conflicted because, all the necessary executors are in the new version.</p>
+<p>Related Topics</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-IF there is an executor down-cast scenario, This time is not just like Executor-oriented-down-casting because the old event should have all the expected executors to be executed as you plan that event should be executed upon the old version&#8217;s use case.
-But in the new version, if one or more executors do not exist, most of the time the execution can be crashed.
-(In rare cases, it might not be affected upon your update) by the way, even though you want to use some executors for the previous version and for the new version that executor is not used, that kind of situation is called as executor-oriented down-casting changes.
-To avoid conflict in this way, the framework provides a feature to skip the old executor from the latest version, and the old executor is retained only for the remaining old events as it&#8217;s.
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_up_casting"><a class="anchor" href="#_up_casting"></a>up-casting</h3>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Architecture-Stacksaga-executor-oriented-version-up-casting.drawio.svg" alt="Architecture Stacksaga executor-oriented version up-casting" height="400">
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="replay-transaction.html" class="xref page">Transaction Replay</a></p>
+</li>
+<li>
+<p><a href="aggregator_versioning.html" class="xref page">Aggregator Versioning</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

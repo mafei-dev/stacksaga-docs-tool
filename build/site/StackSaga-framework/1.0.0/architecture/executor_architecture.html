@@ -3,14 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Saga Executor :: StackSAGA Docs</title>
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Overview :: StackSAGA Docs</title>
     <meta name="page-spec" content="StackSaga-framework:architecture:executor_architecture.adoc">
     <meta name="generator" content="Antora 3.1.7">
     <link rel="prev" href="aggregator.html">
-    <link rel="next" href="command_executor_architecture.html">
+    <link rel="next" href="how_executors_behave_in_the_application.html">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/icon.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
@@ -18,7 +27,7 @@
 <header class="header">
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
                     src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
             <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
             <button class="navbar-burger" data-target="topbar-nav">
@@ -49,50 +58,35 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="what_is_stacksaga.html">What is StackSaga</a>
+    <a class="nav-link" href="saga-architecture.html">Introduction to the Saga Design Pattern</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="high_level_architecture.html">StackSaga in High-level</a>
+    <a class="nav-link" href="introduction-to-stacksaga.html">Introduction to StackSaga</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
+    <a class="nav-link" href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stacksaga_components.html">StackSaga Components</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="SEC.html">Saga execution coordinator (SEC)</a>
+    <a class="nav-link" href="SEC.html">Saga execution coordinator. (SEC)</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="event_store.html">Event Store</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="aggregator.html">Saga Aggregator</a>
+    <a class="nav-link" href="aggregator.html">Saga Aggregator.</a>
   </li>
   <li class="nav-item is-current-url" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="executor_architecture.html">Saga Executor</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="command_executor_architecture.html">Command Executor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query_executor_architecture.html">Query Executor</a>
-  </li>
-</ul>
+    <a class="nav-link" href="executor_architecture.html">Saga Executors</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
@@ -117,13 +111,16 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
@@ -150,7 +147,7 @@
     <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../framework/saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
@@ -159,10 +156,63 @@
     <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
   </li>
 </ul>
   </li>
@@ -203,7 +253,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">StackSaga Framework</span>
-    <span class="version">1.0.0 1.0.0</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -218,7 +268,7 @@
       <a class="title" href="../index.html">StackSaga Framework</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">1.0.0 1.0.0</a>
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
         </li>
       </ul>
     </li>
@@ -230,53 +280,283 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../intro.html" class="home-link" title="Home"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">StackSaga Framework</a></li>
-    <li><a href="executor_architecture.html">Saga Executor</a></li>
+    <li><a href="executor_architecture.html">Saga Executors</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
 <article class="doc">
-<h1 class="page">Saga Executor</h1>
+<h1 class="page">Overview</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>According to the saga design pattern, you have to separate your entire transaction in to small atomic transactions.
-In general, each atomic execution can have two executions called <strong>process execution</strong> and <strong>compensation execution</strong>.</p>
+<p>Before dive in to the executor component, you should have an awareness about the atomic operations (atomic transaction/atomic execution).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_whats_an_atomic_transaction_atomic_operation"><a class="anchor" href="#_whats_an_atomic_transaction_atomic_operation"></a>What&#8217;s an atomic transaction (atomic operation)?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An atomic transaction refers to a set of operations that must either all succeed or all fail as a single unit.
+In microservices, that kind of single unit is called as an atomic execution.</p>
+</div>
+<div class="paragraph">
+<p>For instance, in the placing-order example, there were 5 atomic operations.
+Those 5 atomic executions can consist of many sets of operations at service level.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-atomic-transaction.drawio.svg" alt="stacksaga diagram atomic transaction.drawio"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_saga_executors"><a class="anchor" href="#_saga_executors"></a>Saga Executors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The executor is the where that your atomic transaction should be implemented.
+You know that the entire transaction consists of multiple steps (multiple atomic transactions) in the saga design pattern.
+To execute each atomic transaction, you have to communicate with other microservices or third party APIs.
+In Stacksaga, there&#8217;s a specific location that should implement that communicating process.
+It is called as Executor.</p>
+</div>
+<div class="paragraph">
+<p>For instance, let&#8217;s have a look at the placing-order example.
+There were 5 sub executions for completing the entire transaction.
+To execute those 5 executions, we have to implement 5 executors in Stacksaga.</p>
+</div>
+<div class="paragraph">
+<p>When it&#8217;s considered the atomic executions, it can be divided into two types based on the atomic transaction has a compensating execution or not.
+If the execution is a read only operation, it doesn&#8217;t impact on the database state.
+That means there&#8217;s nothing to undo.</p>
+</div>
+<div class="paragraph">
+<p>For instance, in our placing order example, there was an atomic execution for fetching the user&#8217;s details by calling the user service.
+Due to the fetching the user&#8217;s details from the service, the impact on the user-service&#8217;s database is zero.
+We just fetched the data.</p>
+</div>
+<div class="paragraph">
+<p>In general, an atomic execution can have two executions called <strong>primary-execution</strong> and <strong>compensating-execution</strong>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Process Execution / Main Execution</strong></p>
+<p><strong>Primary Execution / Main Execution</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The main execution that you want to archive the atomic transaction.<br>
-<br>
-As an example, In your <a href="#what_is_stacksaga">place order example</a> you had multiple individual processes to overcome the entire transaction like checking use&#8217;s validation, checking stock&#8217;s availability, updating stock, making payment, dispatching the order.
-Those executions that caused to start the atomic processes are called as <strong>Process execution</strong>.<br>
-Those are going forward [<span class="icon green"><i class="fa fa-arrow-circle-right fa-1x"></i></span>].</p>
+<p>Primary Execution refers to the main operations that are part of a long-running transaction.
+Each primary execution is a step in the overall business process and performs a specific action that moves the process towards its completion.
+These operations are typically idempotent and isolated, meaning that they can be executed independently of each other without causing side effects.</p>
+<div class="paragraph">
+<p>For example, In your place order example you had multiple individual transactions to overcome the entire transaction like fetching user&#8217;s details, initialize the order, making the pre-auth, updating the stock, and make the real payment.</p>
+</div>
+</li>
+<li>
+<p>Those sets of primary executions are moved towards. [<span class="icon green"><i class="fa fa-arrow-circle-right fa-1x"></i></span>].</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Compensation Execution / Revert Execution</strong></p>
+<p><strong>Compensating Execution / Revert Execution</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Most of the <strong>Main Executions</strong> can have a revert process to undo the executions that were done before If you want to get state back of your changed data (Because you can&#8217;t do rollback just like you do in the Monolithic application).
-The executions that are used for the reverting the done-process before are called as <strong>Compensation Executions</strong>.<br>
-<br>
-As an example, If the stock-updating process was done successfully but due to one of the next atomic executions' failures, the stock-updating execution should be restored (Undo the process or get the state back).<br>
-If the main execution has a revert execution, Those are going backward [<span class="icon green"><i class="fa fa-arrow-circle-left fa-1x"></i></span>].</p>
+<p>Compensating Execution refers to the operations that are performed to undo the effects of a previously completed primary execution if a subsequent step fails.
+Each primary execution has a corresponding compensating execution designed to reverse its effect.
+This ensures that the system can revert to a consistent state even if part of the transaction fails.</p>
+</li>
+<li>
+<p>Those sets of compensating executions are moved backward. [<span class="icon green"><i class="fa fa-arrow-circle-left fa-1x"></i></span>].</p>
 </li>
 </ul>
 </div>
 </li>
 </ol>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_executor_types"><a class="anchor" href="#_executor_types"></a>Executor types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Based on the above classification, the saga executors are two types in StackSaga.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Command executors</p>
+<div class="paragraph">
+<p>If some atomic execution has both primary execution and compensating, those kinds of atomic transactions should be implemented inside the command executor.<br>
+In <strong>Command executor</strong> has two methods for making the primary execution and making the compensating execution.
+(See the command executor <a href="../framework/command_executor.html" class="xref page">implementation</a> or <a href="../framework/command_executor.html" class="xref page">read more</a>)</p>
+</div>
+<div class="paragraph">
+<p><strong>Examples Executions for command-executor</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>initialize order</p>
+</li>
+<li>
+<p>make pre-auth</p>
+</li>
+<li>
+<p>update stock</p>
+</li>
+<li>
+<p>make real payment</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Query executors</p>
+<div class="paragraph">
+<p>If the atomic execution has only the primary execution, those kinds of executions should be implemented inside the Query executor.</p>
+</div>
+<div class="paragraph">
+<p>In <strong>Query Executor</strong> has only one method for making the primary execution.
+(See the query executor <a href="../framework/query_executor.html" class="xref page">implementation</a> or <a href="../framework/query_executor.html" class="xref page">read more</a>)</p>
+</div>
+<div class="paragraph">
+<p><strong>Example Executions for query-executor</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>collecting user delivery details</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The below diagram shows the Executors types and what are the methods they have.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stack-saga-e-store-example-executor-types-in-stacksaga.drawio.svg" alt="Stacksaga Executors" height="300"></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_guidelines_for_creating_executors"><a class="anchor" href="#_guidelines_for_creating_executors"></a>Guidelines for creating executors.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The execution that is implemented in the saga executor should be an atomic transaction.
+That means you cannot implement multiple transactions in the same executor.
+The reason for one executor can have only one atomic transaction is that the executor is the wrapper component that is used for retrying by the saga orchestration engine.
+Then, if you have added many atomic transactions inside the executor saga, the SEC doesn&#8217;t know that what was exactly failed previously.
+Because, for instance, if the executor had 3 atomic transactions, the first two executions might have been executed successfully.
+But due to the failure of the 3rd one, the executor is retried.
+The worst thing that can happen is that both 1st and 2nd atomic transactions are executed again and again until the 3rd execution is executed successfully if the 3rd execution is failed due to a resource-unavailable issue (Retractable issue).</p>
+</div>
+<div class="paragraph">
+<p>This can lead to data redundancy and potential problems with data integrity and consistency.
+And the other thing is that if it&#8217;s wanted to execute the compensating transaction, the SEC has no awareness about what specific atomic transaction should be undone.
+Because the SEC considered an executor as a single atomic operation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_executions_classifying_tips"><a class="anchor" href="#_executions_classifying_tips"></a>Executions Classifying Tips</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you are creating the executors, you have to decide that whether the executor is a <strong>command-executor</strong> or <strong>query-executor</strong>.
+To determine that the following chart will be helpful (from the database prospective).</p>
+</div>
+<div class="paragraph">
+<p>The summary of the chart is that if the atomic execution is a <strong>read-only</strong> one, it should be implemented in a <strong>query-executor</strong>, and if the atomic operation does some state change on any database, that atomic operation should be implemented in a <strong>command-executor</strong>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operation</th>
+<th class="tableblock halign-left valign-top">Has a Revert</th>
+<th class="tableblock halign-left valign-top">Executor Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>C</strong> - Create</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YES</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>R</strong> - Read</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>NO</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query-Executor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>U</strong> - Update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YES</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>D</strong> - delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YES</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For instance, let&#8217;s classify the executions that we have in our placing-order example.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Execution</th>
+<th class="tableblock halign-left valign-top">Executor Type</th>
+<th class="tableblock halign-left valign-top">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collecting user&#8217;s delivery details</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Query-Executor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fetching data doesn&#8217;t make an impact on the user-service&#8217;s database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initialzie the order</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The order should be canceled if any upcoming atomic transaction is failed after initializing the order.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Making Pre-Auth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Pre-Auth should be canceled if any upcoming atomic transaction is failed after making the Pre-Auth.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updating The Stock</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Stock should be restored if any upcoming atomic transaction is failed after reducing the stock.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Making Real Payment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command-Executor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Payment should be refunded if any upcoming atomic transaction is failed after making the payment.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -284,87 +564,58 @@ If the main execution has a revert execution, Those are going backward [<span cl
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Even though most of the executions can have a Compensation Execution / Revert Execution, Sometimes it is not.
-It is based on your nature of the execution.
-It can be explained by the CRUD operations.
-If your atomic execution cased to a database&#8217;s state change, That kind of executions can have a revert execution to get the state back. <br>
-As an example, In the above example, <strong>checking use&#8217;s validation, checking stock&#8217;s availability</strong> executions have no revert executions.
-Because that were only read operations.<br>
+In the placing-order example, there is no any atomic operation after making the payment.
+But as the theory, making payment execution should be executed withing a command-executor.
+because, for instance, if a new another atomic process is added in the future after making the payment, you must implement the compensating execution for making the payment.
 </td>
 </tr>
 </table>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Process Execution</th>
-<th class="tableblock halign-left valign-top">Has a Revert</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>C</strong> - Create</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YES</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>R</strong> - Read</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>NO</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>U</strong> - Update</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YES</strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>D</strong> - delete</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>YES</strong></p></td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sub_executors"><a class="anchor" href="#_sub_executors"></a>Sub Executors</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>To hand over your set of atomic transactions regarding the entire transaction to the <a href="#SEC">SEC</a>, you have to identify whether the atomic transaction has a revert operation or not.
-Because StackSaga framework does provide tow Codespace types for setting up each atomic execution.</p>
+<p>There is a special type of executor called sub executor in Stacksaga other than the query executor and command executor.
+It&#8217;s used for executing the extra compensating atomic transactions in addition to the main compensating transactions.</p>
 </div>
 <div class="paragraph">
-<p>According to the framework, those <strong>Codespaces</strong> are called as <strong>Executors</strong>.</p>
+<p>You already know that you can only execute one atomic transaction inside the executor.
+The rule is applied for both primary execution and compensating execution.
+Sometimes You might want to execute another extra execution when one of compensating executions is executed.</p>
+</div>
+<div class="paragraph">
+<p>For instance, just imagine that the system has a requirement that should be updated to another service when that the order is cancelled execution.
+Then, as per the executor&#8217;s rule, you cannot implement both executions in the doRevert method for canceling the order and notifying that into another server.
+Because those are totally two atomic operations.
+In this kind of situation, you can use a sub executor to overcome the challenge.
+Based on the position that the sub execution should be executed, the sub executors are divided into two types.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="#query_executor_architecture">Query executors</a></p>
+<p>sub-before-executors</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If some atomic process has no compensation (query execution), those kinds of processes are used in a query executor.<br>
-— In <strong>Query Executor</strong> has only one <a href="#query_executor">method</a> for making the main process.</p>
-<div class="paragraph">
-<p><strong>Example</strong>: If you want to check, the user is active at the time of the transaction happen, and you want to keep the user&#8217;s activeness until the end of the transaction.<br>
-<br>
-<a href="#query_executor">Implementation</a>|<a href="#query_executor_architecture">Read More</a></p>
-</div>
+<p>If the sub executor should be run before making the main compensating transaction, it can be used sub before Executors.
+As per the requirement, it can be added any number of sub-before-executors into a command executor.
+You can navigate the SEC to each of them one by one.
+See the code implementation.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><a href="#command_executor_architecture">Command executors</a></p>
+<p>sub-after-executors</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If some atomic process has a compensation (command execution), those kinds of processes are used in a command executor.<br>
-— In <strong>Command executor</strong> has two <a href="#command_executor">methods</a> for making the main process and making the revert process.</p>
-<div class="paragraph">
-<p><strong>Example</strong>: Think that you want to create an order and order process is done successfully.
-But after the make-payment process is failed.
-Then the compensation process will be started.
-Now you must have a compensation against the creating order.
-So create an order process is a command process, and it goes to a command executor.<br>
-<br>
-<a href="#command_executor">Implementation</a> | <a href="#command_executor_architecture">Read More</a></p>
-</div>
+<p>If the sub executor should be run after making the main compensating transaction, it can be used a sub after Executor.
+As per the requirement, it can be added any number of sub-after-executors into a command executor.
+You can navigate the SEC to each of them one by one.
+See the code implementation.</p>
 </li>
 </ul>
 </div>
@@ -372,15 +623,59 @@ So create an order process is a command process, and it goes to a command execut
 </ol>
 </div>
 <div class="paragraph">
-<p>The below diagram shows the Executors types and what are the methods they have.
-To see how you can implement these executors, <a href="#saga_executors">read here</a>.</p>
+<p>If it&#8217;s needed to have both sub-before-executors and also sub after Executors, it is possible to do.
+If it has been configured both before and after executors, the order of the entire compensating transaction is like below.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="_images/stack-saga-e-store-example-executor-types-in-stacksaga.drawio.svg" alt="Stacksaga Executors" height="300"></span></p>
+<p>At 1st all sub before Executors will be executed that you configured into the command executor and after completing the sub before Executors, next it is executed the default compensating execution (main compensating) of the command executor.
+After completing the main compensating, next it&#8217;s executed the sub after Executors that you have configured into the command executor.
+The diagram shows the order and relationship between the sub-before-executor, and main-revert-execution and sub-after-executor.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><object type="image/svg+xml" data="_images/Architecture-Stacksaga-command-executor-with-revert-executors.drawio.svg" width="100%"><span class="alt"> Stacksaga Executors</span></object></span></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_combine_multiple_atomic_executions"><a class="anchor" href="#_combine_multiple_atomic_executions"></a>Combine multiple atomic executions</h2>
+<div class="sectionbody">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+There are two possibilities to implement multiple atomic operations in the saga executor.
+You know already there are two types of atomic executions in Stacksaga called command executions and query executions.
+The query executions can sometimes be used together in the same executor based on the use case.<br>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Using multiple read only atomic operations inside the same executor can reduce the event sourcing overhead.
+Because you know that after each executor, the new state of the aggregator is stored as a new event in the database by the Saga engine.
+For instance, if you implement 3 read only atomic transactions in the same executor, you can reduce the event sourcing overhead by 2.
+Because if we added those 3 executions to the 3 executors, 3 times the event store is updated after each execution.<br></p>
+</div>
+<div class="paragraph">
+<p><strong>First way</strong>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-combine-multiple-executor-option-1.drawio.svg" alt="stacksaga diagram combine multiple executor option 1.drawio"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Second way</strong>:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/stacksaga-diagram-combine-multiple-executor-option-2.drawio.svg" alt="stacksaga diagram combine multiple executor option 2.drawio"></span></p>
+</div>
+</div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="aggregator.html">Saga Aggregator</a></span>
-  <span class="next"><a href="command_executor_architecture.html">Command Executor</a></span>
+  <span class="prev"><a href="aggregator.html">Saga Aggregator.</a></span>
+  <span class="next"><a href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a></span>
 </nav>
 </article>
   </div>

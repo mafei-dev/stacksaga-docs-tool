@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Migrate To Kubernetes Environment :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:quick-examples:k8s_with_k8s/migration-to-kubernetes.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="prev" href="../stackSaga-demo-with-docker-and-docker-compose.html">
+<link rel="stylesheet" href="../../../../_/css/site.css">
+<link rel="stylesheet" href="../../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
+                    src="../../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../index.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/saga-architecture.html">Introduction to the Saga Design Pattern</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/introduction-to-stacksaga.html">Introduction to StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/SEC.html">Saga execution coordinator. (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/aggregator.html">Saga Aggregator.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/executor_architecture.html">Saga Executors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../architecture/stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/saga_exception_annotation.html">@SagaException Annotation </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="1">
+    <a class="nav-link" href="migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">1.0.0 SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">StackSaga Framework</a></li>
+    <li><a href="migration-to-kubernetes.html">Migrate To Kubernetes Environment</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Migrate To Kubernetes Environment</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>To Migrate to the Kubernetes environment, we will be using the same place-order example by changing the required properties and dependencies.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You can get the fully updated source code <a href="#//">here</a>.</p>
+</li>
+</ul>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>it is recommended to read the <a href="../../framework/stacksaga_in_kubernetes.html" class="xref page">k8s reference documentation</a> to have a better understanding.</p>
+</div>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prepare_the_kubernetes_environment"><a class="anchor" href="#_prepare_the_kubernetes_environment"></a>Prepare the kubernetes environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>At the first step, you have to create your kubernetes environment for deploying the set of applications.
+Due to the fact that the demo is quite large, I will be using <a href="https://cloud.google.com/">GCP</a> cloud instead of using local environment.
+It doesn&#8217;t matter if you are able to deploy your entire k8s things in your local environment you are totally free to use it.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Make sure to install <code>kubectl</code> clint.
+And if you are using GCP cloud, make sure to install <a href="https://cloud.google.com/sdk/docs/install">gcloud cli</a> to access the cluster.
+If you prefer to use a GUI client, it will be quite easy to understand and to access the logs and terminals if you are new to k8s.
+It is recommended you to use <a href="https://github.com/MuhammedKalkan/OpenLens/releases">OpenLens</a> kubernetes GUI client.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After connecting the cluster into the OpenLens you can the dashboard like below.</p>
+</div>
+<div class="paragraph">
+<div class="title">Initial overview of the cluster (default namespace)</div>
+<p><span class="image"><img src="../_images/k8s/openLensOverview.png" alt="openLensOverview"></span></p>
+</div>
+<div class="paragraph">
+<p>Now the cluster is ready.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updating_pom_xml_file"><a class="anchor" href="#_updating_pom_xml_file"></a>Updating pom.xml file.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the place-order example, we used Eureka-Service as the discovery server and service registry.
+But in general, if are moving to the Kubernetes Environment, Kubernetes supports in-built service registry and service discovery features.</p>
+</div>
+<div class="paragraph">
+<p>But know that Eureka-server cached registry was used for electing the leader for doing the retry and other StackSaga scheduling.
+Then, if we don&#8217;t use Eureka-server, how StackSaga selects the leader in the Kubernetes Environment?</p>
+</div>
+<div class="paragraph">
+<p>StackSaga provides a dependency called <code>stacksaga-connect-k8s-support</code>
+and it uses internally <a href="https://kubernetes.io/docs/concepts/architecture/leases/#leader-election">kubernetes lease leader election</a> for leader election.
+<a href="../../framework/stacksaga_in_kubernetes.html" class="xref page">Read more..</a></p>
+</div>
+<div class="paragraph">
+<p>So then you have to remove the <code>stacksaga-connect-eureka-support</code> and <code>spring-cloud-starter-netflix-eureka-client</code>
+and add the <code>stacksaga-connect-k8s-support</code>.</p>
+</div>
+<div class="paragraph">
+<p>Here is the updated <code>pom.xml</code> for <code>order-service</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.7.0&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;groupId&gt;org.example&lt;/groupId&gt;
+    &lt;artifactId&gt;order-service&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;8&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;8&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;spring-cloud.version&gt;2021.0.3&lt;/spring-cloud.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;optional&gt;true&lt;/optional&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--removed eureka clint--&gt;
+        &lt;!--&lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;
+        &lt;/dependency&gt;--&gt;
+
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-mysql-support&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--removed stacksaga-connect-eureka-support--&gt;
+        &lt;!--&lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-connect-eureka-support&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;--&gt;
+
+        &lt;!--added stacksaga-connect-k8s-support--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.stacksaga&lt;/groupId&gt;
+            &lt;artifactId&gt;stacksaga-connect-k8s-support&lt;/artifactId&gt;
+            &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+&lt;/project&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Make sure to keep the <code>spring-cloud-dependencies</code> as it is in the <code>dependencyManagement</code> section.
+Because <code>stacksaga-connect-k8s-support</code> uses it for managing the internal dependencies.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_a_new_profile_with_a_new_property_file"><a class="anchor" href="#_adding_a_new_profile_with_a_new_property_file"></a>Adding a new profile with a new property file.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now let&#8217;s create a new profile and a configuration file for <code>k8s</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="https://docs.spring.io/spring-boot/docs/1.2.0.M1/reference/html/boot-features-external-config.html#boot-features-external-config-profile-specific-properties">Spring Profiles</a> provide a way to segregate parts of your application configuration and make it only available in certain environments.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title"><a href="#//"><span class="icon black"><i class="fa fa-github fa-2x"></i></span> application-k8s.yaml</a></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">services: <i class="conum" data-value="1"></i><b>(1)</b>
+  payment-service: http://payment-service-service
+  stock-service: http://stock-service-service
+  user-service: http://user-service-service
+server:
+  port: 8080
+
+spring:
+  application:
+    name: order-service
+
+stacksaga:
+  component-scan: org.example.aggregator <i class="conum" data-value="2"></i><b>(2)</b>
+  app-release-version: 1.0.0 <i class="conum" data-value="2"></i><b>(2)</b>
+  cloud:
+    k8s:
+      namespace: default <i class="conum" data-value="3"></i><b>(3)</b>
+      service-host: http://${spring.application.name}-service <i class="conum" data-value="4"></i><b>(4)</b>
+      <i class="conum" data-value="5"></i><b>(5)</b>
+      leader-election:
+        lease-duration: 3m
+        renew-deadline: 1m
+        retry-period: 30s
+  connect:
+    <i class="conum" data-value="6"></i><b>(6)</b>
+    admin-urls:
+      - http://stacksaga-admin-server-service:4444
+    <i class="conum" data-value="7"></i><b>(7)</b>
+    admin-username: order-service-application-user
+    admin-password: dtj8lEfssVUCsaHe
+  datasource:
+    <i class="conum" data-value="8"></i><b>(8)</b>
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/order-service?createDatabaseIfNotExist=true
+      username: root
+      password: mafei
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+management:
+  endpoint:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: ${stacksaga.app-release-version}
+logging:
+  level:
+    org:
+      stacksaga: trace
+      springframework: debug
+    root: info</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Highlights</strong></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The services' Urls that we access inside the service.
+The hosts should be the exact same with the k8s <a href="#//">service name</a>.
+If you have multiple instances for one service, the load-balancing part also does by kubernetes proxy.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The path for scans the aggregators.
+We have added the path to the aggregator layer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>stacksaga-connect-k8s-support</code> <a href="#//">fetches the pod&#8217;s data</a> from the k8s control plane.
+so we have to provide which namespace the pod is deployed.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The host name (k8s service-name) of the order-service application in kubernetes.
+See the <a href="#//">manifest</a>.
+This is used for sharing the data across the siblings (If the current pod is the leader, spreads the execution with other followers).</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>To acquire the leader, all the pods try to update a lease object to the k8s.
+These properties say that how to update the lease.
+<a href="../../framework/kubernetes-support-configuration-properties.html" class="xref page">See more details.</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>The URL of the admin server.
+It can be provided a list of admin URLs for high-availability (HA).
+In case one admin server goes down, the request can be retried with other available services.
+See more <a href="#//">how the admin-server interacts in Stacksaga architecture</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>You know that to communicate with admin-server, and We have to create a user account for each service to communicate with the <code>admin-server</code>.
+After creating a user-account, you will have the username and password.
+See how to create a user account for utility service].</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>You have to provide the data sources properties for StackSaga <a href="../../architecture/event_store.html" class="xref page">event-store</a>.
+Due to you have selected <a href="#//">stacksaga-mysql-support</a>.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_the_kubernetes_rbac_related_manifest"><a class="anchor" href="#_creating_the_kubernetes_rbac_related_manifest"></a>Creating the kubernetes RBAC related manifest.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You already know that we should create <a href="https://kubernetes.io/docs/reference/access-authn-authz/authentication/">kubernetes user-account</a> for accessing the kubernetes API to fetch some metadata and leader election.</p>
+</div>
+<div class="sect2">
+<h3 id="_creating_useraccount_manifest"><a class="anchor" href="#_creating_useraccount_manifest"></a>Creating UserAccount Manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: order-service-service-account
+  namespace: default</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_clusterrole_manifest"><a class="anchor" href="#_creating_clusterrole_manifest"></a>Creating ClusterRole Manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: leader-election-lease-role
+  namespace: default
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods","nodes" ]
+    verbs: [ "get" ]
+  - apiGroups: [ "coordination.k8s.io" ]
+    resources: [ "leases"]
+    verbs: [ "get", "create", "update", "patch" ]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_clusterrolebinding_manifest"><a class="anchor" href="#_creating_clusterrolebinding_manifest"></a>Creating ClusterRoleBinding Manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: order-service-service-account-leader-election-lease-role
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: order-service-service-account
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: leader-election-lease-role</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_database_configuration_manifests"><a class="anchor" href="#_creating_database_configuration_manifests"></a>Creating Database Configuration manifests.</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_database_deployment_manifest"><a class="anchor" href="#_database_deployment_manifest"></a>Database Deployment manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: StatefulSet
+metadata:
+  name: mysql-common-server
+spec:
+  replicas: 1
+  serviceName: mysql-common-server
+  selector:
+    matchLabels:
+      app: mysql
+      type: common
+  template:
+    metadata:
+      labels:
+        app: mysql
+        type: common
+    spec:
+      containers:
+        - name: mysql-container
+          image: mysql:8.0
+          ports:
+            - name: mysql-port
+              protocol: TCP
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "admin"
+          volumeMounts:
+            - name: mysql-common-storage
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-common-storage
+      spec:
+        storageClassName: standard
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_database_service_manifest"><a class="anchor" href="#_database_service_manifest"></a>Database Service manifest.</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-common-server
+  labels:
+    app: mysql
+    type: common
+spec:
+  clusterIP: None
+  selector:
+    app: mysql
+    type: common
+  ports:
+    - name: mysql-port
+      protocol: TCP
+      port: 3306</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_api_cloud_gateway_server_manifests"><a class="anchor" href="#_creating_api_cloud_gateway_server_manifests"></a>Creating API-cloud-Gateway Server manifests.</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_creating_a_new_k8s_profile_and_property_file"><a class="anchor" href="#_creating_a_new_k8s_profile_and_property_file"></a>Creating a new k8s profile and property file.</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">server:
+  port: 8080
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+info:
+  app:
+    author: mafei
+    name: ${spring.application.name}
+    version: 1.0.0
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            exposedHeaders:
+              - "*"
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      routes:
+        - id: api-user-service
+          uri: http://user-service
+          predicates:
+            - Path=/api/user-service/**
+          filters:
+            - RewritePath=/api/user-service/?(?&lt;segment&gt;.*), /$\{segment}
+          order: 0
+        - id: api-order-service
+          uri: http://order-service
+          predicates:
+            - Path=/api/order-service/**
+          filters:
+            - RewritePath=/api/order-service/?(?&lt;segment&gt;.*), /$\{segment}
+          order: 1
+logging:
+  level:
+    root: debug
+    org:
+      spring: debug</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_cloud_gateway_deployment_manifest"><a class="anchor" href="#_api_cloud_gateway_deployment_manifest"></a>API-cloud-Gateway Deployment manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: mafeidev/stacksaga-k8s-demo-1-api-gateway:1.0.3
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+            - name: SPRING_CLOUD_GATEWAY_DEFAULT-FILTERS
+              value: DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            - name: SPRING_CLOUD_GATEWAY_GLOBALCORS_ADD-TO-SIMPLE-URL-HANDLER-MAPPING
+              value: "true"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_api_cloud_gateway_service_manifest"><a class="anchor" href="#_api_cloud_gateway_service_manifest"></a>API-cloud-Gateway Service manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+spec:
+  type: LoadBalancer
+  selector:
+    app: api-gateway
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30000
+  sessionAffinity: None</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_stacksaga_admin_server_manifests"><a class="anchor" href="#_creating_stacksaga_admin_server_manifests"></a>Creating StackSaga Admin Server manifests.</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_admin_database_deployment_manifest"><a class="anchor" href="#_admin_database_deployment_manifest"></a>Admin-Database Deployment manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-admin-server
+spec:
+  replicas: 1
+  serviceName: mysql-admin-server
+  selector:
+    matchLabels:
+      app: mysql
+      type: admin
+  template:
+    metadata:
+      labels:
+        app: mysql
+        type: admin
+    spec:
+      containers:
+        - name: mysql-container
+          image: mysql:8.0
+          ports:
+            - name: mysql-port
+              protocol: TCP
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "admin"
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-storage
+      spec:
+        storageClassName: standard
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 3Gi</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_admin_database_service_manifest"><a class="anchor" href="#_admin_database_service_manifest"></a>Admin-Database Service manifest.</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-admin-server
+  labels:
+    app: mysql
+    type: admin
+spec:
+  clusterIP: None
+  selector:
+    app: mysql
+    type: admin
+  ports:
+    - name: mysql-port
+      protocol: TCP
+      port: 3306</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_admin_server_deployment_manifest"><a class="anchor" href="#_admin_server_deployment_manifest"></a>Admin-Server Deployment manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stacksaga-admin-server-deployment
+  labels:
+    app: stacksaga-admin-server
+spec:
+  selector:
+    matchLabels:
+      app: stacksaga-admin-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stacksaga-admin-server
+    spec:
+      containers:
+        - name: stacksaga-admin-server-container
+          image: stacksaga/stacksaga_admin_mysql:1.0.6
+          ports:
+            - containerPort: 4444
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql-admin-server-0.mysql-admin-server.default.svc.cluster.local:3306/stacksaga_admin?createDatabaseIfNotExist=true
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: admin</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_admin_server_service_manifest"><a class="anchor" href="#_admin_server_service_manifest"></a>Admin-Server Service manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: stacksaga-admin-server-service
+  labels:
+    app: stacksaga-admin-server
+spec:
+  type: ClusterIP
+  selector:
+    app: stacksaga-admin-server
+  ports:
+    - name: mysql-port
+      protocol: TCP
+      port: 4444</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_admin_server_loadbalancer_manifest"><a class="anchor" href="#_admin_server_loadbalancer_manifest"></a>Admin-Server LoadBalancer manifest</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: Service
+metadata:
+  name: stacksaga-admin-server-service-lb
+  labels:
+    app: stacksaga-admin-server-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: stacksaga-admin-server
+  ports:
+    - name: mysql-port
+      protocol: TCP
+      port: 80
+      targetPort: 4444</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../../_/js/site.js" data-ui-root-path="../../../../_"></script>
+<script async src="../../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

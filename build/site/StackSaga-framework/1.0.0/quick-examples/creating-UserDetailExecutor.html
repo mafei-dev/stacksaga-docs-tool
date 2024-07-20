@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Untitled :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:quick-examples:creating-UserDetailExecutor.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/saga-architecture.html">Introduction to the Saga Design Pattern</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/introduction-to-stacksaga.html">Introduction to StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/SEC.html">Saga execution coordinator. (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator.html">Saga Aggregator.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/executor_architecture.html">Saga Executors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../architecture/stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+</div>
+  <div class="content">
+<article class="doc">
+<div class="sect2">
+<h3 id="creating_user_detail_executor"><a class="anchor" href="#creating_user_detail_executor"></a>Creating UserDetailExecutor</h3>
+<div class="paragraph">
+<p>In the <code>OrderController</code> class The <code>UserDetailExecutor</code> has been mentioned as the initial executor.
+As per the diagram, you know that executor should be a <code>Query-Executor</code>.
+Because the requirement is only fetching the user details.
+Fetching user details doesn&#8217;t change any data.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><i class="conum" data-value="1"></i><b>(1)</b>
+@SagaExecutor(executeFor = "user-service", liveCheck = false, value = "UserDetailExecutor")
+@RequiredArgsConstructor
+public class UserDetailExecutor implements QueryExecutor&lt;PlaceOrderAggregator&gt; { <i class="conum" data-value="2"></i><b>(2)</b>
+
+    <i class="conum" data-value="3"></i><b>(3)</b>
+    private final UserService userService;
+
+    @Override
+    public ProcessStepManager&lt;PlaceOrderAggregator&gt; doProcess(
+            PlaceOrderAggregator currentAggregator, <i class="conum" data-value="4"></i><b>(4)</b>
+            ProcessStepManagerUtil&lt;PlaceOrderAggregator&gt; stepManager <i class="conum" data-value="5"></i><b>(5)</b>
+    ) throws
+    RetryableExecutorException, NonRetryableExecutorException <i class="conum" data-value="6"></i><b>(6)</b>
+    {
+        currentAggregator.getExecutions().add(this.getClass().getSimpleName()+":"+ LocalDateTime.now());
+        <i class="conum" data-value="7"></i><b>(7)</b>
+        UserDetailDto.ResponseBody userDetails = this.userService.getUserDetails(currentAggregator.getUserId());
+        <i class="conum" data-value="8"></i><b>(8)</b>
+        currentAggregator.setDeliveryDetails(userDetails.getDeliveryDetails());
+        return stepManager.next(OrderInitializeExecutor.class, OrderStatus.USER_DETAILS_FETCHED); <i class="conum" data-value="9"></i><b>(9)</b>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotate the <code>UserDetailExecutor</code> class as a <code>SagaExecutor</code> by using <code>@SagaExecutor</code> annotation.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#saga_executors" class="xref page"><code>@SagaExecutor</code></a> annotation.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Implement the <code>UserDetailExecutor</code> from the <code>QueryExecutor</code> by passing the target Aggregator.
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/saga_executors.html#query_executor" class="xref page"><code>QueryExecutor&lt;A&gt;</code></a> interface.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Autowire the <a href="https://github.com/stacksaga/stacksaga-examples/blob/main/stacksaga-demo-for-kubernetes/order-service/src/main/java/org/example/service/external/UserService.java"><code>UserService</code></a>
+to make the execution by calling the <code>user-service</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>you will have the <code>currentAggregator</code> object through the method parameter. due to this executor is the 1st executor, the <code>currentAggregator</code> object contains the initialized values from the <a href="creating-controller.html#orderController_source" class="xref page">OrderController</a> class.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>stepManager</code> helps you to navigate the execution to the next executor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>If you throw an exception, that is how the framework knows that the executor has an exception at this moment.
+Based on the exception type that you have thrown, The framework decides that the process should be started the revert process or either process should be stopped temporally.
+<div class="paragraph">
+<p>IF the exception is a <code>RetryableExecutorException</code> the framework stops the process temporally.
+Or if the exception is a <code>NonRetryableExecutorException</code> the framework knows that the execution cannot be processed to forward anymore and the revert process should be started.
+Throwing an exception can be implemented in the method as well.
+But in this example, we categorize the exceptions whether the exception is a <code>RetryableExecutorException</code> or otherwise a <code>NonRetryableExecutorException</code> in the <a href="#creating_user_service">UserService</a> (service layer).</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Read more about <a href="../framework/retryable_executor_exception.html" class="xref page">RetryableExecutorException</a> and <a href="../framework/non_retryable_executor_exception.html" class="xref page">NonRetryableExecutorException</a>.</p>
+</div>
+</blockquote>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>By using the UserService&#8217;s <code>getUserDetails()</code> method, fetches the user&#8217;s data from user <code>user-service</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>After receiving the user&#8217;s detail the <code>currentAggregator</code> is updated with user&#8217;s details.
+Therefore, you can access the user&#8217;s detail within the next executor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>By using the <code>stepManager</code>, navigates the execution to the next executor called and the event name marked as <code>USER_DETAILS_FETCHED</code> <a href="creating-OrderInitializeExecutor.html#creating_order_initialize_executor" class="xref page">OrderInitializeExecutor</a>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="creating_user_service"><a class="anchor" href="#creating_user_service"></a>Creating UserService.</h3>
+<div class="paragraph">
+<p><code>Userservice</code> is a regular spring service that creates for calling <code>user-service</code>.
+Due to the <code>user-service</code> is another utility service we have to call it through http or any other protocol that target service supports (Most probably API endpoints are exposed by http protocol).
+This example&#8217;s <code>user-service</code> also support http endpoint to access the API.
+Therefore, we will be using rest template as http client.
+But you can use any Http client like Feign-client, Okhttp, Spring-webclient and so on.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Service
+@RequiredArgsConstructor
+public class UserService {
+
+    private final RestTemplate restTemplate;
+
+    public UserDetailDto.ResponseBody getUserDetails(String userId)
+            throws
+            NonRetryableExecutorException,  RetryableExecutorException <i class="conum" data-value="1"></i><b>(1)</b>
+    {
+
+        try {
+            <i class="conum" data-value="2"></i><b>(2)</b>
+            UserDetailDto.ResponseBody responseBody = this.restTemplate.getForObject(
+                    "http://user-service/users/{userId}",
+                    UserDetailDto.ResponseBody.class,
+                    userId
+            );
+            assert responseBody != null;
+            return responseBody;
+        } catch (HttpClientErrorException ex) { <i class="conum" data-value="3"></i><b>(3)</b>
+            // This exception is thrown for HTTP 4xx errors (Client errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                <i class="conum" data-value="4"></i><b>(4)</b>
+                throw NonRetryableExecutorException
+                        .buildWith(
+                                new RuntimeException("User not found"),
+                                ""
+                        )
+                        .put("reason", "User not found")
+                        .build();
+            } else {
+                <i class="conum" data-value="5"></i><b>(5)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            }
+        } catch (HttpServerErrorException ex) { <i class="conum" data-value="6"></i><b>(6)</b>
+            // This exception is thrown for HTTP 5xx errors (Server errors)
+            // You can handle specific HTTP error codes here
+            if (ex.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR)) {
+                <i class="conum" data-value="7"></i><b>(7)</b>
+                throw NonRetryableExecutorException.buildWith(ex, "").build();
+            } else {
+                <i class="conum" data-value="8"></i><b>(8)</b>
+                //502 , 503, 504, 509 etc.
+                throw RetryableExecutorException.buildWith(ex).build();
+            }
+        } catch (RestClientException ex) { <i class="conum" data-value="9"></i><b>(9)</b>
+            // This exception is a generic RestClientException
+            // Handle other types of exceptions here
+            throw ex; <i class="conum" data-value="10"></i><b>(10)</b>
+        } catch (IllegalArgumentException illegalArgumentException) { <i class="conum" data-value="11"></i><b>(11)</b>
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        } catch (RunT) { <i class="conum" data-value="11"></i><b>(11)</b>
+            throw RetryableExecutorException.buildWith(illegalArgumentException).build();
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Handling the exceptions is the most important task in StackSaga framework.
+You have to handle the exception, and decide what should be the <code>NonRetryableExecutorException</code> and what should be the <code>RetryableExecutorException</code> carefully.
+For example, in this demo you saw that we handled <code>NOT_FOUND</code> status.
+the <code>NOT_FOUND</code> can be thrown if the <mark>endpoint not found</mark> that you are looking for.
+Or otherwise it can be passed if the <mark>user does not exist</mark>.
+Then, if you have not any awareness about what the target service returns, you will not be able to catch the real error.
+In this example, we know exactly there is an endpoint <code>/users/{userId}</code> in the user-service therefore no worries.
+But be careful if you access third party APIs.
+Read the API documentation in detail.
+</td>
+</tr>
+</table>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We have thrown both <code>NonRetryableExecutorException</code>,and <code>RetryableExecutorException</code> that UserDetailExecutor&#8217;s <code>doPrcess()</code> method expects.
+That&#8217;s why it was mentioned in above.
+The handling exception part is done in the service layer.
+<div class="paragraph">
+<p>[ Read the <a href="#exception_tip">TIP</a> ]</p>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the http request to the user-service.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>4xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Due to the http error code is equal to NOT_FOUND (404), the process cannot be done anymore.
+Therefore, a <code>NonRetryableExecutorException</code> is thrown by wrapping with the real exception.
+If you want to put some data based on the exception, you can use the <code>put("key","value")</code> method for that.
+The data can be accessed from any revert-exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Other 4xx errors are thrown as the <code>NonRetryableExecutorException</code> by wrapping the real error.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Catch the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes"><strong>5xx</strong></a> HTTP errors to determine if the exception is a <code>NonRetryableExecutorException</code> or <code>RetryableExecutorException</code>.
+Most probably 5xx errors can be retried, but there are some cases it can not.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Check the 5xx error is equal to <code>INTERNAL_SERVER_ERROR</code>.
+Because if there is an internal server in this case, we know that we cannot go ahead and the process should be stopped going forward.
+Therefore, <code>NonRetryableExecutorException</code> is thrown by wrapping the real letter.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>If the 5xx is not equal to <code>INTERNAL_SERVER_ERROR</code>, then other errors like 502, 503, 504, 509 error codes are caught as <code>RetryableExecutorException</code> and therefore a <code>RetryableExecutorException</code> is thrown by wrapping the real exception.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>Cathe the other exceptions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="10"></i><b>10</b></td>
+<td>In this example, that other error codes are not considered because we assume that errors cannot be happened.
+Therefore, that error just throws without wrapping with <code>NonRetryableExecutorException</code>.
+IF you want to wrap, you can do as usual but is not required if you don&#8217;t consider those errors.
+Because internally the framework wraps the all <code>RuntimeExceptions</code> with <code>NonRetryableExecutorException</code> by default.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="11"></i><b>11</b></td>
+<td>Due to we are using <code>spring-cloud-load-balancer</code>, when we make a request via the <code>RestTemplate</code> internally load balancer check is there any registered services in the local cache.
+Then, if there is no instance in the cache, it throws and exception with <code>IllegalArgumentException</code>.
+But in our case, actuality it is also a retryable exception.
+Because when an instance is registered, that execution can be invoked.
+Therefore, that error is thrown as <code>RetryableExecutorException</code>.</td>
+</tr>
+</table>
+</div>
+<div id="exception_tip" class="exampleblock">
+<div class="content">
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The reason for handling the exception is that this is where the http client does the invocation and the special this is most probably the exceptions are different to each other even though the http status code is the same.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Case-1</dt>
+<dd>
+<p>IF you change the Rest-Client (For instance, you move to RestTemplate to Feign-client), all the exceptions are changed.
+Then you have to change all the codes in the executor if you have handled the exceptions inside the executor.
+But in this way nothing to do anything.</p>
+</dd>
+<dt class="hdlist1">Case-2</dt>
+<dd>
+<p>If you have to change the protocol like HttpRest to GRPC, you have nothing to do in the executor layer.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
     <title>StackSaga Transaction Types :: StackSAGA Docs</title>
     <meta name="page-spec" content="StackSaga-framework:architecture:stack_saga_transaction_type.adoc">
     <meta name="generator" content="Antora 3.1.7">
@@ -10,7 +12,14 @@
     <link rel="next" href="../framework/create-aggregator.html">
 <link rel="stylesheet" href="../../../_/css/site.css">
 <link rel="stylesheet" href="../../../_/css/icon.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
@@ -18,7 +27,7 @@
 <header class="header">
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org"><img
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
                     src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
             <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
             <button class="navbar-burger" data-target="topbar-nav">
@@ -49,50 +58,35 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../intro.html">Introduction To Microservice</a>
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Architecture</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="what_is_stacksaga.html">What is StackSaga</a>
+    <a class="nav-link" href="saga-architecture.html">Introduction to the Saga Design Pattern</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="high_level_architecture.html">StackSaga in High-level</a>
+    <a class="nav-link" href="introduction-to-stacksaga.html">Introduction to StackSaga</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="key_processes_of_ecosystem.html">Key Processes of ecosystem</a>
+    <a class="nav-link" href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stack_saga_admin_connect_with_event_store.html">Admin Communication With Event-store</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="stacksaga_components.html">StackSaga Components</a>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="SEC.html">Saga execution coordinator (SEC)</a>
+    <a class="nav-link" href="SEC.html">Saga execution coordinator. (SEC)</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="event_store.html">Event Store</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="aggregator.html">Saga Aggregator</a>
+    <a class="nav-link" href="aggregator.html">Saga Aggregator.</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="executor_architecture.html">Saga Executor</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="command_executor_architecture.html">Command Executor</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="query_executor_architecture.html">Query Executor</a>
-  </li>
-</ul>
+    <a class="nav-link" href="executor_architecture.html">Saga Executors</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
@@ -117,13 +111,16 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <span class="nav-text"><strong><em>StackSaga Core</em></strong></span>
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
@@ -150,7 +147,7 @@
     <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../framework/saga_exception_annotation.html">saga_exception_annotation.adoc</a>
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
@@ -159,10 +156,63 @@
     <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
   </li>
   <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
   </li>
 </ul>
   </li>
@@ -203,7 +253,7 @@
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">StackSaga Framework</span>
-    <span class="version">1.0.0 1.0.0</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
   </div>
   <ul class="components">
     <li class="component">
@@ -218,7 +268,7 @@
       <a class="title" href="../index.html">StackSaga Framework</a>
       <ul class="versions">
         <li class="version is-current is-latest">
-          <a href="../index.html">1.0.0 1.0.0</a>
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
         </li>
       </ul>
     </li>
@@ -230,7 +280,6 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../intro.html" class="home-link" title="Home"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">StackSaga Framework</a></li>
@@ -263,17 +312,15 @@ Let&#8217;s see one by one how the StackSaga&#8217;s execution-coordinator coord
 <p><strong><a href="#revert_success_transaction_scenario">Revert success transaction scenario</a></strong></p>
 </li>
 <li>
-<p><strong><a href="#revert_failed_transaction_scenario">Rollback/Compensation/Revert failed transaction scenario</a></strong></p>
+<p><strong><a href="#revert_failed_transaction_scenario">Rollback/Compensating/Revert failed transaction scenario</a></strong></p>
 </li>
 </ol>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="fully_success_transaction_scenario"><a class="anchor" href="#fully_success_transaction_scenario"></a><span class="icon green"><i class="fa fa-circle"></i></span> Fully Success</h2>
-<div class="sectionbody">
+<h1 id="fully_success_transaction_scenario" class="sect0"><a class="anchor" href="#fully_success_transaction_scenario"></a><span class="icon green"><i class="fa fa-circle"></i></span> Fully Success Transaction</h1>
 <div class="paragraph">
-<p>here, the SEC has successfully executed all the executors. therefore, there is no compensation/revert execution was invoked. this is the success scenario we wish.</p>
+<p>here, the SEC has successfully executed all the executors. therefore, there is no Compensating/revert execution was invoked. this is the success scenario we wish.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -317,17 +364,13 @@ Before invoking the executor that you provided as the start-executor SEC saves t
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="revert_success_transaction_scenario"><a class="anchor" href="#revert_success_transaction_scenario"></a><span class="icon yellow"><i class="fa fa-circle"></i></span> Compensation Success</h2>
-<div class="sectionbody">
+<h1 id="revert_success_transaction_scenario" class="sect0"><a class="anchor" href="#revert_success_transaction_scenario"></a><span class="icon yellow"><i class="fa fa-circle"></i></span> Compensating Success Transaction</h1>
 <div class="paragraph">
-<p>here, the SEC hasn&#8217;t successfully executed all the executors. an error occurred while after some processing. therefore, the transaction has a compensation/revert executions.</p>
+<p>here, the SEC hasn&#8217;t successfully executed all the executors. an error occurred while after some processing. therefore, the transaction has a Compensating/revert executions.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/Architecture-Stacksaga-revert-success-transaction-scenario.drawio.svg" alt="Compensation/Revert success transaction scenario" height="300">
+<img src="_images/Architecture-Stacksaga-revert-success-transaction-scenario.drawio.svg" alt="Compensating/Revert success transaction scenario" height="300">
 </div>
 </div>
 <div class="ulist">
@@ -359,16 +402,16 @@ Before invoking the executor that you provided as the <strong>start-executor</st
 <p><span class="rounded-number">6</span> SEC executes the <strong>[Command] PaymentExecutor</strong> executor that you provided. <span class="rounded-number">6.1</span> due to the executing the process method by the SEC, the <strong>ExternalPaymentService&#8217;s</strong> <strong>makePayment()</strong> method will be invoked. <span class="rounded-number">6.2</span> the <strong>ExternalPaymentService</strong> will call the <strong>payment-service</strong> and make a request to make-payment process. at this time, the request failed due to an exception.</p>
 </li>
 <li>
-<p><span class="rounded-number">7</span> the SEC will invoke <strong>onProcessException</strong> method of the handler class that you provided. there you can get notified about the <strong>process failure.</strong> the transaction can&#8217;t be executed forward anymore, the compensation process will start from this point.</p>
+<p><span class="rounded-number">7</span> the SEC will invoke <strong>onProcessException</strong> method of the handler class that you provided. there you can get notified about the <strong>process failure.</strong> the transaction can&#8217;t be executed forward anymore, the Compensating process will start from this point.</p>
 <div class="paragraph">
 <p>**if you want to update the order status or update the customer, you can invoke your code here. in this example, it hasn&#8217;t been implemented.</p>
 </div>
 </li>
 <li>
-<p><span class="rounded-number">8</span> due to the final successful executed <strong>OrderExecutor</strong> (There is no compensation because the UserExecutor is a query executor.) SEC invokes the <strong>doRevert</strong> method of the <strong>OrderExecutor</strong>. <span class="rounded-number">8.1</span> due to the executing of the <strong>doRevert</strong> method, <strong>createOrderRevert</strong> method will be invoked and do the revert process of the make-payment. <span class="rounded-number">8.2</span> in the compensation process if you want to store some data regarding the revert process, you can store them into the [hint-store] the framework provides. that stored data is saved at this step. <span class="rounded-number">8.4</span> after invoking successfully the revert, the SEC will invoke <strong>onEachRevertPerformed</strong> method regarding the revert process. <span class="rounded-number">8.4</span> the customer will be notified about the revert process. (if you want to update the order status, you can invoke your code here as well. that part hasn&#8217;t been implemented in this example.)</p>
+<p><span class="rounded-number">8</span> due to the final successful executed <strong>OrderExecutor</strong> (There is no Compensating because the UserExecutor is a query executor.) SEC invokes the <strong>doRevert</strong> method of the <strong>OrderExecutor</strong>. <span class="rounded-number">8.1</span> due to the executing of the <strong>doRevert</strong> method, <strong>createOrderRevert</strong> method will be invoked and do the revert process of the make-payment. <span class="rounded-number">8.2</span> in the Compensating process if you want to store some data regarding the revert process, you can store them into the [hint-store] the framework provides. that stored data is saved at this step. <span class="rounded-number">8.4</span> after invoking successfully the revert, the SEC will invoke <strong>onEachRevertPerformed</strong> method regarding the revert process. <span class="rounded-number">8.4</span> the customer will be notified about the revert process. (if you want to update the order status, you can invoke your code here as well. that part hasn&#8217;t been implemented in this example.)</p>
 </li>
 <li>
-<p><span class="rounded-number">9</span> StackSaga state-machine knows that the compensation is done. therefore, SEC invokes the <strong>onTransactionCompleted</strong> method as <strong>REVERT_SUCCESS</strong>. <span class="rounded-number">9.1</span> you can update the status of the place-order regarding the revert was processed. <span class="rounded-number">9.2</span> after that the customer will be notified about the revert success process of their order.</p>
+<p><span class="rounded-number">9</span> StackSaga state-machine knows that the Compensating is done. therefore, SEC invokes the <strong>onTransactionCompleted</strong> method as <strong>REVERT_SUCCESS</strong>. <span class="rounded-number">9.1</span> you can update the status of the place-order regarding the revert was processed. <span class="rounded-number">9.2</span> after that the customer will be notified about the revert success process of their order.</p>
 </li>
 </ul>
 </div>
@@ -379,22 +422,71 @@ Before invoking the executor that you provided as the <strong>start-executor</st
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To keep the overall state of the transaction eventually consistent, the revert processes (compensation processes) can be retryable.
-Because all the compensations must be invoked.
+To keep the overall state of the transaction eventually consistent, the revert processes (Compensating processes) can be retryable.
+Because all the Compensatings must be invoked.
 To have knowledge about how retry works of revert-processes in StackSaga, please refer to <a href="https://mafei-dev.github.io/stacksaga-doc/architecture/1.0/topics/retryable-exception-vs-non-retryable-exception.html#how-retry-works-in-the-revert-process">this</a>.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="revert_failed_transaction_scenario"><a class="anchor" href="#revert_failed_transaction_scenario"></a><span class="icon red"><i class="fa fa-circle"></i></span> Compensation Failed</h2>
-<div class="sectionbody">
+<h1 id="revert_failed_transaction_scenario" class="sect0"><a class="anchor" href="#revert_failed_transaction_scenario"></a><span class="icon red"><i class="fa fa-circle"></i></span> Compensating Failed Transaction</h1>
 <div class="imageblock">
 <div class="content">
-<img src="_images/Architecture-Stacksaga-evert-failed-transaction-scenario.drawio.svg" alt="Compensation/Revert failed transaction scenario" height="300">
+<img src="_images/Architecture-Stacksaga-evert-failed-transaction-scenario.drawio.svg" alt="Compensating/Revert failed transaction scenario" height="300">
 </div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Even though if there is a <strong>Compensating Failed Transaction</strong> for theoretically, Make sure that a revert exception doesn&#8217;t occur in your production application.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<strong>Can we ignore the Exceptions to execute the rest of revert executions?</strong><br>
+The answer is yes.
+You know that if an exception happens while reverting the entire transaction, the transaction is terminated from that point.
+Then the next rest of revert executions that should be invoked are not executed.<br>
+Sometimes that can have some revert-executions more important to be executed, and it is a must.
+But if you have an error before executing that revert-execution, that important revert-execution is not executed.<br>
+Most of the time, those exceptions will be that you didn&#8217;t except.<br>
+To avoid transaction-termination due to revert-error, you can catch all the exceptions and filter the exception that you know well and ignore another all rest of exceptions without throwing to the SEC.
+[ <a href="../quick-examples/stacksaga-demo.html#tip_for_avoid_transaction_termination" class="xref page">See a real usage</a> ]
+</td>
+</tr>
+</table>
+</div>
+<div class="sect1">
+<h2 id="_summary_of_stacksaga_transaction_types"><a class="anchor" href="#_summary_of_stacksaga_transaction_types"></a>Summary Of StackSAGA Transaction Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Fully success transaction</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/fully-success-transaction-summary.svg" alt="Fully Success Transaction Summary" height="300"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Rollback/Compensating/Revert success transaction</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/revert-success-transaction-summary.svg" alt="Revert Success Transaction Summary" height="300"></span></p>
+</div>
+<div class="paragraph">
+<p><strong>Rollback/Compensating/Revert failed transaction</strong></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="_images/revert-failed-transaction-summary.svg" alt="Revert Failed Transaction Summary" height="300"></span></p>
 </div>
 </div>
 </div>

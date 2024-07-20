@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+<!--    <meta name="description" content="stack saga is a ecosystem as well as a framework to implement saga orchestration pattern with for spring boot. The framework provides a spring boot starter library to implement and a dashboard to manipulate all the transactions.">-->
+    <meta name="author" content="Mafei (Tharindu Kalhara)">
+    <title>Introduction to StackSaga :: StackSAGA Docs</title>
+    <meta name="page-spec" content="StackSaga-framework:architecture:introduction-to-stacksaga.adoc">
+    <meta name="generator" content="Antora 3.1.7">
+    <link rel="prev" href="saga-architecture.html">
+    <link rel="next" href="key_steps_of_ecosystem.html">
+<link rel="stylesheet" href="../../../_/css/site.css">
+<link rel="stylesheet" href="../../../_/css/icon.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><script async src="https://www.googletagmanager.com/gtag/js?id=[object Object]"></script>
+<script>function gtag() {
+    dataLayer.push(arguments)
+};window.dataLayer = window.dataLayer || [];
+gtag('js', new Date());
+gtag('config', '[object Object]')</script>
+<script src="https://kit.fontawesome.com/0cc2c17262.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../../../_/img/fev/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../_/img/fev/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../_/img/fev/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../_/img/fev/favicon-16x16.png">  </head>
+  <body class="article">
+<header class="header">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item logo" title="Asciidoctor" href="https://www.stacksaga.org"><img
+                    src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+            <a class="navbar-item title" href="../../..">StackSAGA Docs</a>
+            <button class="navbar-burger" data-target="topbar-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="topbar-nav" class="navbar-menu">
+            <div class="navbar-end">
+
+                <a class="navbar-item" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+                    <span class="icon"><img src="../../../_/img/octicons-16.svg#view-mark-github"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../index.html">StackSaga Framework</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Introduction To Microservice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Architecture</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="saga-architecture.html">Introduction to the Saga Design Pattern</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="1">
+    <a class="nav-link" href="introduction-to-stacksaga.html">Introduction to StackSaga</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="SEC.html">Saga execution coordinator. (SEC)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="event_store.html">Event Store</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator.html">Saga Aggregator.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="executor_architecture.html">Saga Executors</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="how_executors_behave_in_the_application.html">Aggregator Vs Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="aggregator_versioning.html">Aggregator Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="version_casting_architecture.html">Aggregator Version Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="dual_consistency_problem_of_sec_in_microservice.html">Dual-Consistency problem of SEC in microservice.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="replay-transaction.html">Transaction Replay.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="stack_saga_transaction_type.html">StackSaga Transaction Types</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">StackSaga Core</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/create-aggregator.html">Creating Aggregator Class</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_serializable.html">Creating SagaSerializable Class for Aggregator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_key_gen_custom_implementation.html">Aggregator KeyGen</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_mapper_implementation.html">Custom Aggregator Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/complex_aggrgator.html">Full Aggregator implementation.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_serialization.html">Aggregator Serialization And Deserialization</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/aggregator_casting.html">Aggregator&#8217;s Event Casting</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_executors.html">Saga Executors.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/retryable_executor_exception.html">RetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/non_retryable_executor_exception.html">NonRetryableExecutorException</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/usage_of_exceptions.html">Usage of Executors[Q&amp;C] With Exceptions </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_exception_annotation.html">@SagaException Annotation </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_revert_hint_store.html">RevertHintStore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_event_handler.html">Saga Execution Event Listener </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/uncommitted_data_listener.html">UncommittedDataListener</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/saga_template.html">SagaTemplate&lt;A&gt;</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/custom_thread_pool_configuration.html">Custom Thread-pool configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/stacksaga_in_kubernetes.html">Kubernetes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Configuration Properties</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/core-configuration-properties.html">Core Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/sql-datasource-configuration-properties.html">JDBC Datasource Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/kubernetes-support-configuration-properties.html">Kubernetes Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/eureka-support-configuration-properties.html">Eureka Support Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../framework/admin-configuration-properties.html">Admin Configuration Properties</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Admin Dashboard</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../admin/stacksaga_admin.html">StackSaga Admin Dashboard</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text"><strong class="green">Demo Implementations</strong></span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/quick-start.html">Quick Start</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stacksaga-demo.html">StackSaga Demo (Core concept practice)</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/stackSaga-demo-with-docker-and-docker-compose.html">Migrate To Docker Environment.</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../quick-examples/k8s_with_k8s/migration-to-kubernetes.html">Migrate To Kubernetes Environment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">StackSaga Framework</span>
+    <span class="version">1.0.0 SNAPSHOT</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../StackSaga-admin/2.5/index.html">StackSaga Admin</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../StackSaga-admin/2.5/index.html">2.5-beta.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../index.html">StackSaga Framework</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0 SNAPSHOT</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">StackSaga Framework</a></li>
+    <li><a href="introduction-to-stacksaga.html">Introduction to StackSaga</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Introduction to StackSaga</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Stacksaga is a Saga Orchestration engine framework that built top of the spring boot framework.
+Orchestration engine helps you to manage your work flows to execute the primary executions and also the compensating executions in a very handy way.
+And also you can see here some of the major features that StackSaga provides.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Saga Orchestration engine for managing primary and compensating work flows.</p>
+</li>
+<li>
+<p>Transaction Coordination</p>
+</li>
+<li>
+<p>Idempotency (Ensures that repeating the same operation multiple times has the same effect as performing it once, which is crucial for reliability.)</p>
+</li>
+<li>
+<p>Retrying transactions</p>
+</li>
+<li>
+<p>Event sourcing (State Management)</p>
+</li>
+<li>
+<p>Monitoring Distributed transaction tracing via the StackSaga admin dashboard.</p>
+</li>
+<li>
+<p>Concurrency Control</p>
+</li>
+<li>
+<p>Managing the Dual consistency problem. and many more..</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>StackSaga consists of two major components in high-level.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>StackSaga-Admin Dashboard</strong></p>
+<div class="paragraph">
+<p>StackSaga admin mainly provides the monitoring facilities of the transactions and manages the security.</p>
+</div>
+</li>
+<li>
+<p><strong>StackSaga Framework</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>StackSaga Framework provides orchestration engine to manage your work flows to execute the primary executions and also the compensating executions.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_why_stacksaga"><a class="anchor" href="#_why_stacksaga"></a>Why StackSaga?<a id="why_stacksaga_should_be_used"></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you implement the Saga orchestration design pattern in your system, you have to manually manage the work flows.
+It&#8217;s quite difficult to manage manually.
+And specially managing the compensating in correct order is more difficult.
+And also you have to follow a way to store all the events safely for retrying the execution where the execution was stopped temporarily.
+To understand the implementation, let&#8217;s have a look at an example.</p>
+</div>
+<div class="paragraph">
+<p>Just imagine an E-Commerce application, and it should place an order.
+Even though this action is a single one from the clint perspective, if we are in microservices architecture, that single action consists of multiple sub operations like initialize the order, collecting user details, making pre-auth, updating stocks, making the real payment and so on.
+Doing these sub operations in sequence order is quite easy at first glance.
+But all the time these sub operations might not be executed smoothly.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sometimes an error can occur while executing the last process or after some executions are done.
+Then you have to execute the compensating executions as the order of last-in first-out (LIFO).</p>
+</li>
+<li>
+<p>Sometimes an error can occur due to resources unavailable like connection issues or the target service is unavailable temporarily.
+If there is this kind of situation in the Saga, it&#8217;s not recommended the starting compensating process.
+Because eventually, we will be able to execute the execution successfully after the resources are available.
+Here you have to implement a schedule mechanism to check the resource availability.</p>
+</li>
+<li>
+<p>Even if you managed to handle all those challenges.
+Sometimes you may have to face dual-consistency problems as well.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Likewise, a lot of challenges will be covered by Stacksaga.
+As a developer, you only have to focus on the business case if you are using StackSaga on your system.
+The Stacksaga will take care of all other saga things and many challenges.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stacksaga_in_high_level"><a class="anchor" href="#_stacksaga_in_high_level"></a>StackSaga in High-level</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the <a href="#what_is_stacksaga">introduction section</a>, We got a clear idea of how microservice architecture works, and what are the challenges that we have to face when implementing the microservice in traditional way.</p>
+</div>
+<div class="paragraph">
+<p>Here, we are going to see how the StackSaga works together with typical microservice architecture.
+It shows how StackSaga does impact on the default <a href="https://spring.io/microservices">spring boot microservice architecture</a>.</p>
+</div>
+<div class="paragraph">
+<p>For your convenience, both <strong>Spring Microservice Architecture</strong> and <strong>Spring Microservice Architecture With StackSaga</strong> diagrams have been added here.</p>
+</div>
+<div class="sect2">
+<h3 id="_spring_microservice_architecture"><a class="anchor" href="#_spring_microservice_architecture"></a><strong>Spring Microservice Architecture</strong> <a id="spring_microservice_architecture"></a><br></h3>
+<div class="paragraph">
+<p><span class="image"><object type="image/svg+xml" data="_images/microservice-high-level-diagram.svg" width="100%"><span class="alt">Microservice High Level Diagram</span></object></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_spring_microservice_architecture_with_stacksaga"><a class="anchor" href="#_spring_microservice_architecture_with_stacksaga"></a><strong>Spring Microservice Architecture With StackSaga</strong></h3>
+<div class="paragraph">
+<p><span class="image"><object type="image/svg+xml" data="_images/stack-saga-high-level-diagram.svg" width="100%"><span class="alt">StackSaga High-level architecture</span></object></span></p>
+</div>
+<div class="paragraph">
+<p>After adding stack saga in the microservice architecture, you can see there are some additional components in the high-level architecture diagram.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In the diagram, the <strong>Gray</strong> color components and lines are related to the typical microservice architecture, and additional stacksaga related components and lines have been colored by <strong>Green</strong> color.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s have a look at all the components and how they are interacted with each other.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>At first glance, you can see a major difference in database architecture.
+The reason is StackSaga <strong>SEC</strong> uses <strong>event sourcing</strong> for managing your <strong>aggregator state</strong> for each <strong>executor</strong>.
+In brief, StackSaga internally uses a database to string your execution data as events.
+Therefore, If you are using StackSaga, you have to provide a database as the <strong>event-store</strong>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Even though the diagram shows event-store per service, It can be configured as a single event-store for all services if the application is currently not a large one. <strong>Read more</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+It is recommended to use one of the StackSaga database implementations that is equal to the primary database of the particular service.
+Because, you don&#8217;t need to configure another separate database and complicate the architecture.<br>
+As an example, If the order-service uses <strong>MYSQL</strong> databases as the <strong>primary database</strong>, you can use the <code>stacksaga-mysql-support</code> implementation for the event-store.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Next, Let&#8217;s have a look at <strong>StackSaga Admin</strong>.
+Admin provides a lot of facilities in the framework.
+Primarily feature is monitoring and tracking the transaction&#8217;s flow and trace.
+For monitoring your transactions, Admin should be able to retrieve the transaction data from each event-store.
+Internally, StackSaga client provides and exposes the endpoints for that.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>According to the high-level architecture diagram and the brief explanation, you can identify one application and 4 libraries are involved for StackSaga.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+No need to add StackSaga for all the services in the ecosystem.
+It can be added freely only to the services that you want to use.
+If There is no any complex business domain in some services, there is no point in adding StackSaga for that particular service and keep it as it is in the ecosystem.
+* <code>StackSaga-Admin-Server</code> Can be run as a standalone server.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+StackSaga-Admin&#8217;s Database is used only for saving the <strong>User&#8217;s-Credentials</strong> and the <strong>Terminated Transactions'</strong> metadata.
+<mark>Other data that you can see in the StackSaga-Admin dashboard are obtained from each service&#8217;s event-store endpoints.
+</mark>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We had a quit a simple idea over this high-level overview.
+Let&#8217;s dive in to the deeper step by step to have a better understanding.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="saga-architecture.html">Introduction to the Saga Design Pattern</a></span>
+  <span class="next"><a href="key_steps_of_ecosystem.html">Key Steps of ecosystem in High-Level</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org"><img src="../../../_/img/stack-saga-icon.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org">StackSAGA</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="../../..">Docs</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="http://discuss.asciidoctor.org" target="_blank" rel="noopener">Discuss</a></li>
+    </ul>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2024 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The UI for this site is based on the default Antora UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc is a Trademark of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="https://secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f383.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="../../../_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer>
+<script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
